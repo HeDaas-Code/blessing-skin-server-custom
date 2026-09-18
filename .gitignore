@@ -35,3 +35,5 @@ storage/framework/
 storage/debugbar/
 storage/app/
 storage/packages/
+deploy.env
+dist/

@@ -1,0 +1,54 @@
+# Blessing Skin Server —— 一键部署
+#
+#   1. cp deploy.env.example deploy.env && vi deploy.env   # 至少改管理员密码
+#   2. docker compose up -d                                # 首次启动自动安装
+#   3. 打开 http://<服务器IP>:8080
+#
+# 默认 SQLite（零依赖）。切换到 MySQL 见文件末尾说明（用 --env-file 让变量生效）。
+services:
+  app:
+    image: blessing-skin:6.0.2
+    build:
+      context: .
+    container_name: blessing-skin
+    restart: unless-stopped
+    ports:
+      - "${BS_PORT:-8080}:80"
+    # 所有配置（管理员账号、数据库、邮件、站点地址）都写在这里
+    env_file:
+      - path: ./deploy.env
+        required: false
+    environment:
+      TZ: "${TZ:-Asia/Shanghai}"
+    volumes:
+      - storage:/app/storage
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "-o", "/dev/null", "http://127.0.0.1/"]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+      start_period: 90s
+
+  # 可选：MySQL。用下述命令启动，compose 会从 deploy.env 读取 DB_* 变量：
+  #   docker compose --env-file deploy.env --profile mysql up -d
+  # 并确保 deploy.env 中 DB_CONNECTION=mysql、DB_HOST=mysql。
+  mysql:
+    image: mysql:8.0
+    container_name: blessing-skin-db
+    profiles: ["mysql"]
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: "${DB_DATABASE:-blessingskin}"
+      MYSQL_USER: "${DB_USERNAME:-blessing}"
+      MYSQL_PASSWORD: "${DB_PASSWORD:-blessing}"
+      MYSQL_ROOT_PASSWORD: "${DB_ROOT_PASSWORD:-root}"
+      TZ: "${TZ:-Asia/Shanghai}"
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+    volumes:
+      - mysql:/var/lib/mysql
+
+volumes:
+  storage:
+  mysql:
