@@ -1,0 +1,41 @@
+title: Microsoft Account Binding
+intro: After binding your Microsoft account, the same-name player will use your official UUID for authentication; when official services are down, local fallback signs the same UUID so server items stay intact.
+bind: Bind Microsoft Account
+bind-device: Bind Microsoft Account (Device Code)
+device-title: Microsoft Account Binding (Device Code)
+device-intro: Open the Microsoft sign-in page, enter the code below, approve, then return here and wait for the automatic check or click the button.
+device-verification-uri: Sign-in URL
+device-code: Code
+device-expires: The code expires in about %seconds% seconds.
+device-check: I've approved, check result
+device-cancel: Cancel
+device-pending: Waiting for Microsoft approval. Keep this page open…
+device-start-failed: Failed to start device code sign-in. Please retry later.
+device-not-started: Device code sign-in has not been started. Please start over from the binding page.
+unbind: Unbind
+confirm-unbind: Unbind the Microsoft account? The player will fall back to an offline UUID.
+player-name: Official Player Name
+bound-at: Bound At
+verified-at: Last Verified
+success: Microsoft account bound successfully.
+name-occupied: The official player name is occupied by another user and cannot be auto-created.
+failed: Binding failed. Please make sure you completed the Microsoft sign-in and try again.
+state-mismatch: Sign-in state verification failed. Please start over.
+unbound: Microsoft account unbound.
+admin-title: Microsoft Binding Management
+empty: No binding records
+sync: Sync Official Skin
+sync-done: Official skin synced (if a same-name player exists).
+sync-failed: Failed to sync official skin. Please retry later.
+not-bound: No Microsoft account bound yet.
+conflict-title: Microsoft account bound. Please resolve the player-name conflict
+conflict-intro: Your official player name is %name%, which differs from your site player name(s).
+conflict-resolve: Resolve
+conflict-choose: Choose a site player to rename to the official name
+conflict-keep: Keep current names
+conflict-rename: Rename and apply official profile
+conflict-occupied: The official name is occupied by another user. You can only keep your current names.
+conflict-invalid-player: The selected player is invalid.
+conflict-name-mismatch: Name mismatch.
+conflict-renamed: Player renamed to %name% and official profile applied.
+no-conflict: No conflict to resolve.

@@ -1,0 +1,48 @@
+{% extends 'user.base' %}
+
+{% block title %}{{ trans('Yggdrasil::binding.conflict-title') }}{% endblock %}
+
+{% block content %}
+  <div class="row">
+    <div class="col-md-8">
+      <div class="card card-warning card-outline">
+        <div class="card-header">
+          <h3 class="card-title">{{ trans('Yggdrasil::binding.conflict-title') }}</h3>
+        </div>
+        <div class="card-body">
+          {% if errors.any() %}
+            <div class="alert alert-danger">
+              {% for error in errors.all() %}<p class="mb-0">{{ error }}</p>{% endfor %}
+            </div>
+          {% endif %}
+
+          <p>{{ trans('Yggdrasil::binding.conflict-intro', {'name': conflict.official}) }}</p>
+
+          {% if conflict.occupied %}
+            <div class="alert alert-danger">{{ trans('Yggdrasil::binding.conflict-occupied') }}</div>
+          {% endif %}
+
+          {% if not conflict.occupied %}
+            <form method="post" action="{{ url('user/yggdrasil-binding/resolve/rename') }}">
+              {{ csrf_field() }}
+              <div class="form-group">
+                <label>{{ trans('Yggdrasil::binding.conflict-choose') }}</label>
+                {% for player in conflict.players %}
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="player_id" id="player-{{ player.pid }}" value="{{ player.pid }}" {% if loop.first %}checked{% endif %}>
+                    <label class="form-check-label" for="player-{{ player.pid }}">{{ player.name }}</label>
+                  </div>
+                {% endfor %}
+              </div>
+              <input type="hidden" name="name" value="{{ conflict.official }}">
+              <button type="submit" class="btn btn-warning">{{ trans('Yggdrasil::binding.conflict-rename') }}</button>
+              <a class="btn btn-default ml-2" href="{{ url('user/yggdrasil-binding') }}">{{ trans('Yggdrasil::binding.conflict-keep') }}</a>
+            </form>
+          {% else %}
+            <a class="btn btn-default" href="{{ url('user/yggdrasil-binding') }}">{{ trans('Yggdrasil::binding.conflict-keep') }}</a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

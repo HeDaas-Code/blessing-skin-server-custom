@@ -1,0 +1,40 @@
+{% extends 'admin.base' %}
+
+{% block title %}{{ trans('Yggdrasil::binding.admin-title') }}{% endblock %}
+
+{% block content %}
+  <div class="card">
+    <div class="card-header">
+      <h3 class="card-title">{{ trans('Yggdrasil::binding.admin-title') }}</h3>
+    </div>
+    <div class="card-body table-responsive p-0">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>{{ trans('Yggdrasil::binding.player-name') }}</th>
+            <th>UUID</th>
+            <th>{{ trans('Yggdrasil::binding.bound-at') }}</th>
+            <th>{{ trans('Yggdrasil::binding.verified-at') }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for row in rows %}
+            <tr>
+              <td>{{ row.user_id }}</td>
+              <td>{{ row.player_name }}</td>
+              <td><code>{{ row.mojang_uuid }}</code></td>
+              <td>{{ row.bound_at }}</td>
+              <td>{{ row.last_verified_at }}</td>
+            </tr>
+          {% else %}
+            <tr><td colspan="5" class="text-center">{{ trans('Yggdrasil::binding.empty') }}</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <div class="card-footer">
+      {{ rows.links()|raw }}
+    </div>
+  </div>
+{% endblock %}

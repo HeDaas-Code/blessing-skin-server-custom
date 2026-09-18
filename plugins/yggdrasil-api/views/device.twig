@@ -1,0 +1,92 @@
+{% extends 'user.base' %}
+
+{% block title %}{{ trans('Yggdrasil::binding.device-title') }}{% endblock %}
+
+{% block content %}
+  <div class="row">
+    <div class="col-md-8">
+      <div class="card card-success card-outline">
+        <div class="card-header">
+          <h3 class="card-title">{{ trans('Yggdrasil::binding.device-title') }}</h3>
+        </div>
+        <div class="card-body">
+          <p>{{ trans('Yggdrasil::binding.device-intro') }}</p>
+
+          <p>{{ trans('Yggdrasil::binding.device-verification-uri') }}：
+            <a href="{{ verification_uri }}" target="_blank" rel="noopener">{{ verification_uri }}</a>
+          </p>
+
+          <p>{{ trans('Yggdrasil::binding.device-code') }}：
+            <code style="font-size: 1.6rem; letter-spacing: .2rem">{{ user_code }}</code>
+          </p>
+
+          {% if message %}<p class="text-muted">{{ message }}</p>{% endif %}
+
+          <p class="text-muted">{{ trans('Yggdrasil::binding.device-expires', {'seconds': expires_in}) }}</p>
+
+          <div id="ygg-device-status" class="alert d-none"></div>
+
+          <button id="ygg-device-check" type="button" class="btn btn-success"
+            data-pending="{{ trans('Yggdrasil::binding.device-pending') }}"
+            data-failed="{{ trans('Yggdrasil::binding.failed') }}">
+            {{ trans('Yggdrasil::binding.device-check') }}
+          </button>
+          <a class="btn btn-secondary" href="{{ url('user/yggdrasil-binding') }}">{{ trans('Yggdrasil::binding.device-cancel') }}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var statusEl = document.getElementById('ygg-device-status');
+      var checkBtn = document.getElementById('ygg-device-check');
+      var timer = null;
+      var running = false;
+
+      var showStatus = function (type, text) {
+        statusEl.className = 'alert alert-' + type;
+        statusEl.textContent = text;
+      };
+
+      var poll = function () {
+        if (running) return;
+        running = true;
+        checkBtn.disabled = true;
+        showStatus('info', checkBtn.dataset.pending);
+
+        blessing.fetch.post('/user/yggdrasil-binding/device/poll')
+          .then(function (res) {
+            if (res.status === 'done') {
+              window.location.href = res.redirect;
+              return;
+            }
+
+            if (res.status === 'pending') {
+              running = false;
+              checkBtn.disabled = false;
+              schedule(res.slow_down ? 10000 : 5000);
+              return;
+            }
+
+            running = false;
+            checkBtn.disabled = false;
+            showStatus('danger', res.message || checkBtn.dataset.failed);
+          })
+          .catch(function () {
+            running = false;
+            checkBtn.disabled = false;
+            showStatus('danger', checkBtn.dataset.failed);
+          });
+      };
+
+      var schedule = function (ms) {
+        if (timer) clearTimeout(timer);
+        timer = setTimeout(poll, ms);
+      };
+
+      checkBtn.addEventListener('click', poll);
+      schedule(3000);
+    })();
+  </script>
+{% endblock %}

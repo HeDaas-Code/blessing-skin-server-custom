@@ -1,0 +1,41 @@
+title: 微软账号绑定
+intro: 绑定你的微软账号后，同名角色的认证 UUID 将使用微软官方 UUID；官方服务不可用时本地兜底签发同一 UUID，保证服务器物品不丢失。
+bind: 绑定微软账号
+bind-device: 绑定微软账号（设备码）
+device-title: 微软账号绑定（设备码流程）
+device-intro: 请打开微软登录页面，输入下面的代码并完成授权，然后回到本页等待自动查询，或手动点击查询。
+device-verification-uri: 登录地址
+device-code: 代码
+device-expires: 代码有效期约 %seconds% 秒
+device-check: 已授权，查询结果
+device-cancel: 取消返回
+device-pending: 等待微软授权中，请勿关闭页面…
+device-start-failed: 发起设备码登录失败，请稍后重试。
+device-not-started: 尚未发起设备码登录，请从绑定页重新开始。
+unbind: 解绑
+confirm-unbind: 确定要解绑微软账号吗？解绑后该角色将回到离线 UUID。
+player-name: 官方角色名
+bound-at: 绑定时间
+verified-at: 最近校验时间
+success: 微软账号绑定成功。
+name-occupied: 官方角色名已被其他用户占用，无法自动创建角色。
+failed: 绑定失败，请确认已正确完成微软登录并重试。
+state-mismatch: 登录状态校验失败，请重新发起绑定。
+unbound: 已解绑微软账号。
+admin-title: 微软账号绑定管理
+empty: 暂无绑定记录
+sync: 同步官方皮肤
+sync-done: 官方皮肤同步完成（如存在同名角色）。
+sync-failed: 同步官方皮肤失败，请稍后重试。
+not-bound: 尚未绑定微软账号。
+conflict-title: 微软账号绑定成功，请处理角色名冲突
+conflict-intro: 你的微软官方角色名是 %name%，与站内角色名不一致。
+conflict-resolve: 去处理
+conflict-choose: 选择要改名为官方名称的站内角色
+conflict-keep: 保留原名称
+conflict-rename: 改名为官方名称并应用官方档案
+conflict-occupied: 官方名称已被其他用户占用，无法改名，只能保留原名称。
+conflict-invalid-player: 所选角色无效。
+conflict-name-mismatch: 名称不一致。
+conflict-renamed: 角色已改名为 %name% 并应用官方档案。
+no-conflict: 没有需要处理的冲突。
