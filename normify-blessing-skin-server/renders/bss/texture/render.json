@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "id": "bss.texture.render",
+  "updated_at": "2026-09-17T16:07:26.723Z",
+  "mode": "layers",
+  "reading": {
+    "zh": "从左到右按数据形态：清单 JSON → 原始文件 → 头像 → 预览。",
+    "en": "Left to right by data shape: manifest JSON → raw files → avatars → previews."
+  },
+  "order": [
+    "bss.texture.render.manifest",
+    "bss.texture.render.binary",
+    "bss.texture.render.avatar",
+    "bss.texture.render.preview"
+  ]
+}

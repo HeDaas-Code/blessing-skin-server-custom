@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "id": "bss.infra.database",
+  "updated_at": "2026-09-17T16:14:28.415Z",
+  "mode": "grid",
+  "reading": {
+    "zh": "迁移定义表结构，工厂为测试造数。",
+    "en": "Migrations define the schema; factories seed test data."
+  },
+  "order": [
+    "bss.infra.database.migrations",
+    "bss.infra.database.factories"
+  ]
+}

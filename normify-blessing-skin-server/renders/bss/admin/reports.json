@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "id": "bss.admin.reports",
+  "updated_at": "2026-09-17T16:12:11.885Z",
+  "mode": "layers",
+  "reading": {
+    "zh": "用户提交举报，管理员在队列中审核。",
+    "en": "Users submit reports; admins review them in the queue."
+  },
+  "order": [
+    "bss.admin.reports.submit",
+    "bss.admin.reports.review"
+  ]
+}

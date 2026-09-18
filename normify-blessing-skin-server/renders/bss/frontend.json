@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "id": "bss.frontend",
+  "updated_at": "2026-09-17T16:15:41.152Z",
+  "mode": "groups",
+  "reading": {
+    "zh": "运行时装配基础能力，组件库与 hooks 供页面复用，终端与样式独立成区。",
+    "en": "Runtime assembles base capabilities; the component library and hooks are shared; terminal and styles stand alone."
+  },
+  "order": [
+    "bss.frontend.runtime",
+    "bss.frontend.components",
+    "bss.frontend.hooks",
+    "bss.frontend.scripts",
+    "bss.frontend.cli",
+    "bss.frontend.styles"
+  ],
+  "groups": [
+    {
+      "id": "base",
+      "title": {
+        "zh": "运行时",
+        "en": "Runtime"
+      },
+      "children": [
+        "bss.frontend.runtime"
+      ]
+    },
+    {
+      "id": "shared",
+      "title": {
+        "zh": "共享能力",
+        "en": "Shared"
+      },
+      "children": [
+        "bss.frontend.components",
+        "bss.frontend.hooks",
+        "bss.frontend.scripts"
+      ]
+    },
+    {
+      "id": "apps",
+      "title": {
+        "zh": "终端与样式",
+        "en": "Terminal & Styles"
+      },
+      "children": [
+        "bss.frontend.cli",
+        "bss.frontend.styles"
+      ]
+    }
+  ]
+}

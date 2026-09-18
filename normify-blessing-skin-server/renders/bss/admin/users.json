@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "id": "bss.admin.users",
+  "updated_at": "2026-09-17T16:12:11.844Z",
+  "mode": "layers",
+  "reading": {
+    "zh": "列表提供数据入口，联系信息与账户处置逐项操作。",
+    "en": "The list is the data entry; contact and account operations follow."
+  },
+  "order": [
+    "bss.admin.users.list",
+    "bss.admin.users.contact",
+    "bss.admin.users.account"
+  ]
+}

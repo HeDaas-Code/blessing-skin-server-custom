@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "id": "bss",
+  "updated_at": "2026-09-17T15:52:59.118Z",
+  "mode": "groups",
+  "reading": {
+    "zh": "按领域阅读：从左到右依次是请求入口 → 业务域 → 平台能力 → 表现层与交付面。点开任一模块继续下钻到单一功能单元。",
+    "en": "Read by domain: request entry → business domains → platform capabilities → presentation and delivery. Open any module to drill down to a single functional unit."
+  },
+  "order": [
+    "bss.http",
+    "bss.exception",
+    "bss.user",
+    "bss.player",
+    "bss.texture",
+    "bss.admin",
+    "bss.plugin",
+    "bss.option",
+    "bss.i18n",
+    "bss.notify",
+    "bss.security",
+    "bss.event",
+    "bss.frontend",
+    "bss.view",
+    "bss.infra"
+  ],
+  "groups": [
+    {
+      "id": "transport",
+      "title": {
+        "zh": "请求入口",
+        "en": "Request Entry"
+      },
+      "children": [
+        "bss.http",
+        "bss.exception"
+      ]
+    },
+    {
+      "id": "domains",
+      "title": {
+        "zh": "业务域",
+        "en": "Business Domains"
+      },
+      "children": [
+        "bss.user",
+        "bss.player",
+        "bss.texture",
+        "bss.admin"
+      ]
+    },
+    {
+      "id": "platform",
+      "title": {
+        "zh": "平台能力",
+        "en": "Platform Capabilities"
+      },
+      "children": [
+        "bss.plugin",
+        "bss.option",
+        "bss.i18n",
+        "bss.notify",
+        "bss.security",
+        "bss.event"
+      ]
+    },
+    {
+      "id": "presentation",
+      "title": {
+        "zh": "表现与交付",
+        "en": "Presentation & Delivery"
+      },
+      "children": [
+        "bss.frontend",
+        "bss.view",
+        "bss.infra"
+      ]
+    }
+  ]
+}

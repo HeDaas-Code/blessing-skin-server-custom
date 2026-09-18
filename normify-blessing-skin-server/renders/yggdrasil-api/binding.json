@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "id": "yggdrasil-api.binding",
+  "updated_at": "2026-09-17T17:30:20.407Z",
+  "mode": "layers",
+  "reading": {
+    "zh": "OAuth 客户端取得官方档案，模型持久化，皮肤同步与界面提供自助服务。",
+    "en": "The OAuth client obtains the official profile, the model persists it, and skin sync plus UI provide self-service."
+  },
+  "order": [
+    "yggdrasil-api.binding.oauth",
+    "yggdrasil-api.binding.model",
+    "yggdrasil-api.binding.sync",
+    "yggdrasil-api.binding.ui"
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "id": "bss.http.routing",
+  "updated_at": "2026-09-17T15:59:24.825Z",
+  "mode": "layers",
+  "reading": {
+    "zh": "从左到右：装载器读取三张路由表，装载后向插件广播扩展事件。",
+    "en": "Left to right: the loader reads the three route tables, then fires the extension event for plugins."
+  },
+  "order": [
+    "bss.http.routing.registration",
+    "bss.http.routing.web",
+    "bss.http.routing.api",
+    "bss.http.routing.static"
+  ]
+}

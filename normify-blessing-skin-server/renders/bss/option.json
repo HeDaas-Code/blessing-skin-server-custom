@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "id": "bss.option",
+  "updated_at": "2026-09-17T16:09:13.583Z",
+  "mode": "layers",
+  "reading": {
+    "zh": "默认值 → 存储服务 → 表单构建器，形成选项的读写闭环。",
+    "en": "Defaults → store service → form builder close the option read/write loop."
+  },
+  "order": [
+    "bss.option.defaults",
+    "bss.option.service",
+    "bss.option.form"
+  ]
+}

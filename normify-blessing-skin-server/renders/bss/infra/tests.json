@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "id": "bss.infra.tests",
+  "updated_at": "2026-09-17T16:14:28.527Z",
+  "mode": "grid",
+  "reading": {
+    "zh": "后端 PHPUnit 与前端 Jest 双轨测试。",
+    "en": "Back-end PHPUnit and front-end Jest run in parallel tracks."
+  },
+  "order": [
+    "bss.infra.tests.phpunit",
+    "bss.infra.tests.jest"
+  ]
+}

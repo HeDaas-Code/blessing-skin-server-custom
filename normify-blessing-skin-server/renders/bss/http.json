@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "id": "bss.http",
+  "updated_at": "2026-09-17T15:59:24.803Z",
+  "mode": "groups",
+  "reading": {
+    "zh": "请求自左向右穿过中间件栈进入路由，控制器取数后由视图组合器喂给模板。",
+    "en": "A request flows left to right through the middleware stack into routing; controllers fetch data and composers feed the templates."
+  },
+  "order": [
+    "bss.http.kernel",
+    "bss.http.middleware",
+    "bss.http.routing",
+    "bss.http.composers"
+  ],
+  "groups": [
+    {
+      "id": "in",
+      "title": {
+        "zh": "入口与拦截",
+        "en": "Entry & Guards"
+      },
+      "children": [
+        "bss.http.kernel",
+        "bss.http.middleware"
+      ]
+    },
+    {
+      "id": "route",
+      "title": {
+        "zh": "路由分发",
+        "en": "Routing"
+      },
+      "children": [
+        "bss.http.routing"
+      ]
+    },
+    {
+      "id": "out",
+      "title": {
+        "zh": "视图装配",
+        "en": "View Assembly"
+      },
+      "children": [
+        "bss.http.composers"
+      ]
+    }
+  ]
+}

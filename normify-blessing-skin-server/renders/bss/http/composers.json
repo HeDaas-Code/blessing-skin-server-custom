@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "id": "bss.http.composers",
+  "updated_at": "2026-09-17T15:59:24.840Z",
+  "mode": "grid",
+  "reading": {
+    "zh": "三个组合器分别负责页头资源、页脚脚本与导航菜单数据。",
+    "en": "Three composers handle head assets, footer scripts and navigation menu data."
+  },
+  "order": [
+    "bss.http.composers.head",
+    "bss.http.composers.foot",
+    "bss.http.composers.navigation"
+  ]
+}

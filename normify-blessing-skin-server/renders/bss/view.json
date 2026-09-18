@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "id": "bss.view",
+  "updated_at": "2026-09-17T16:14:28.207Z",
+  "mode": "groups",
+  "reading": {
+    "zh": "共享布局与表单组件是通用底座，认证/用户/皮肤库/后台/安装/邮件是各页面家族。",
+    "en": "Shared layout and form components are the common base; auth/user/skinlib/admin/setup/mail are the page families."
+  },
+  "order": [
+    "bss.view.layout",
+    "bss.view.forms",
+    "bss.view.assets",
+    "bss.view.home",
+    "bss.view.auth",
+    "bss.view.user",
+    "bss.view.skinlib",
+    "bss.view.admin",
+    "bss.view.setup",
+    "bss.view.mails"
+  ],
+  "groups": [
+    {
+      "id": "base",
+      "title": {
+        "zh": "通用底座",
+        "en": "Common Base"
+      },
+      "children": [
+        "bss.view.layout",
+        "bss.view.forms",
+        "bss.view.assets",
+        "bss.view.home"
+      ]
+    },
+    {
+      "id": "pages",
+      "title": {
+        "zh": "页面家族",
+        "en": "Page Families"
+      },
+      "children": [
+        "bss.view.auth",
+        "bss.view.user",
+        "bss.view.skinlib",
+        "bss.view.admin",
+        "bss.view.setup",
+        "bss.view.mails"
+      ]
+    }
+  ]
+}

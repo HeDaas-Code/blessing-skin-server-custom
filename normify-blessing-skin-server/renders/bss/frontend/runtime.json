@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "id": "bss.frontend.runtime",
+  "updated_at": "2026-09-17T16:15:41.203Z",
+  "mode": "layers",
+  "reading": {
+    "zh": "入口引导 → 路由匹配 → 网络层与状态总线支撑页面。",
+    "en": "Entry boot → route matching → HTTP layer and state bus support pages."
+  },
+  "order": [
+    "bss.frontend.runtime.bootstrap",
+    "bss.frontend.runtime.router",
+    "bss.frontend.runtime.net",
+    "bss.frontend.runtime.state"
+  ]
+}

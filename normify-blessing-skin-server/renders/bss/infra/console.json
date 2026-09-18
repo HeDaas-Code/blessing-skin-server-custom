@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "id": "bss.infra.console",
+  "updated_at": "2026-09-17T16:14:28.365Z",
+  "mode": "grid",
+  "reading": {
+    "zh": "内核注册命令，安装/升级/缓存/盐/插件命令各行其职。",
+    "en": "The kernel registers commands; install/update/cache/salt/plugin commands each do their job."
+  },
+  "order": [
+    "bss.infra.console.kernel",
+    "bss.infra.console.install",
+    "bss.infra.console.update",
+    "bss.infra.console.options-cache",
+    "bss.infra.console.salt"
+  ]
+}

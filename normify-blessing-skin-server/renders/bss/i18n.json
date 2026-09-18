@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "id": "bss.i18n",
+  "updated_at": "2026-09-17T16:09:13.643Z",
+  "mode": "layers",
+  "reading": {
+    "zh": "语言包资源经加载器进入应用，语言探测选择当前语言，后台管理回写词条。",
+    "en": "Language packs load through the loader, detection picks the locale, and admin writes entries back."
+  },
+  "order": [
+    "bss.i18n.lang",
+    "bss.i18n.loader",
+    "bss.i18n.detect",
+    "bss.i18n.admin"
+  ]
+}

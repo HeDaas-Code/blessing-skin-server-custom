@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "id": "bss.player",
+  "updated_at": "2026-09-17T16:06:43.283Z",
+  "mode": "groups",
+  "reading": {
+    "zh": "从角色模型出发，向左是用户侧的管理与材质绑定，向右是衣橱及其后台管理入口。",
+    "en": "From the player model: user-side management and texture binding on the left, closet and its admin entry on the right."
+  },
+  "order": [
+    "bss.player.model",
+    "bss.player.manage",
+    "bss.player.texture",
+    "bss.player.closet",
+    "bss.player.admin",
+    "bss.player.closet-admin"
+  ],
+  "groups": [
+    {
+      "id": "core",
+      "title": {
+        "zh": "角色",
+        "en": "Player"
+      },
+      "children": [
+        "bss.player.model",
+        "bss.player.manage",
+        "bss.player.texture"
+      ]
+    },
+    {
+      "id": "closet",
+      "title": {
+        "zh": "衣橱",
+        "en": "Closet"
+      },
+      "children": [
+        "bss.player.closet"
+      ]
+    },
+    {
+      "id": "admin",
+      "title": {
+        "zh": "后台管理",
+        "en": "Admin"
+      },
+      "children": [
+        "bss.player.admin",
+        "bss.player.closet-admin"
+      ]
+    }
+  ]
+}

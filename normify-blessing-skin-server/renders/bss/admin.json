@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "id": "bss.admin",
+  "updated_at": "2026-09-17T16:12:11.802Z",
+  "mode": "groups",
+  "reading": {
+    "zh": "仪表盘是总览，用户/举报是管控操作，选项与更新是站点配置。",
+    "en": "Dashboard is the overview, users/reports are governance, and options/update configure the site."
+  },
+  "order": [
+    "bss.admin.dashboard",
+    "bss.admin.users",
+    "bss.admin.reports",
+    "bss.admin.options",
+    "bss.admin.update"
+  ],
+  "groups": [
+    {
+      "id": "overview",
+      "title": {
+        "zh": "总览",
+        "en": "Overview"
+      },
+      "children": [
+        "bss.admin.dashboard"
+      ]
+    },
+    {
+      "id": "govern",
+      "title": {
+        "zh": "管控",
+        "en": "Governance"
+      },
+      "children": [
+        "bss.admin.users",
+        "bss.admin.reports"
+      ]
+    },
+    {
+      "id": "config",
+      "title": {
+        "zh": "配置",
+        "en": "Configuration"
+      },
+      "children": [
+        "bss.admin.options",
+        "bss.admin.update"
+      ]
+    }
+  ]
+}

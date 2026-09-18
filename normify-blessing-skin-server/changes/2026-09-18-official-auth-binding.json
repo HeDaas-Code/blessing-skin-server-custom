@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "id": "2026-09-18-official-auth-binding",
+  "title": {
+    "zh": "双向容灾官方认证（绑定式官方档案）",
+    "en": "Dual-path resilient official auth (binding-based)"
+  },
+  "status": "verified",
+  "intent": {
+    "zh": "在 yggdrasil-api 插件中实现微软账号绑定：用户绑定官方账号后，同名角色登录返回微软官方 UUID；官方服务故障时本地兜底签发同一 UUID，保证 UUID 恒定不切换、物品不丢失。绑定入口在用户中心与后台，未绑定角色保持现有离线 UUID 逻辑。",
+    "en": "Implement Microsoft account binding in yggdrasil-api: bound same-name players get their official UUID; when official services fail, local fallback signs the same UUID so it never switches. Binding UI in user center and admin; unbound players keep the existing offline UUID flow."
+  },
+  "modules": {
+    "create": [
+      "yggdrasil-api.binding",
+      "yggdrasil-api.binding.oauth",
+      "yggdrasil-api.binding.model",
+      "yggdrasil-api.binding.ui",
+      "yggdrasil-api.official",
+      "yggdrasil-api.official.router",
+      "yggdrasil-api.official.verifier"
+    ],
+    "modify": [
+      "yggdrasil-api.auth",
+      "yggdrasil-api.profile",
+      "yggdrasil-api.config",
+      "yggdrasil-api.bootstrap"
+    ]
+  },
+  "acceptance": [
+    "用户中心提供微软账号绑定/解绑页面，后台提供绑定列表管理。",
+    "已绑定用户登录时，与微软档案同名的角色返回官方 UUID；未绑定或不同名角色保持 v3/v4 离线 UUID。",
+    "官方服务不可用时自动降级为本地签发，且 UUID 与官方一致（不切换）。",
+    "微软 access/refresh token 使用 Laravel Crypt 加密存储，不落明文。",
+    "normify 结构同步更新，normify_validate 达到 0 error。"
+  ],
+  "note": "绑定式官方档案实现完成：OAuth 绑定、官方路由决策 P0/P1/P2、同名角色官方 UUID、官方故障本地兜底同 UUID。",
+  "revision": {
+    "before": null,
+    "after": "52f6fefed08e091c08e409c67e31d00b00ff00ee"
+  },
+  "created_at": "2026-09-17T17:12:49.774Z",
+  "updated_at": "2026-09-17T17:24:18.626Z",
+  "closed_at": "2026-09-17T17:24:18.626Z"
+}

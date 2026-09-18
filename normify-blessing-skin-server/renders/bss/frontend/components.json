@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "id": "bss.frontend.components",
+  "updated_at": "2026-09-17T16:15:41.255Z",
+  "mode": "grid",
+  "reading": {
+    "zh": "五类通用组件：模态、分页、预览、反馈、表单。",
+    "en": "Five component kinds: modal, pagination, viewer, feedback, form."
+  },
+  "order": [
+    "bss.frontend.components.modal",
+    "bss.frontend.components.pagination",
+    "bss.frontend.components.viewer",
+    "bss.frontend.components.feedback",
+    "bss.frontend.components.form"
+  ]
+}

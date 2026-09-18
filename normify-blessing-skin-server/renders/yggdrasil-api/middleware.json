@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "id": "yggdrasil-api.middleware",
+  "updated_at": "2026-09-17T16:38:40.561Z",
+  "mode": "layers",
+  "reading": {
+    "zh": "请求依次通过 Content-Type 校验、登录限流，出站时注入 ALI 头。",
+    "en": "Requests pass the content-type check, then login throttle; the ALI header is injected outbound."
+  },
+  "order": [
+    "yggdrasil-api.middleware.content-type",
+    "yggdrasil-api.middleware.throttle",
+    "yggdrasil-api.middleware.ali"
+  ]
+}

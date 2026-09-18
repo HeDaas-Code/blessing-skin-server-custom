@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "id": "bss.user",
+  "updated_at": "2026-09-17T16:02:43.168Z",
+  "mode": "groups",
+  "reading": {
+    "zh": "左侧是账号入口与生命周期流程，中间是登录后的用户中心能力，右侧是模型与授权底座。",
+    "en": "Left: account entry and lifecycle flows. Middle: signed-in user center features. Right: the model and authorization foundation."
+  },
+  "order": [
+    "bss.user.auth",
+    "bss.user.profile",
+    "bss.user.dashboard",
+    "bss.user.score",
+    "bss.user.oauth",
+    "bss.user.model"
+  ],
+  "groups": [
+    {
+      "id": "entry",
+      "title": {
+        "zh": "账号入口",
+        "en": "Account Entry"
+      },
+      "children": [
+        "bss.user.auth"
+      ]
+    },
+    {
+      "id": "center",
+      "title": {
+        "zh": "用户中心",
+        "en": "User Center"
+      },
+      "children": [
+        "bss.user.profile",
+        "bss.user.dashboard",
+        "bss.user.score"
+      ]
+    },
+    {
+      "id": "platform",
+      "title": {
+        "zh": "模型与授权",
+        "en": "Model & Authorization"
+      },
+      "children": [
+        "bss.user.oauth",
+        "bss.user.model"
+      ]
+    }
+  ]
+}

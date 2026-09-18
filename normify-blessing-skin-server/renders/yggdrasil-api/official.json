@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "id": "yggdrasil-api.official",
+  "updated_at": "2026-09-17T17:12:40.141Z",
+  "mode": "layers",
+  "reading": {
+    "zh": "路由决策器选择路径，校验器负责在线核对官方档案。",
+    "en": "The router picks a path; the verifier checks the official profile online."
+  },
+  "order": [
+    "yggdrasil-api.official.router",
+    "yggdrasil-api.official.verifier"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "id": "bss.frontend.cli",
+  "updated_at": "2026-09-17T16:15:41.309Z",
+  "mode": "grid",
+  "reading": {
+    "zh": "终端会话承载窗口，命令集负责执行。",
+    "en": "The session hosts the window; commands handle execution."
+  },
+  "order": [
+    "bss.frontend.cli.terminal",
+    "bss.frontend.cli.commands"
+  ]
+}

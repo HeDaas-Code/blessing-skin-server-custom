@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "id": "bss.infra.build",
+  "updated_at": "2026-09-17T16:14:28.478Z",
+  "mode": "grid",
+  "reading": {
+    "zh": "Webpack 打包、URL 生成与依赖清单构成前端工程化的三件套。",
+    "en": "Webpack bundling, URL generation and manifests form the front-end tooling triad."
+  },
+  "order": [
+    "bss.infra.build.webpack",
+    "bss.infra.build.tools",
+    "bss.infra.build.manifest"
+  ]
+}

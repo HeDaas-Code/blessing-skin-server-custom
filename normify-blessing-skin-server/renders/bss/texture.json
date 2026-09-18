@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "id": "bss.texture",
+  "updated_at": "2026-09-17T16:07:26.700Z",
+  "mode": "groups",
+  "reading": {
+    "zh": "上传者经皮肤库与材质管理维护数据，最终由公开渲染接口向 Minecraft 客户端输出。",
+    "en": "Uploaders maintain data via the library and management; the public rendering endpoints serve Minecraft clients."
+  },
+  "order": [
+    "bss.texture.model",
+    "bss.texture.library",
+    "bss.texture.upload",
+    "bss.texture.manage",
+    "bss.texture.render"
+  ],
+  "groups": [
+    {
+      "id": "data",
+      "title": {
+        "zh": "数据与使用",
+        "en": "Data & Usage"
+      },
+      "children": [
+        "bss.texture.model",
+        "bss.texture.library",
+        "bss.texture.upload",
+        "bss.texture.manage"
+      ]
+    },
+    {
+      "id": "render",
+      "title": {
+        "zh": "渲染输出",
+        "en": "Rendering Output"
+      },
+      "children": [
+        "bss.texture.render"
+      ]
+    }
+  ]
+}

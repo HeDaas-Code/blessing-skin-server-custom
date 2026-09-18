@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "id": "bss.http.middleware",
+  "updated_at": "2026-09-17T15:59:24.814Z",
+  "mode": "groups",
+  "reading": {
+    "zh": "按执行顺序阅读：全局预处理 → 安装闸门 → 登录态 → 权限与验证。",
+    "en": "Read in execution order: global preprocessing → installation gate → authentication → verification and roles."
+  },
+  "order": [
+    "bss.http.middleware.lifecycle",
+    "bss.http.middleware.installation",
+    "bss.http.middleware.auth",
+    "bss.http.middleware.account"
+  ],
+  "groups": [
+    {
+      "id": "global",
+      "title": {
+        "zh": "全局",
+        "en": "Global"
+      },
+      "children": [
+        "bss.http.middleware.lifecycle"
+      ]
+    },
+    {
+      "id": "gate",
+      "title": {
+        "zh": "闸门",
+        "en": "Gates"
+      },
+      "children": [
+        "bss.http.middleware.installation",
+        "bss.http.middleware.auth"
+      ]
+    },
+    {
+      "id": "guard",
+      "title": {
+        "zh": "账户与权限",
+        "en": "Account & Roles"
+      },
+      "children": [
+        "bss.http.middleware.account"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "id": "bss.notify",
+  "updated_at": "2026-09-17T16:09:13.615Z",
+  "mode": "grid",
+  "reading": {
+    "zh": "站内通知走队列与页面下拉，邮件通道独立发送。",
+    "en": "Site notifications go through the queue and the bell; mail sends independently."
+  },
+  "order": [
+    "bss.notify.center",
+    "bss.notify.mail"
+  ]
+}

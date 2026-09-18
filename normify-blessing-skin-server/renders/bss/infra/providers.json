@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "id": "bss.infra.providers",
+  "updated_at": "2026-09-17T16:14:28.313Z",
+  "mode": "grid",
+  "reading": {
+    "zh": "两个装配器分别负责应用级单例与视图组合器。",
+    "en": "Two assemblers: app-level singletons and view composers."
+  },
+  "order": [
+    "bss.infra.providers.app",
+    "bss.infra.providers.view"
+  ]
+}

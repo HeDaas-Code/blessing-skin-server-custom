@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "id": "bss.security",
+  "updated_at": "2026-09-17T16:09:13.554Z",
+  "mode": "grid",
+  "reading": {
+    "zh": "密码哈希、OAuth 作用域与输入规则构成安全三件套。",
+    "en": "Password ciphers, OAuth scopes and input rules form the security triad."
+  },
+  "order": [
+    "bss.security.cipher",
+    "bss.security.oauth",
+    "bss.security.rules"
+  ]
+}

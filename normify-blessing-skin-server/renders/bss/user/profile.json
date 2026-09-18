@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "id": "bss.user.profile",
+  "updated_at": "2026-09-17T16:02:43.205Z",
+  "mode": "grid",
+  "reading": {
+    "zh": "控制器负责校验与落库，视图分片负责表单与前端交互。",
+    "en": "The controller validates and persists; the view partials render forms and front-end interactions."
+  },
+  "order": [
+    "bss.user.profile.controller",
+    "bss.user.profile.ui"
+  ]
+}

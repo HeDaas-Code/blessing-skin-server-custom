@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "id": "bss.exception",
+  "updated_at": "2026-09-17T15:59:24.853Z",
+  "mode": "grid",
+  "reading": {
+    "zh": "异常先经渲染器分类，再落到对应错误页模板。",
+    "en": "Exceptions are classified by the renderer and then fall through to the matching error page template."
+  },
+  "order": [
+    "bss.exception.handler",
+    "bss.exception.pages"
+  ]
+}

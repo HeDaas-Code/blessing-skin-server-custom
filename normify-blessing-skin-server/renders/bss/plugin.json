@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "id": "bss.plugin",
+  "updated_at": "2026-09-17T16:12:11.763Z",
+  "mode": "layers",
+  "reading": {
+    "zh": "从提供者引导出发：管理器与实体是内核，后台与市场是操作面，命令用于脚本化。",
+    "en": "From the provider: manager and entity form the core; admin and market are the UI; commands support scripting."
+  },
+  "order": [
+    "bss.plugin.provider",
+    "bss.plugin.manager",
+    "bss.plugin.model",
+    "bss.plugin.admin",
+    "bss.plugin.market",
+    "bss.plugin.commands"
+  ]
+}

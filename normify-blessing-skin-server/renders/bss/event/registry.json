@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "id": "bss.event.registry",
+  "updated_at": "2026-09-17T16:10:17.096Z",
+  "mode": "grid",
+  "reading": {
+    "zh": "五类事件：菜单路由、渲染挂载、角色、用户、插件生命周期。",
+    "en": "Five event kinds: menu/route, render mounts, player, user, and plugin lifecycle."
+  },
+  "order": [
+    "bss.event.registry.menu",
+    "bss.event.registry.rendering",
+    "bss.event.registry.player",
+    "bss.event.registry.user",
+    "bss.event.registry.plugin"
+  ]
+}

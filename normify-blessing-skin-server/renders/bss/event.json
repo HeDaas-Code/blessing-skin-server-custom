@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "id": "bss.event",
+  "updated_at": "2026-09-17T16:10:17.065Z",
+  "mode": "groups",
+  "reading": {
+    "zh": "事件目录与 Hook 是扩展面，调度表把事件路由到监听器，形成插件可挂接的闭环。",
+    "en": "The catalog and Hook form the extension surface; the dispatcher routes events to listeners, closing the plugin loop."
+  },
+  "order": [
+    "bss.event.registry",
+    "bss.event.hook",
+    "bss.event.dispatcher",
+    "bss.event.listeners"
+  ],
+  "groups": [
+    {
+      "id": "surface",
+      "title": {
+        "zh": "扩展面",
+        "en": "Extension Surface"
+      },
+      "children": [
+        "bss.event.registry",
+        "bss.event.hook"
+      ]
+    },
+    {
+      "id": "flow",
+      "title": {
+        "zh": "调度与响应",
+        "en": "Dispatch & Response"
+      },
+      "children": [
+        "bss.event.dispatcher",
+        "bss.event.listeners"
+      ]
+    }
+  ]
+}

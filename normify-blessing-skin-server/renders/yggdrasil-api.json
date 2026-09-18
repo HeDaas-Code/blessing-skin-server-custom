@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "id": "yggdrasil-api",
+  "updated_at": "2026-09-17T17:23:46.916Z",
+  "mode": "groups",
+  "reading": {
+    "zh": "客户端请求先过协议中间件，进入认证/会话/档案端点；绑定与官方路由为已绑定用户提供官方 UUID 与容灾切换。",
+    "en": "Client requests pass protocol middleware into the auth/session/profile endpoints; binding and official routing provide bound users with the official UUID and failover."
+  },
+  "order": [
+    "yggdrasil-api.bootstrap",
+    "yggdrasil-api.binding",
+    "yggdrasil-api.official",
+    "yggdrasil-api.middleware",
+    "yggdrasil-api.auth",
+    "yggdrasil-api.session",
+    "yggdrasil-api.profile",
+    "yggdrasil-api.token",
+    "yggdrasil-api.utils",
+    "yggdrasil-api.exception",
+    "yggdrasil-api.config",
+    "yggdrasil-api.i18n"
+  ],
+  "groups": [
+    {
+      "id": "mount",
+      "title": {
+        "zh": "挂载与横切",
+        "en": "Mount & Cross-cutting"
+      },
+      "children": [
+        "yggdrasil-api.bootstrap",
+        "yggdrasil-api.middleware",
+        "yggdrasil-api.exception",
+        "yggdrasil-api.i18n"
+      ]
+    },
+    {
+      "id": "official",
+      "title": {
+        "zh": "官方认证与容灾",
+        "en": "Official Auth & Failover"
+      },
+      "children": [
+        "yggdrasil-api.binding",
+        "yggdrasil-api.official"
+      ]
+    },
+    {
+      "id": "api",
+      "title": {
+        "zh": "Yggdrasil 端点",
+        "en": "Yggdrasil Endpoints"
+      },
+      "children": [
+        "yggdrasil-api.auth",
+        "yggdrasil-api.session",
+        "yggdrasil-api.profile"
+      ]
+    },
+    {
+      "id": "core",
+      "title": {
+        "zh": "支撑组件",
+        "en": "Supporting Components"
+      },
+      "children": [
+        "yggdrasil-api.token",
+        "yggdrasil-api.utils",
+        "yggdrasil-api.config"
+      ]
+    }
+  ]
+}

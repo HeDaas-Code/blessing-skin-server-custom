@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "id": "bss.infra",
+  "updated_at": "2026-09-17T16:14:28.267Z",
+  "mode": "groups",
+  "reading": {
+    "zh": "从引导与装配出发，命令行与数据层支撑运行时，构建/CI/测试保障交付。",
+    "en": "From bootstrap and assembly, the console and data layer support runtime; build/CI/tests ensure delivery."
+  },
+  "order": [
+    "bss.infra.bootstrap",
+    "bss.infra.providers",
+    "bss.infra.console",
+    "bss.infra.database",
+    "bss.infra.build",
+    "bss.infra.delivery",
+    "bss.infra.tests"
+  ],
+  "groups": [
+    {
+      "id": "runtime",
+      "title": {
+        "zh": "运行时",
+        "en": "Runtime"
+      },
+      "children": [
+        "bss.infra.bootstrap",
+        "bss.infra.providers",
+        "bss.infra.console",
+        "bss.infra.database"
+      ]
+    },
+    {
+      "id": "delivery",
+      "title": {
+        "zh": "交付",
+        "en": "Delivery"
+      },
+      "children": [
+        "bss.infra.build",
+        "bss.infra.delivery",
+        "bss.infra.tests"
+      ]
+    }
+  ]
+}
