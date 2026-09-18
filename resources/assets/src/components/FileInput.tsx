@@ -25,7 +25,7 @@ const FileInput: React.FC<Props> = (props) => {
   return (
     <div className="form-group">
       <label htmlFor="select-file">{t('skinlib.upload.select-file')}</label>
-      <div className="input-group">
+      <div className="input-group terra-sample-chamber">
         <div className="custom-file">
           <input
             type="file"

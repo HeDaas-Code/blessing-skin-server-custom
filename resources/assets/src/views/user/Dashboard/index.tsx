@@ -8,6 +8,7 @@ import { toast } from '@/scripts/notify'
 import useTween from '@/scripts/hooks/useTween'
 import urls from '@/scripts/urls'
 import * as breakpoints from '@/styles/breakpoints'
+import * as terra from '@/styles/terra'
 import InfoBox from './InfoBox'
 import SignButton from './SignButton'
 import * as scoreUtils from './scoreUtils'
@@ -36,6 +37,7 @@ const Score = styled.p`
   font-size: 50px;
   margin-top: 20px;
   cursor: help;
+  ${terra.tabular}
 `
 const ScoreNotice = styled.p`
   font-size: smaller;

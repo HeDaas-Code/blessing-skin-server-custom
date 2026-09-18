@@ -22,7 +22,7 @@ const SignButton: React.FC<Props> = (props) => {
 
   return (
     <button
-      className="btn bg-gradient-primary pl-4 pr-4"
+      className="btn btn-primary pl-4 pr-4"
       role="button"
       disabled={!canSign || props.isLoading}
       onClick={props.onClick}

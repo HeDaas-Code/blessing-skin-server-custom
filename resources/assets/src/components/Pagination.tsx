@@ -21,7 +21,7 @@ const Pagination: React.FC<Props> = (props) => {
   }
 
   return (
-    <ul className="pagination">
+    <ul className="pagination terra-stepper">
       <PaginationItem
         title={t('vendor.datatable.prev')}
         disabled={page === 1}

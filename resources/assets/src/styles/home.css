@@ -31,6 +31,7 @@ body {
   align-self: center;
 }
 
+/* Splash = translucent frosted diagnostic pane over the subject image */
 .splash {
   width: 80%;
   height: 50%;
@@ -41,21 +42,44 @@ body {
   bottom: 0;
   right: 0;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1.5rem;
+  background-color: rgba(255, 255, 255, 0.74);
+  border: 2px solid var(--terra-rule);
+  border-radius: var(--terra-radius);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
 }
+
+/* measured inset sample rail on the splash pane */
+.splash::before {
+  content: '';
+  position: absolute;
+  top: var(--terra-inset);
+  bottom: var(--terra-inset);
+  left: var(--terra-inset);
+  width: 3px;
+  border-radius: 1px;
+  background: var(--terra-rule);
+  opacity: 0.55;
+  pointer-events: none;
+}
+
 .splash-head {
-  color: #fff;
+  color: var(--terra-ink);
   padding: 0.8em 0.5em 1em;
   line-height: 1.5em;
   margin: 0.2em 0 0.5em;
   font-family: Minecraft;
-  text-shadow: 0 4px 3px rgba(0, 0, 0, 0.4), 0 8px 13px rgba(0, 0, 0, 0.1),
-    0 18px 23px rgba(0, 0, 0, 0.1);
+  text-shadow: none;
 }
 .splash-subhead {
   font-size: 16px;
   letter-spacing: 0.05em;
   margin-bottom: 3em;
-  color: #fff;
+  color: var(--terra-ink-muted);
   font-family: Ubuntu, 'Segoe UI', 'Microsoft Yahei', 'Microsoft Jhenghei',
     sans-serif;
 }
@@ -73,19 +97,32 @@ body {
   }
 }
 
+/* Main button = review gate (charcoal plate + chartreuse sample edge) */
 .main-button {
-  color: #fff;
-  padding: 0.8em 2em;
-  border-radius: 5px;
-  background: transparent;
-  border: 1px solid #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  color: var(--terra-on-solid);
+  padding: 0.7em 1.75em;
+  border-radius: var(--terra-radius);
+  background-color: var(--terra-ink-solid);
+  border: var(--terra-rule-width) solid var(--terra-ink);
   font-size: 120%;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  box-shadow: inset 3px 0 0 var(--terra-signal);
   transition: color 0.25s ease-in-out, border-color 0.25s ease-in-out,
     background-color 0.25s ease-in-out;
 }
 .main-button:hover {
-  color: #fff;
-  background-color: rgba(255, 255, 255, 0.2);
+  color: var(--terra-on-solid);
+  background-color: var(--terra-ink-solid-hover);
+  border-color: var(--terra-ink-muted);
+}
+.main-button:focus-visible {
+  outline: 2px solid var(--terra-signal-deep);
+  outline-offset: 2px;
 }
 
 #fixed-bg {
@@ -96,26 +133,32 @@ body {
   background-size: cover;
 }
 
+/* Intro = lab bench description band */
 #intro {
   padding: 50px 0;
-  border-top: 5px solid #bdc3c7;
-  background-color: #fff;
+  border-top: var(--terra-rule-width) solid var(--terra-rule);
+  background-color: var(--terra-surface);
+  color: var(--terra-ink);
 }
 #intro i {
   font-size: 80px;
+  color: var(--terra-ink-muted);
 }
 
+/* Footer = mineral-gray safety paper band */
 #footer-wrap {
-  color: #fff;
-  background-color: #2f2f2f;
+  color: var(--terra-ink-muted);
+  background-color: var(--terra-surface-muted);
+  border-top: var(--terra-rule-width) solid var(--terra-rule);
   padding: 50px 0;
 }
 
 #copyright {
-  color: #fff;
+  color: var(--terra-ink-muted);
 }
 #copyright.with-intro {
-  background-color: #222;
+  background-color: var(--terra-surface-muted);
+  border-top: 1px solid var(--terra-rule);
   padding: 15px 0;
 }
 #copyright.without-intro {
@@ -123,4 +166,6 @@ body {
   bottom: 0;
   width: 100%;
   padding: 16px 50px;
+  color: #fff;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
 }

@@ -10,13 +10,13 @@ export const Card = styled.div`
   }
 
   .card-body {
-    background-color: #eff1f0;
+    background-color: var(--terra-surface-muted);
   }
 `
 
 export const DropdownButton = styled.span`
-  color: var(--gray);
+  color: var(--terra-ink-muted);
   :hover {
-    color: #000;
+    color: var(--terra-ink);
   }
 `

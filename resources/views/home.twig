@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ locale }}">
+<html lang="{{ locale }}" data-terra-faction="rhine-lab" data-terra-depth="moderate">
   <head>
     {{ include('shared.head') }}
     <link rel="preload" as="image" href="{{ home_pic_url }}">
@@ -23,7 +23,7 @@
       {% endif %}
 
       <nav class="navbar navbar-expand fixed-top navbar-{{ navbar_color }} navbar-{{ color_mode }}
-        ml-0 {{ transparent_navbar ? 'transparent' }}"
+        ml-0 {{ transparent_navbar ? 'transparent' }} terra-top-band"
       >
         <div class="container">
           <div class="navbar-header">

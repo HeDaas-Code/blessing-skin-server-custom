@@ -4,6 +4,7 @@ import { t } from '@/scripts/i18n'
 import type { Player } from '@/scripts/types'
 import ButtonEdit from '@/components/ButtonEdit'
 import * as cssUtils from '@/styles/utils'
+import * as terra from '@/styles/terra'
 
 interface Props {
   player: Player
@@ -28,9 +29,9 @@ const Row: React.FC<Props> = (props) => {
   const selected =
     props.selected &&
     css`
-      background: #efefef;
+      background: ${terra.surfaceDeep};
       .dark-mode & {
-        background: var(--dark);
+        background: ${terra.surfaceDeep};
       }
     `
 

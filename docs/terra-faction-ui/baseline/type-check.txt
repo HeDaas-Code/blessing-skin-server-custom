@@ -1,0 +1,129 @@
+yarn run v1.22.22
+$ tsc -p . --noEmit && tsc -p ./resources/assets/tests --noEmit
+[96mresources/assets/src/components/Captcha.tsx[0m:[93m71[0m:[93m10[0m - [91merror[0m[90m TS2786: [0m'Reaptcha' cannot be used as a JSX component.
+  Its instance type 'Reaptcha' is not a valid JSX element.
+    The types returned by 'render()' are incompatible between these types.
+      Type 'string | number | boolean | ReactFragment | Element | null | undefined' is not assignable to type 'ReactNode'.
+        Type '{}' is not assignable to type 'ReactNode'.
+
+[7m71[0m         <Reaptcha
+[7m  [0m [91m         ~~~~~~~~[0m
+
+[96mresources/assets/src/components/EmailSuggestion.tsx[0m:[93m57[0m:[93m8[0m - [91merror[0m[90m TS2322: [0mType '{ form?: string | undefined; slot?: string | undefined; style?: CSSProperties | undefined; title?: string | undefined; pattern?: string | undefined; children?: ReactNode; ... 288 more ...; onResizeCapture?: ReactEventHandler<...> | undefined; }' is not assignable to type 'ClassAttributes<HTMLInputElement> & InputHTMLAttributes<HTMLInputElement> & { css?: Interpolation<Theme>; }'.
+  Type '{ form?: string | undefined; slot?: string | undefined; style?: CSSProperties | undefined; title?: string | undefined; pattern?: string | undefined; children?: ReactNode; ... 288 more ...; onResizeCapture?: ReactEventHandler<...> | undefined; }' is not assignable to type 'InputHTMLAttributes<HTMLInputElement>'.
+    Types of property 'contentEditable' are incompatible.
+      Type '"inherit" | Booleanish | "plaintext-only" | undefined' is not assignable to type '"inherit" | Booleanish | undefined'.
+        Type '"plaintext-only"' is not assignable to type '"inherit" | Booleanish | undefined'.
+
+[7m57[0m       <input className="form-control" {...props} />
+[7m  [0m [91m       ~~~~~[0m
+
+[96mresources/assets/src/index.tsx[0m:[93m34[0m:[93m79[0m - [91merror[0m[90m TS2339: [0mProperty 'el' does not exist on type 'never'.
+
+[7m34[0m       typeof route.el === 'string' ? document.querySelector(route.el) : route.el
+[7m  [0m [91m                                                                              ~~[0m
+
+[96mresources/assets/src/scripts/cli.tsx[0m:[93m108[0m:[93m6[0m - [91merror[0m[90m TS2786: [0m'Draggable' cannot be used as a JSX component.
+  Its instance type 'Draggable' is not a valid JSX element.
+    The types returned by 'render()' are incompatible between these types.
+      Type 'React.ReactNode' is not assignable to type 'import("/home/hedass/\u6587\u6863/\u9879\u76EE/blessing-skin-server/node_modules/@types/react-autosuggest/node_modules/@types/react/ts5.0/index").ReactNode'.
+
+[7m108[0m     <Draggable handle=".card-header">
+[7m   [0m [91m     ~~~~~~~~~[0m
+
+[96mresources/assets/src/views/admin/PlayersManagement/LoadingCard.tsx[0m:[93m16[0m:[93m8[0m - [91merror[0m[90m TS2786: [0m'Skeleton' cannot be used as a JSX component.
+  Its instance type 'Skeleton' is not a valid JSX element.
+
+[7m16[0m       <Skeleton circle height={50} width={50} />
+[7m  [0m [91m       ~~~~~~~~[0m
+
+[96mresources/assets/src/views/admin/UsersManagement/LoadingCard.tsx[0m:[93m17[0m:[93m8[0m - [91merror[0m[90m TS2786: [0m'Skeleton' cannot be used as a JSX component.
+  Its instance type 'Skeleton' is not a valid JSX element.
+    The types returned by 'render()' are incompatible between these types.
+      Type 'React.ReactNode' is not assignable to type 'import("/home/hedass/\u6587\u6863/\u9879\u76EE/blessing-skin-server/node_modules/@types/react-autosuggest/node_modules/@types/react/ts5.0/index").ReactNode'.
+        Type '{}' is not assignable to type 'ReactNode'.
+
+[7m17[0m       <Skeleton circle height={50} width={50} />
+[7m  [0m [91m       ~~~~~~~~[0m
+
+[96mresources/assets/src/views/admin/UsersManagement/LoadingCard.tsx[0m:[93m22[0m:[93m12[0m - [91merror[0m[90m TS2786: [0m'Skeleton' cannot be used as a JSX component.
+  Its instance type 'Skeleton' is not a valid JSX element.
+
+[7m22[0m           <Skeleton width="140px" />
+[7m  [0m [91m           ~~~~~~~~[0m
+
+[96mresources/assets/src/views/admin/UsersManagement/LoadingCard.tsx[0m:[93m28[0m:[93m12[0m - [91merror[0m[90m TS2786: [0m'Skeleton' cannot be used as a JSX component.
+  Its instance type 'Skeleton' is not a valid JSX element.
+
+[7m28[0m           <Skeleton width="140px" />
+[7m  [0m [91m           ~~~~~~~~[0m
+
+[96mresources/assets/src/views/admin/UsersManagement/LoadingCard.tsx[0m:[93m31[0m:[93m12[0m - [91merror[0m[90m TS2786: [0m'Skeleton' cannot be used as a JSX component.
+  Its instance type 'Skeleton' is not a valid JSX element.
+
+[7m31[0m           <Skeleton width="140px" />
+[7m  [0m [91m           ~~~~~~~~[0m
+
+[96mresources/assets/src/views/admin/UsersManagement/LoadingCard.tsx[0m:[93m54[0m:[93m12[0m - [91merror[0m[90m TS2786: [0m'Skeleton' cannot be used as a JSX component.
+  Its instance type 'Skeleton' is not a valid JSX element.
+
+[7m54[0m           <Skeleton width="180px" />
+[7m  [0m [91m           ~~~~~~~~[0m
+
+[96mresources/assets/src/views/skinlib/Show/index.tsx[0m:[93m357[0m:[93m20[0m - [91merror[0m[90m TS2786: [0m'Skeleton' cannot be used as a JSX component.
+  Its instance type 'Skeleton' is not a valid JSX element.
+
+[7m357[0m                   <Skeleton />
+[7m   [0m [91m                   ~~~~~~~~[0m
+
+[96mresources/assets/src/views/skinlib/Show/index.tsx[0m:[93m379[0m:[93m20[0m - [91merror[0m[90m TS2786: [0m'Skeleton' cannot be used as a JSX component.
+  Its instance type 'Skeleton' is not a valid JSX element.
+
+[7m379[0m                   <Skeleton />
+[7m   [0m [91m                   ~~~~~~~~[0m
+
+[96mresources/assets/src/views/skinlib/Show/index.tsx[0m:[93m405[0m:[93m31[0m - [91merror[0m[90m TS2786: [0m'Skeleton' cannot be used as a JSX component.
+  Its instance type 'Skeleton' is not a valid JSX element.
+
+[7m405[0m                 {isLoading ? <Skeleton /> : texture.hash}
+[7m   [0m [91m                              ~~~~~~~~[0m
+
+[96mresources/assets/src/views/skinlib/Show/index.tsx[0m:[93m411[0m:[93m31[0m - [91merror[0m[90m TS2786: [0m'Skeleton' cannot be used as a JSX component.
+  Its instance type 'Skeleton' is not a valid JSX element.
+
+[7m411[0m                 {isLoading ? <Skeleton /> : <span>{texture.size} KB</span>}
+[7m   [0m [91m                              ~~~~~~~~[0m
+
+[96mresources/assets/src/views/skinlib/Show/index.tsx[0m:[93m418[0m:[93m20[0m - [91merror[0m[90m TS2786: [0m'Skeleton' cannot be used as a JSX component.
+  Its instance type 'Skeleton' is not a valid JSX element.
+
+[7m418[0m                   <Skeleton />
+[7m   [0m [91m                   ~~~~~~~~[0m
+
+[96mresources/assets/src/views/skinlib/Show/index.tsx[0m:[93m445[0m:[93m31[0m - [91merror[0m[90m TS2786: [0m'Skeleton' cannot be used as a JSX component.
+  Its instance type 'Skeleton' is not a valid JSX element.
+
+[7m445[0m                 {isLoading ? <Skeleton /> : texture.upload_at}
+[7m   [0m [91m                              ~~~~~~~~[0m
+
+[96mresources/assets/src/views/user/Closet/index.tsx[0m:[93m91[0m:[93m20[0m - [91merror[0m[90m TS2345: [0mArgument of type 'Dispatch<SetStateAction<string>>' is not assignable to parameter of type 'Dispatch<unknown>'.
+  Type 'unknown' is not assignable to type 'SetStateAction<string>'.
+
+[7m91[0m     updater(value, setQuery)
+[7m  [0m [91m                   ~~~~~~~~[0m
+
+
+Found 17 errors in 8 files.
+
+Errors  Files
+     1  resources/assets/src/components/Captcha.tsx[90m:71[0m
+     1  resources/assets/src/components/EmailSuggestion.tsx[90m:57[0m
+     1  resources/assets/src/index.tsx[90m:34[0m
+     1  resources/assets/src/scripts/cli.tsx[90m:108[0m
+     1  resources/assets/src/views/admin/PlayersManagement/LoadingCard.tsx[90m:16[0m
+     5  resources/assets/src/views/admin/UsersManagement/LoadingCard.tsx[90m:17[0m
+     6  resources/assets/src/views/skinlib/Show/index.tsx[90m:357[0m
+     1  resources/assets/src/views/user/Closet/index.tsx[90m:91[0m
+error Command failed with exit code 2.
+info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
+EXIT_CODE=2

@@ -1,0 +1,5 @@
+node: v22.23.2
+yarn: 1.22.22
+npm: 10.9.8
+php: PHP 8.3.6 (cli) (built: Sep  2 2026 12:56:02) (NTS)
+composer: Composer version 2.7.1 2024-02-09 15:26:28

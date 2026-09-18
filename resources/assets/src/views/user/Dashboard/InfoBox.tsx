@@ -14,7 +14,7 @@ const InfoBox: React.FC<Props> = (props) => {
   const percentage = (props.used / total) * 100
 
   return (
-    <div className={`info-box bg-${props.color}`}>
+    <div className="info-box" data-terra-specimen={props.color}>
       <span className="info-box-icon">
         <i className={`fas fa-${props.icon}`}></i>
       </span>

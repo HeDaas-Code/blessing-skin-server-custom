@@ -25,21 +25,18 @@ class SessionController extends Controller
 
         Log::channel('ygg')->info("Player [$selectedProfile] is trying to join server [$serverId] with access token [$accessToken]");
 
-        $result = DB::table('uuid')->where('uuid', $selectedProfile)->first();
-
-        if (! $result) {
-            // 据说 Mojang 在这种情况下是会返回 403 的
-            throw new ForbiddenOperationException(
-                trans('Yggdrasil::exceptions.uuid', ['profile' => $selectedProfile])
-            );
-        }
-
-        $player = Player::where('name', $result->name)->first();
+        // UUID 可能来自离线 uuid 表，也可能来自微软账号绑定（ygg_bindings.mojang_uuid）
+        $player = Profile::resolvePlayerFromUuid($selectedProfile);
 
         if (! $player) {
-            // 删除已失效的 UUID 映射（e.g. 其对应的角色已被删除）
-            DB::table('uuid')->where('uuid', $selectedProfile)->delete();
+            // 只有当该 UUID 确实来自离线 uuid 表（而非绑定表）且其对应角色已被删除时，
+            // 才清理这条失效映射；由绑定表匹配到的 UUID 不得删除任何 uuid 行。
+            if (! Profile::isBoundUuid($selectedProfile)
+                && DB::table('uuid')->where('uuid', $selectedProfile)->exists()) {
+                DB::table('uuid')->where('uuid', $selectedProfile)->delete();
+            }
 
+            // 据说 Mojang 在这种情况下是会返回 403 的
             throw new ForbiddenOperationException(
                 trans('Yggdrasil::exceptions.uuid', ['profile' => $selectedProfile])
             );
@@ -106,7 +103,8 @@ class SessionController extends Controller
             $profile = Profile::createFromUuid($selectedProfile);
 
             // TODO: 检查 IP 地址
-            if ($name === $profile->name) {
+            // 拿不到 profile（例如角色已被删除）时直接走下面的「未加入」返回
+            if ($profile && $name === $profile->name) {
                 // 检查完成后马上删除缓存键值对
                 Cache::forget("SERVER_$serverId");
                 Log::channel('ygg')->info("Player [$name] was in the server [$serverId]");

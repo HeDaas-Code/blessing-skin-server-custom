@@ -25,7 +25,7 @@ const ClosetItem: React.FC<Props> = (props) => {
 
   return (
     <Card className={`card mr-3 mb-3 ${props.selected ? 'shadow' : ''}`}>
-      <div className="card-body" onClick={handleItemClick}>
+      <div className="card-body terra-tray" onClick={handleItemClick}>
         <picture>
           <source srcSet={preview} type="image/webp" />
           <img

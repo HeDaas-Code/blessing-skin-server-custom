@@ -9,7 +9,7 @@ const Box = styled.div`
   transition-property: box-shadow;
   transition-duration: 0.3s;
   &:hover {
-    box-shadow: 0 0.5rem 1rem rgba(#000, 0.15);
+    box-shadow: 0 2px 8px rgba(17, 23, 20, 0.18);
   }
 
   .info-box-content {
@@ -19,12 +19,12 @@ const Box = styled.div`
 const ActionButton = styled.a`
   transition-property: color;
   transition-duration: 0.3s;
-  color: #000;
+  color: var(--terra-ink);
   .dark-mode & {
-    color: #fff;
+    color: var(--terra-ink);
   }
   &:hover {
-    color: #999;
+    color: var(--terra-ink-muted);
   }
   &:not(:last-child) {
     margin-right: 9px;

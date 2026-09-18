@@ -31,6 +31,7 @@ export default function (env?: Env): webpack.Configuration {
         'admin-lte/dist/css/alt/adminlte.pages.min.css',
         'admin-lte/dist/css/alt/adminlte.light.min.css',
         '@fortawesome/fontawesome-free/css/all.min.css',
+        '@/styles/terra.css',
       ],
       home: '@/scripts/homePage.ts',
       'home-css': '@/styles/home.css',
@@ -38,6 +39,7 @@ export default function (env?: Env): webpack.Configuration {
         'spectre.css/dist/spectre.min.css',
         '@/fonts/minecraft.css',
         '@/styles/spectre.css',
+        '@/styles/terra.css',
       ],
     },
     output: {

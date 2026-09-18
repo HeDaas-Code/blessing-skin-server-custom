@@ -204,7 +204,7 @@ const Upload: React.FC = () => {
               {t('skinlib.upload.set-as-private')}
             </label>
             <button
-              className="btn btn-success"
+              className="btn btn-primary"
               disabled={isUploading}
               onClick={handleUpload}
             >

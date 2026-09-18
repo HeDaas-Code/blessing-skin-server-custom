@@ -10,11 +10,11 @@ const Card = styled.div`
   transition-property: box-shadow;
   transition-duration: 0.3s;
   &:hover {
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    box-shadow: 0 2px 8px rgba(17, 23, 20, 0.18);
   }
 
   .card-body {
-    background-color: #eff1f0;
+    background-color: var(--terra-surface-muted);
   }
 
   img {
@@ -42,9 +42,9 @@ const ButtonLike = styled.a<ButtonLikeProps>`
   ${cssUtils.pointerCursor}
 
   i, span {
-    color: ${(props) => (props.liked ? '#dc3545' : '#6c757d')};
+    color: ${(props) => (props.liked ? 'var(--terra-critical)' : 'var(--terra-ink-muted)')};
     &:hover {
-      color: ${(props) => (props.liked ? '#dc3545' : '#343a40')};
+      color: ${(props) => (props.liked ? 'var(--terra-critical)' : 'var(--terra-ink)')};
     }
   }
 `
@@ -77,7 +77,7 @@ const Item: React.FC<Props> = (props) => {
   return (
     <a href={link} className="ml-3 mr-2 mb-2 d-block" target="_blank">
       <Card className="card">
-        <div className="card-body">
+        <div className="card-body terra-tray">
           <a href={link} target="_blank">
             <picture>
               <source srcSet={preview} type="image/webp" />

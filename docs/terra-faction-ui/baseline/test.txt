@@ -1,0 +1,49 @@
+yarn run v1.22.22
+$ jest
+PASS resources/assets/tests/components/Modal.test.tsx
+PASS resources/assets/tests/scripts/net.test.ts
+PASS resources/assets/tests/views/user/OAuth.test.tsx
+PASS resources/assets/tests/views/admin/PluginsManagement.test.tsx
+PASS resources/assets/tests/views/admin/PluginsMarket.test.tsx
+PASS resources/assets/tests/views/skinlib/Upload.test.tsx
+PASS resources/assets/tests/views/admin/ReportsManagement.test.tsx
+PASS resources/assets/tests/views/skinlib/SkinLibrary.test.tsx
+PASS resources/assets/tests/components/Pagination.test.tsx
+PASS resources/assets/tests/views/auth/Login.test.tsx
+PASS resources/assets/tests/views/admin/Translations.test.tsx
+PASS resources/assets/tests/views/user/Dashboard.test.tsx
+PASS resources/assets/tests/components/Viewer.test.tsx
+PASS resources/assets/tests/components/EmailSuggestion.test.tsx
+PASS resources/assets/tests/views/auth/Reset.test.tsx
+PASS resources/assets/tests/scripts/cli/AptCommand.test.ts
+PASS resources/assets/tests/scripts/cli/DnfCommand.test.ts
+PASS resources/assets/tests/views/auth/Registration.test.tsx
+PASS resources/assets/tests/views/widgets/NotificationsList.test.tsx
+PASS resources/assets/tests/scripts/cli/ClosetCommand.test.ts
+PASS resources/assets/tests/components/Captcha.test.tsx
+PASS resources/assets/tests/views/user/Players.test.tsx
+PASS resources/assets/tests/scripts/cli/PacmanCommand.test.ts
+PASS resources/assets/tests/scripts/cli/RmCommand.test.ts
+PASS resources/assets/tests/views/skinlib/Show.test.tsx
+PASS resources/assets/tests/views/user/Closet.test.tsx
+PASS resources/assets/tests/components/FileInput.test.tsx
+PASS resources/assets/tests/scripts/toast.test.ts
+PASS resources/assets/tests/scripts/homePage.test.ts
+PASS resources/assets/tests/views/auth/Forgot.test.tsx
+PASS resources/assets/tests/views/widgets/EmailVerification.test.tsx
+PASS resources/assets/tests/scripts/event.test.ts
+PASS resources/assets/tests/scripts/i18n.test.ts
+PASS resources/assets/tests/scripts/modal.test.ts
+PASS resources/assets/tests/scripts/logout.test.ts
+PASS resources/assets/tests/views/admin/PlayersManagement.test.tsx
+PASS resources/assets/tests/components/DarkModeButton.test.tsx
+PASS resources/assets/tests/scripts/cli/Spinner.test.ts
+PASS resources/assets/tests/views/admin/UsersManagement.test.tsx (5.022 s)
+
+Test Suites: 39 passed, 39 total
+Tests:       366 passed, 366 total
+Snapshots:   0 total
+Time:        5.542 s
+Ran all test suites.
+Done in 6.05s.
+EXIT_CODE=0

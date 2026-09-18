@@ -18,9 +18,9 @@
             <div>
               {% for color in colors.navbar %}
                 <label>
-                  <input type="radio" class="d-none" name="navbar" value="{{ color }}">
+                  <input type="radio" class="d-none terra-swatch-input" name="navbar" value="{{ color }}">
                   <div class="btn-color bg-{{ color }} display-inline-block
-                    rounded-pill mr-2 mb-1 elevation-2"
+                    terra-swatch mr-2 mb-1"
                   ></div>
                 </label>
               {% endfor %}
@@ -31,9 +31,9 @@
             <div>
               {% for color in colors.sidebar %}
                 <label>
-                  <input type="radio" class="d-none" name="sidebar" value="dark-{{ color }}">
+                  <input type="radio" class="d-none terra-swatch-input" name="sidebar" value="dark-{{ color }}">
                   <div class="btn-color bg-{{ color }} display-inline-block
-                    rounded-pill mr-2 mb-1 elevation-2"
+                    terra-swatch mr-2 mb-1"
                   ></div>
                 </label>
               {% endfor %}
@@ -44,9 +44,9 @@
             <div>
               {% for color in colors.sidebar %}
                 <label>
-                  <input type="radio" class="d-none" name="sidebar" value="light-{{ color }}">
+                  <input type="radio" class="d-none terra-swatch-input" name="sidebar" value="light-{{ color }}">
                   <div class="btn-color bg-{{ color }} display-inline-block
-                    rounded-pill mr-2 mb-1 elevation-2"
+                    terra-swatch mr-2 mb-1"
                   ></div>
                 </label>
               {% endfor %}

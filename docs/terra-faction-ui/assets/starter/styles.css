@@ -1,0 +1,2139 @@
+:root {
+  color-scheme: light;
+  --field: #edf2ef;
+  --ink: #111714;
+  --surface: #d8e0db;
+  --rule: #95a29a;
+  --signal: #b9d532;
+  --signal-ink: #526214;
+  --signal-text: #111714;
+  --critical: #a64035;
+  --layer-opacity: 0.28;
+  --instrument-scale: 0.78;
+  --stage-min: 29rem;
+  --font-ui: "Noto Sans SC", "PingFang SC", system-ui, sans-serif;
+  --font-display: "Noto Serif SC", "Songti SC", Georgia, serif;
+}
+
+[data-terra-faction="lungmen-municipal"] {
+  --field: #c9d0d4;
+  --ink: #161a1e;
+  --surface: #aeb7bd;
+  --rule: #59636b;
+  --signal: #c7443a;
+  --signal-ink: #7b201b;
+  --signal-text: #fff8f0;
+  --critical: #8f231e;
+  --cultural: #2e625c;
+}
+
+[data-terra-faction="kazimierz-broadcast"] {
+  --field: #f5f5f2;
+  --ink: #0c1018;
+  --surface: #d9dde5;
+  --rule: #667082;
+  --signal: #2c62b4;
+  --signal-ink: #23477f;
+  --signal-text: #ffffff;
+  --critical: #b52f36;
+  --font-display: "Arial Narrow", "Roboto Condensed", var(--font-ui);
+}
+
+[data-terra-faction="laterano-notarial"] {
+  --field: #f7eed8;
+  --ink: #241b12;
+  --surface: #ded0b5;
+  --rule: #947b5b;
+  --signal: #b58a32;
+  --signal-ink: #6b4e17;
+  --signal-text: #241b12;
+  --critical: #a13a2f;
+}
+
+[data-terra-faction="siracusa-dossier"] {
+  --field: #e9dcc7;
+  --ink: #211412;
+  --surface: #c7b29b;
+  --rule: #806757;
+  --signal: #742b38;
+  --signal-ink: #742b38;
+  --signal-text: #fff6e7;
+  --critical: #a53434;
+}
+
+[data-terra-faction="kjerag-alpine"] {
+  --field: #dcecf1;
+  --ink: #11262b;
+  --surface: #c2d9df;
+  --rule: #78939a;
+  --signal: #168a8a;
+  --signal-ink: #0b5e60;
+  --signal-text: #051011;
+  --critical: #a4433c;
+}
+
+[data-terra-faction="iberia-nautical"] {
+  color-scheme: dark;
+  --field: #0e2230;
+  --ink: #f0e6d2;
+  --surface: #243b48;
+  --rule: #72848a;
+  --signal: #c49a52;
+  --signal-ink: #e2c789;
+  --signal-text: #142532;
+  --critical: #c85c4e;
+}
+
+[data-terra-faction="yan-archival"] {
+  --field: #f6f2e8;
+  --ink: #171817;
+  --surface: #ddd7ca;
+  --rule: #777a73;
+  --signal: #b23b2f;
+  --signal-ink: #84261f;
+  --signal-text: #fff9f0;
+  --critical: #8c2825;
+}
+
+[data-terra-faction="leithanien-conservatory"] {
+  color-scheme: dark;
+  --field: #2b1018;
+  --ink: #f1e3d3;
+  --surface: #4a2130;
+  --rule: #85616b;
+  --signal: #c29a4b;
+  --signal-ink: #e2c77e;
+  --signal-text: #241015;
+  --critical: #d35460;
+}
+
+[data-terra-faction="penguin-logistics-street"] {
+  color-scheme: dark;
+  --field: #081a2f;
+  --ink: #f4f7fa;
+  --surface: #173453;
+  --rule: #6f8297;
+  --signal: #f4f7fa;
+  --signal-ink: #f4f7fa;
+  --signal-text: #081a2f;
+  --critical: #d64f45;
+  --font-display: var(--font-ui);
+}
+
+[data-terra-faction="blacksteel-contract"] {
+  color-scheme: dark;
+  --field: #141517;
+  --ink: #f0f1ec;
+  --surface: #292b2e;
+  --rule: #686c70;
+  --signal: #e6c900;
+  --signal-ink: #f3de38;
+  --signal-text: #151618;
+  --critical: #c54a43;
+  --font-display: var(--font-ui);
+}
+
+[data-terra-faction="ursus-student"] {
+  --field: #b7b0a3;
+  --ink: #191a18;
+  --surface: #8e8a82;
+  --rule: #595a56;
+  --signal: #a33b2d;
+  --signal-ink: #6f221b;
+  --signal-text: #fff8ec;
+  --critical: #641e24;
+}
+
+[data-terra-depth="minimal"] {
+  --layer-opacity: 0;
+  --instrument-scale: 0.48;
+  --stage-min: 23rem;
+}
+
+[data-terra-depth="complex"] {
+  --layer-opacity: 0.42;
+  --instrument-scale: 0.92;
+  --stage-min: 33rem;
+}
+
+[data-terra-depth="maximal"] {
+  --layer-opacity: 0.56;
+  --instrument-scale: 1;
+  --stage-min: 37rem;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--ink);
+  color: var(--ink);
+  font-family: var(--font-ui);
+}
+
+body {
+  margin: 0;
+  min-width: 20rem;
+  background: var(--field);
+}
+
+button,
+select {
+  font: inherit;
+}
+
+button,
+select,
+summary {
+  min-height: 2.5rem;
+}
+
+:focus-visible {
+  outline: 2px solid var(--signal);
+  outline-offset: 3px;
+}
+
+.skip-link {
+  position: fixed;
+  z-index: 20;
+  top: 0.5rem;
+  left: 0.5rem;
+  padding: 0.6rem 0.8rem;
+  color: var(--field);
+  background: var(--ink);
+  transform: translateY(-160%);
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+.topbar,
+footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.9rem clamp(1rem, 3vw, 2.6rem);
+  color: var(--field);
+  background: var(--ink);
+}
+
+.identity {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.identity strong,
+.identity small {
+  display: block;
+}
+
+.identity small,
+.micro,
+.eyebrow,
+footer {
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.identity-mark {
+  position: relative;
+  width: 1.2rem;
+  height: 3rem;
+  border: 1px solid currentColor;
+  overflow: hidden;
+  background:
+    repeating-linear-gradient(0deg, var(--surface) 0 8px, color-mix(in srgb, var(--rule) 32%, var(--surface)) 8px 9px);
+  box-shadow: 0.18rem 0.2rem 0 color-mix(in srgb, currentColor 18%, transparent);
+}
+
+.identity-mark::before {
+  position: absolute;
+  left: 0.18rem;
+  bottom: 0.2rem;
+  width: 0.28rem;
+  height: 58%;
+  background: var(--signal);
+  content: "";
+}
+
+.identity-mark::after {
+  position: absolute;
+  top: 0.18rem;
+  right: 0.18rem;
+  width: 0.24rem;
+  height: 0.24rem;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  background: var(--field);
+  content: "";
+}
+
+[data-terra-faction="lungmen-municipal"] .identity-mark {
+  background: linear-gradient(90deg, var(--surface) 0 34%, var(--signal) 34% 62%, #2e625c 62% 84%, var(--surface) 84%);
+}
+
+[data-terra-faction="kazimierz-broadcast"] .identity-mark {
+  background: linear-gradient(90deg, var(--signal) 0 58%, var(--field) 58% 66%, var(--ink) 66%);
+}
+
+[data-terra-faction="laterano-notarial"] .identity-mark,
+[data-terra-faction="yan-archival"] .identity-mark {
+  background: linear-gradient(90deg, var(--field) 0 68%, var(--signal) 68% 78%, var(--surface) 78%);
+}
+
+[data-terra-faction="siracusa-dossier"] .identity-mark,
+[data-terra-faction="leithanien-conservatory"] .identity-mark {
+  background: linear-gradient(90deg, var(--surface) 0 58%, var(--signal) 58% 70%, var(--field) 70%);
+}
+
+[data-terra-faction="kjerag-alpine"] .identity-mark {
+  border-style: dashed;
+  background: repeating-linear-gradient(90deg, var(--field) 0 3px, var(--surface) 3px 6px);
+}
+
+[data-terra-faction="iberia-nautical"] .identity-mark {
+  border-color: var(--signal);
+  background: radial-gradient(circle at 50% 64%, transparent 0 6px, var(--signal) 6px 7px, transparent 7px), var(--field);
+}
+
+[data-terra-faction="penguin-logistics-street"] .identity-mark {
+  background: linear-gradient(90deg, var(--field) 0 56%, var(--signal) 56% 76%, var(--surface) 76%);
+}
+
+[data-terra-faction="blacksteel-contract"] .identity-mark {
+  background: linear-gradient(135deg, var(--surface) 0 58%, var(--signal) 58% 68%, var(--field) 68%);
+}
+
+[data-terra-faction="ursus-student"] .identity-mark {
+  background: linear-gradient(132deg, transparent 0 42%, var(--rule) 42% 45%, transparent 45%), linear-gradient(90deg, var(--field) 0 68%, var(--signal) 68% 82%, var(--surface) 82%);
+}
+
+.config {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.config label {
+  display: grid;
+  gap: 0.2rem;
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.config select {
+  min-width: 9.5rem;
+  border: 1px solid color-mix(in srgb, var(--field), transparent 55%);
+  border-radius: 0;
+  padding: 0.45rem 2.2rem 0.45rem 0.6rem;
+  color: var(--field);
+  background: var(--ink);
+}
+
+.stage {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(16rem, 0.85fr);
+  min-height: var(--stage-min);
+  overflow: hidden;
+  border-bottom: 1px solid var(--rule);
+}
+
+.stage::before {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  content: "";
+  opacity: var(--layer-opacity);
+  background:
+    linear-gradient(90deg, transparent 0 72%, var(--rule) 72% calc(72% + 1px), transparent calc(72% + 1px)),
+    repeating-linear-gradient(0deg, transparent 0 3rem, color-mix(in srgb, var(--rule), transparent 55%) 3rem calc(3rem + 1px));
+}
+
+[data-terra-faction="kazimierz-broadcast"] .stage::before {
+  background:
+    linear-gradient(0deg, var(--signal) 0 0.45rem, transparent 0.45rem),
+    repeating-linear-gradient(90deg, transparent 0 8rem, color-mix(in srgb, var(--rule), transparent 55%) 8rem calc(8rem + 1px));
+}
+
+[data-terra-faction="laterano-notarial"] .stage::before {
+  background:
+    radial-gradient(circle at 78% 52%, transparent 0 7rem, var(--rule) 7rem calc(7rem + 1px), transparent calc(7rem + 1px) 10rem, var(--rule) 10rem calc(10rem + 1px), transparent calc(10rem + 1px)),
+    linear-gradient(90deg, transparent 0 72%, var(--rule) 72% calc(72% + 1px), transparent calc(72% + 1px));
+}
+
+[data-terra-faction="siracusa-dossier"] .stage::before {
+  background:
+    linear-gradient(105deg, transparent 0 66%, color-mix(in srgb, var(--surface), transparent 18%) 66%),
+    repeating-linear-gradient(0deg, transparent 0 2.3rem, color-mix(in srgb, var(--rule), transparent 65%) 2.3rem calc(2.3rem + 1px));
+}
+
+[data-terra-faction="kjerag-alpine"] .stage::before {
+  background:
+    linear-gradient(148deg, transparent 0 58%, color-mix(in srgb, var(--surface), transparent 5%) 58% 76%, transparent 76%),
+    linear-gradient(90deg, transparent 0 72%, var(--rule) 72% calc(72% + 1px), transparent calc(72% + 1px));
+}
+
+[data-terra-faction="iberia-nautical"] .stage::before {
+  background:
+    radial-gradient(circle at 78% 52%, transparent 0 5rem, var(--rule) 5rem calc(5rem + 1px), transparent calc(5rem + 1px)),
+    repeating-radial-gradient(circle at 78% 52%, transparent 0 2.5rem, color-mix(in srgb, var(--rule), transparent 68%) 2.5rem calc(2.5rem + 1px));
+}
+
+[data-terra-faction="yan-archival"] .stage::before {
+  background:
+    linear-gradient(90deg, transparent 0 64%, color-mix(in srgb, var(--surface), transparent 5%) 64% 82%, transparent 82%),
+    repeating-linear-gradient(90deg, transparent 0 5.5rem, color-mix(in srgb, var(--rule), transparent 65%) 5.5rem calc(5.5rem + 1px));
+}
+
+[data-terra-faction="leithanien-conservatory"] .stage::before {
+  background:
+    repeating-linear-gradient(0deg, transparent 0 1.35rem, color-mix(in srgb, var(--rule), transparent 65%) 1.35rem calc(1.35rem + 1px)),
+    radial-gradient(circle at 78% 52%, transparent 0 7rem, var(--rule) 7rem calc(7rem + 1px), transparent calc(7rem + 1px));
+}
+
+.stage-copy {
+  align-self: end;
+  padding: clamp(2rem, 7vw, 6rem) clamp(1rem, 5vw, 4.5rem) clamp(2rem, 5vw, 4rem);
+}
+
+.eyebrow,
+.micro {
+  margin: 0 0 0.7rem;
+  color: var(--signal-ink);
+  font-weight: 700;
+}
+
+h1,
+h2,
+p {
+  max-width: 65ch;
+}
+
+h1 {
+  max-width: 11ch;
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(3.1rem, 8vw, 7.6rem);
+  line-height: 0.88;
+  letter-spacing: -0.055em;
+}
+
+h2 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.45rem, 3vw, 2.25rem);
+}
+
+.lede {
+  margin: 1.4rem 0 2rem;
+  font-size: clamp(1rem, 1.8vw, 1.2rem);
+  line-height: 1.7;
+}
+
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  max-width: 42rem;
+  margin: 0 0 2rem;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+
+.metrics div {
+  padding: 0.9rem 1rem 0.9rem 0;
+}
+
+.metrics dt,
+.metrics dd {
+  margin: 0;
+}
+
+.metrics dt {
+  margin-bottom: 0.35rem;
+  color: color-mix(in srgb, var(--ink), transparent 36%);
+  font-size: 0.73rem;
+}
+
+.metrics dd {
+  font-weight: 750;
+  font-variant-numeric: tabular-nums;
+}
+
+.primary-action {
+  min-width: 9.5rem;
+  border: 1px solid var(--ink);
+  border-radius: 0;
+  padding: 0.8rem 1rem;
+  color: var(--field);
+  background: var(--ink);
+  box-shadow: inset 0.35rem 0 var(--signal);
+  cursor: pointer;
+}
+
+.primary-action:hover {
+  color: var(--signal-text);
+  background: var(--signal);
+}
+
+.action-status {
+  min-height: 1.5rem;
+  margin: 0.75rem 0 0;
+  font-size: 0.82rem;
+}
+
+.instrument {
+  position: relative;
+  align-self: center;
+  justify-self: center;
+  width: min(30vw, 22rem);
+  aspect-ratio: 1;
+  border: 1px solid var(--rule);
+  transform: scale(var(--instrument-scale));
+}
+
+.instrument::before,
+.instrument::after {
+  position: absolute;
+  content: "";
+}
+
+.instrument::before {
+  inset: 12%;
+  border: 1px solid var(--rule);
+}
+
+.instrument::after {
+  inset: 50% 0 auto;
+  border-top: 1px solid var(--signal);
+  transform: rotate(-24deg);
+  transform-origin: center;
+}
+
+[data-terra-faction="laterano-notarial"] .instrument,
+[data-terra-faction="iberia-nautical"] .instrument,
+[data-terra-faction="leithanien-conservatory"] .instrument {
+  border-radius: 50%;
+}
+
+[data-terra-faction="kjerag-alpine"] .instrument {
+  clip-path: polygon(50% 0, 100% 100%, 0 100%);
+}
+
+[data-terra-faction="yan-archival"] .instrument {
+  width: min(22vw, 13rem);
+  aspect-ratio: 0.62;
+}
+
+.instrument-index {
+  position: absolute;
+  top: -0.08em;
+  right: 0.02em;
+  color: color-mix(in srgb, var(--signal), transparent 24%);
+  font-size: clamp(5rem, 13vw, 11rem);
+  font-weight: 800;
+  line-height: 0.8;
+  letter-spacing: -0.08em;
+}
+
+.instrument-point {
+  position: absolute;
+  top: calc(50% - 0.35rem);
+  left: calc(50% - 0.35rem);
+  width: 0.7rem;
+  height: 0.7rem;
+  background: var(--signal);
+}
+
+.element-profile {
+  position: absolute;
+  right: -1px;
+  bottom: -1px;
+  max-width: 78%;
+  border: 1px solid var(--rule);
+  border-left: 0.35rem solid var(--signal);
+  padding: 0.7rem 0.8rem;
+  background: var(--surface);
+  color: var(--ink);
+  font: 750 0.58rem/1.35 var(--font-mono);
+  letter-spacing: 0.08em;
+  text-align: right;
+}
+
+.secondary-profile {
+  position: absolute;
+  top: 12%;
+  left: -8%;
+  max-width: 72%;
+  border-top: 1px solid var(--signal);
+  border-bottom: 1px solid var(--rule);
+  padding: 0.55rem 1.8rem 0.55rem 0.65rem;
+  background: color-mix(in srgb, var(--field), transparent 8%);
+  color: var(--ink);
+  font-size: 0.64rem;
+  font-weight: 720;
+  letter-spacing: 0.05em;
+  transition: border-color 180ms ease, background 180ms ease, transform 180ms ease;
+}
+
+.secondary-profile::after {
+  position: absolute;
+  top: 50%;
+  right: 0.55rem;
+  width: 0.55rem;
+  height: 0.55rem;
+  border: 1px solid var(--signal);
+  content: "";
+  transform: translateY(-50%);
+}
+
+.is-committed .secondary-profile {
+  border-color: var(--signal);
+  background: color-mix(in srgb, var(--signal), var(--field) 82%);
+  transform: translateX(0.35rem);
+}
+
+[data-terra-depth="minimal"] .secondary-profile {
+  display: none;
+}
+
+[data-terra-depth="complex"] .secondary-profile,
+[data-terra-depth="maximal"] .secondary-profile {
+  box-shadow: 0.4rem 0.4rem 0 color-mix(in srgb, var(--rule), transparent 60%);
+}
+
+[data-terra-faction="laterano-notarial"] .element-profile,
+[data-terra-faction="iberia-nautical"] .element-profile,
+[data-terra-faction="leithanien-conservatory"] .element-profile {
+  right: 8%;
+  bottom: 3%;
+  border-radius: 999px;
+}
+
+[data-terra-faction="lungmen-municipal"] .element-profile,
+[data-terra-faction="yan-archival"] .element-profile {
+  border-left-width: 0.7rem;
+  font-family: var(--font-display);
+}
+
+[data-terra-faction="penguin-logistics-street"] .element-profile {
+  transform: rotate(-2deg);
+  border-style: dashed;
+}
+
+[data-terra-faction="ursus-student"] .element-profile {
+  transform: rotate(1deg);
+  box-shadow: -1.3rem -0.45rem 0 color-mix(in srgb, var(--rule) 28%, transparent);
+}
+
+.workbench {
+  display: grid;
+  grid-template-columns: minmax(17rem, 0.7fr) minmax(0, 1.3fr);
+  gap: 1px;
+  background: var(--rule);
+}
+
+.queue,
+.dossier {
+  padding: clamp(1.4rem, 3vw, 2.8rem);
+  background: var(--field);
+}
+
+.queue ol {
+  margin: 1.5rem 0 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--rule);
+}
+
+.queue li {
+  display: grid;
+  grid-template-columns: 2.2rem 1fr;
+  gap: 0.9rem;
+  padding: 1rem 0.75rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+.queue li > span {
+  color: var(--signal-ink);
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+.queue strong,
+.queue small {
+  display: block;
+}
+
+.queue small {
+  margin-top: 0.25rem;
+  color: color-mix(in srgb, var(--ink), transparent 35%);
+}
+
+.queue .is-active {
+  background: color-mix(in srgb, var(--signal), transparent 86%);
+  box-shadow: inset 0.3rem 0 var(--signal);
+}
+
+.dossier-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  margin: 1.5rem 0;
+  background: var(--rule);
+  border: 1px solid var(--rule);
+}
+
+.dossier-grid > div {
+  min-height: 6rem;
+  padding: 1rem;
+  background: var(--field);
+}
+
+.dossier-grid span,
+.dossier-grid strong {
+  display: block;
+}
+
+.dossier-grid span {
+  margin-bottom: 0.55rem;
+  color: color-mix(in srgb, var(--ink), transparent 38%);
+  font-size: 0.75rem;
+}
+
+details {
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+
+summary {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+details p {
+  line-height: 1.75;
+}
+
+footer {
+  font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 860px) {
+  .topbar {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .config {
+    width: 100%;
+  }
+
+  .config label,
+  .config select {
+    width: 100%;
+  }
+
+  .stage {
+    grid-template-columns: 1fr;
+  }
+
+  .instrument {
+    position: absolute;
+    z-index: -1;
+    right: -2rem;
+    bottom: 1rem;
+    width: 16rem;
+    opacity: 0.35;
+  }
+
+  .workbench {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .config {
+    flex-direction: column;
+  }
+
+  .metrics,
+  .dossier-grid {
+    grid-template-columns: 1fr;
+  }
+
+  footer {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .motion-ready .topbar {
+    animation: terra-shell-wipe 640ms cubic-bezier(0.2, 0.8, 0.22, 1) both;
+  }
+
+  .motion-ready .stage-copy > * {
+    animation: terra-copy-rise 560ms cubic-bezier(0.2, 0.8, 0.22, 1) both;
+  }
+
+  .motion-ready .stage-copy > :nth-child(2) {
+    animation-delay: 70ms;
+  }
+
+  .motion-ready .stage-copy > :nth-child(3) {
+    animation-delay: 130ms;
+  }
+
+  .motion-ready .stage-copy > :nth-child(n + 4) {
+    animation-delay: 190ms;
+  }
+
+  .motion-ready .instrument {
+    animation: terra-instrument-reveal 760ms 180ms cubic-bezier(0.2, 0.8, 0.22, 1) both;
+  }
+
+  .motion-ready .secondary-profile {
+    animation: terra-copy-rise 520ms 420ms cubic-bezier(0.2, 0.8, 0.22, 1) both;
+  }
+
+  .motion-ready .workbench > * {
+    animation: terra-workbench-reveal 680ms 260ms ease both;
+  }
+
+  .motion-ready .workbench > :nth-child(2) {
+    animation-delay: 350ms;
+  }
+
+  .primary-action,
+  .instrument,
+  .identity-mark {
+    transition: color 180ms ease, background 180ms ease, transform 280ms ease, box-shadow 260ms ease;
+  }
+
+  .primary-action {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+  }
+
+  .primary-action::after {
+    position: absolute;
+    inset: 0;
+    background: color-mix(in srgb, var(--signal) 42%, transparent);
+    content: "";
+    opacity: 0;
+    transform: scaleX(0);
+    transform-origin: left center;
+  }
+
+  .primary-action.is-committing::after {
+    animation: terra-commit-sweep 620ms cubic-bezier(0.2, 0.8, 0.22, 1);
+  }
+
+  .primary-action:active {
+    transform: translateX(0.2rem);
+  }
+
+  .action-status {
+    opacity: 0;
+    transform: translateY(0.35rem);
+  }
+
+  .action-status.is-visible {
+    animation: terra-status-arrive 380ms 180ms ease both;
+  }
+
+  [data-terra-faction="rhine-lab"] .instrument-point {
+    animation: terra-point-breathe 2.2s ease-in-out infinite;
+  }
+
+  [data-terra-faction="lungmen-municipal"] .instrument::after {
+    animation: terra-gate-rule 2.2s ease-in-out infinite;
+  }
+
+  [data-terra-faction="kazimierz-broadcast"] .instrument-index {
+    animation: terra-score-pulse 2s ease-in-out infinite;
+  }
+
+  [data-terra-faction="laterano-notarial"] .instrument::before,
+  [data-terra-faction="iberia-nautical"] .instrument::before {
+    animation: terra-slow-bearing 12s linear infinite;
+  }
+
+  [data-terra-faction="siracusa-dossier"] .instrument::after {
+    animation: terra-proceeding-rule 2.2s ease-in-out infinite;
+  }
+
+  [data-terra-faction="kjerag-alpine"] .instrument-point,
+  [data-terra-faction="yan-archival"] .instrument-point {
+    animation: terra-route-stop 2.2s ease-in-out infinite;
+  }
+
+  [data-terra-faction="leithanien-conservatory"] .instrument::after {
+    animation: terra-tempo-rule 2.4s ease-in-out infinite;
+  }
+
+  [data-terra-faction="penguin-logistics-street"] .instrument-point {
+    animation: terra-handoff-step 2s steps(3, end) infinite;
+  }
+
+  [data-terra-faction="blacksteel-contract"] .instrument::after {
+    animation: terra-industrial-scan 2.4s ease-in-out infinite;
+  }
+
+  [data-terra-faction="ursus-student"] .instrument-index {
+    animation: terra-document-alert 2.2s ease-in-out infinite;
+  }
+}
+
+@keyframes terra-shell-wipe {
+  from {
+    opacity: 0.72;
+    transform: translateY(-0.35rem);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes terra-copy-rise {
+  from {
+    opacity: 0.32;
+    transform: translateY(0.55rem);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes terra-instrument-reveal {
+  from {
+    opacity: 0.42;
+    clip-path: inset(34% 0 0);
+  }
+  to {
+    opacity: 1;
+    clip-path: inset(0);
+  }
+}
+
+@keyframes terra-workbench-reveal {
+  from {
+    opacity: 0.58;
+    clip-path: inset(0 0 34%);
+  }
+  to {
+    opacity: 1;
+    clip-path: inset(0);
+  }
+}
+
+@keyframes terra-commit-sweep {
+  0% {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+  45% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 0;
+    transform: scaleX(1);
+  }
+}
+
+@keyframes terra-status-arrive {
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes terra-point-breathe {
+  50% {
+    transform: scale(1.55);
+    box-shadow: 0 0 0 0.65rem color-mix(in srgb, var(--signal), transparent 82%);
+  }
+}
+
+@keyframes terra-gate-rule {
+  0%,
+  100% {
+    clip-path: inset(0 72% 0 0);
+  }
+  50% {
+    clip-path: inset(0);
+  }
+}
+
+@keyframes terra-score-pulse {
+  50% {
+    opacity: 0.55;
+    transform: translateX(-0.18rem);
+  }
+}
+
+@keyframes terra-slow-bearing {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes terra-proceeding-rule {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: rotate(-24deg) scaleX(0.55);
+  }
+  50% {
+    opacity: 1;
+    transform: rotate(-24deg) scaleX(1);
+  }
+}
+
+@keyframes terra-route-stop {
+  50% {
+    transform: scale(1.45);
+  }
+}
+
+@keyframes terra-tempo-rule {
+  0%,
+  100% {
+    transform: rotate(-30deg);
+  }
+  50% {
+    transform: rotate(-18deg);
+  }
+}
+
+@keyframes terra-handoff-step {
+  0% {
+    transform: translate(-1.1rem, 0.6rem);
+  }
+  100% {
+    transform: translate(1.1rem, -0.6rem);
+  }
+}
+
+@keyframes terra-industrial-scan {
+  0%,
+  100% {
+    opacity: 0.25;
+    transform: rotate(-24deg) translateX(-12%);
+  }
+  50% {
+    opacity: 1;
+    transform: rotate(-24deg) translateX(12%);
+  }
+}
+
+@keyframes terra-document-alert {
+  0%,
+  100% {
+    color: color-mix(in srgb, var(--signal), transparent 24%);
+  }
+  50% {
+    color: var(--signal);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Fixed faction interaction silhouettes */
+
+[data-terra-faction="rhine-lab"] {
+  --control-radius: 2px;
+  --control-clip: none;
+  --control-press-x: 0;
+  --control-press-y: 1px;
+  --control-press-scale: 0.985;
+  --control-boundary: inset 0.35rem 0 var(--signal), inset 0 0 0 1px var(--rule);
+}
+
+[data-terra-faction="lungmen-municipal"] {
+  --control-radius: 0;
+  --control-clip: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 0 100%);
+  --control-press-x: 3px;
+  --control-press-y: 1px;
+  --control-press-scale: 1;
+  --control-boundary: inset 0.4rem 0 var(--cultural), inset 0 -0.18rem var(--signal);
+}
+
+[data-terra-faction="kazimierz-broadcast"] {
+  --control-radius: 0;
+  --control-clip: polygon(0 0, 100% 0, calc(100% - 14px) 100%, 0 100%);
+  --control-press-x: 4px;
+  --control-press-y: 0;
+  --control-press-scale: 1;
+  --control-boundary: inset 0 -0.3rem var(--signal);
+}
+
+[data-terra-faction="laterano-notarial"] {
+  --control-radius: 999px;
+  --control-clip: none;
+  --control-press-x: 0;
+  --control-press-y: 0;
+  --control-press-scale: 0.97;
+  --control-boundary: inset 0 0 0 1px var(--signal-ink), inset 0 0 0 4px var(--field);
+}
+
+[data-terra-faction="siracusa-dossier"] {
+  --control-radius: 0 0 8px 0;
+  --control-clip: polygon(0 0, calc(100% - 11px) 0, 100% 11px, 100% 100%, 0 100%);
+  --control-press-x: 0;
+  --control-press-y: 3px;
+  --control-press-scale: 1;
+  --control-boundary: inset 0 -0.3rem var(--signal), inset 0 0 0 1px var(--rule);
+}
+
+[data-terra-faction="kjerag-alpine"] {
+  --control-radius: 12px 2px 12px 2px;
+  --control-clip: none;
+  --control-press-x: 0;
+  --control-press-y: 3px;
+  --control-press-scale: 0.99;
+  --control-boundary: inset 0 0 0 1px var(--signal), inset 0 0 0 4px var(--field);
+}
+
+[data-terra-faction="iberia-nautical"] {
+  --control-radius: 999px 999px 7px 7px;
+  --control-clip: none;
+  --control-press-x: 0;
+  --control-press-y: 0;
+  --control-press-scale: 0.975;
+  --control-boundary: inset 0 0 0 1px var(--signal-ink), inset 0 0 0 4px var(--field);
+}
+
+[data-terra-faction="yan-archival"] {
+  --control-radius: 1px;
+  --control-clip: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%);
+  --control-press-x: 0;
+  --control-press-y: 3px;
+  --control-press-scale: 1;
+  --control-boundary: inset 0 -0.35rem var(--signal), inset 0 0 0 1px var(--ink);
+}
+
+[data-terra-faction="leithanien-conservatory"] {
+  --control-radius: 999px 4px 999px 4px;
+  --control-clip: none;
+  --control-press-x: 0;
+  --control-press-y: 0;
+  --control-press-scale: 0.97;
+  --control-boundary: inset 0 0 0 1px var(--signal-ink), inset 0.35rem 0 var(--surface);
+}
+
+[data-terra-faction="penguin-logistics-street"] {
+  --control-radius: 0;
+  --control-clip: polygon(6px 0, calc(100% - 6px) 0, 100% 6px, 100% calc(50% - 5px), calc(100% - 4px) 50%, 100% calc(50% + 5px), 100% calc(100% - 6px), calc(100% - 6px) 100%, 6px 100%, 0 calc(100% - 6px), 0 calc(50% + 5px), 4px 50%, 0 calc(50% - 5px), 0 6px);
+  --control-press-x: 5px;
+  --control-press-y: 0;
+  --control-press-scale: 1;
+  --control-boundary: inset 0 0 0 1px var(--signal), inset 0 -0.35rem var(--surface);
+}
+
+[data-terra-faction="blacksteel-contract"] {
+  --control-radius: 0;
+  --control-clip: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+  --control-press-x: 1px;
+  --control-press-y: 3px;
+  --control-press-scale: 0.99;
+  --control-boundary: inset 0.4rem 0 var(--signal), inset 0 0 0 1px var(--rule);
+}
+
+[data-terra-faction="ursus-student"] {
+  --control-radius: 2px 8px 3px 1px;
+  --control-clip: none;
+  --control-press-x: 0;
+  --control-press-y: 3px;
+  --control-press-scale: 0.99;
+  --control-boundary: -3px 3px 0 var(--rule), inset 0.4rem 0 var(--signal);
+}
+
+.primary-action {
+  border-radius: var(--control-radius, 0);
+  clip-path: var(--control-clip, none);
+  box-shadow: var(--control-boundary, inset 0.35rem 0 var(--signal));
+  transition:
+    color 180ms ease,
+    background-color 220ms ease,
+    translate 160ms ease,
+    scale 160ms ease,
+    box-shadow 220ms ease;
+}
+
+.primary-action:active,
+.primary-action.is-committing {
+  translate: var(--control-press-x, 0) var(--control-press-y, 1px);
+  scale: var(--control-press-scale, 0.99);
+}
+
+[data-terra-faction="kjerag-alpine"] .primary-action,
+[data-terra-faction="penguin-logistics-street"] .primary-action {
+  border-style: dashed;
+}
+
+[data-terra-faction="laterano-notarial"] .primary-action:focus-visible,
+[data-terra-faction="iberia-nautical"] .primary-action:focus-visible {
+  box-shadow:
+    0 0 0 1px var(--signal-ink),
+    0 0 0 4px var(--field),
+    0 0 0 6px var(--signal);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .primary-action:active,
+  .primary-action.is-committing {
+    translate: 0;
+    scale: 1;
+  }
+}
+
+/* Moderate-depth control family: binary state + continuous/stepped state */
+
+.starter-controls {
+  display: grid;
+  max-width: 42rem;
+  grid-template-columns: minmax(0, 1.35fr) minmax(12rem, 0.65fr);
+  gap: 1rem;
+  margin: 0 0 1.2rem;
+  border: 1px solid var(--rule);
+  border-radius: var(--control-radius);
+  padding: 0.8rem;
+  background: color-mix(in srgb, var(--field) 90%, transparent);
+  box-shadow: var(--control-boundary);
+}
+
+.starter-controls fieldset {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.5rem;
+  min-width: 0;
+  margin: 0;
+  border: 0;
+  padding: 0;
+}
+
+.starter-controls legend {
+  grid-column: 1 / -1;
+  width: 100%;
+  margin-bottom: 0.25rem;
+  color: var(--signal-ink);
+  font-size: 0.58rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+}
+
+.starter-check {
+  position: relative;
+  display: grid;
+  min-width: 0;
+  grid-template-columns: 1.2rem minmax(0, 1fr);
+  align-items: center;
+  gap: 0.55rem;
+  border: 1px solid var(--rule);
+  padding: 0.55rem;
+  cursor: pointer;
+  font-size: 0.68rem;
+  transition:
+    translate 160ms ease,
+    background-color 180ms ease,
+    border-color 180ms ease;
+}
+
+.starter-check:hover {
+  translate: var(--control-hover-x, 0) var(--control-hover-y, -1px);
+  border-color: var(--signal-ink);
+  background: color-mix(in srgb, var(--signal) 14%, var(--field));
+}
+
+.starter-check input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+
+.starter-check-shape {
+  position: relative;
+  width: 1.1rem;
+  height: 1.1rem;
+  border: 1px solid var(--signal-ink);
+  border-radius: var(--check-radius, 0);
+  background: var(--field);
+  clip-path: var(--check-clip, none);
+}
+
+.starter-check-shape::after {
+  position: absolute;
+  inset: 0.26rem;
+  transform: scale(0);
+  background: var(--signal);
+  clip-path: var(--check-mark-clip, polygon(0 46%, 36% 74%, 100% 0, 100% 38%, 38% 100%, 0 68%));
+  content: "";
+  transition: transform 170ms ease;
+}
+
+.starter-check input:checked + .starter-check-shape::after {
+  transform: scale(1);
+}
+
+.starter-check input:focus-visible + .starter-check-shape {
+  outline: 2px solid var(--signal);
+  outline-offset: 3px;
+}
+
+.starter-range {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-content: center;
+  gap: 0.55rem;
+  font-size: 0.68rem;
+  font-weight: 700;
+}
+
+.starter-range output {
+  color: var(--signal-ink);
+  font-variant-numeric: tabular-nums;
+}
+
+.starter-range input {
+  width: 100%;
+  height: 1.4rem;
+  grid-column: 1 / -1;
+  margin: 0;
+  appearance: none;
+  background:
+    linear-gradient(
+      90deg,
+      var(--signal) 0 var(--range-fill),
+      color-mix(in srgb, var(--rule) 48%, transparent) var(--range-fill) 100%
+    )
+    center / 100% var(--range-track-height, 0.28rem) no-repeat;
+  cursor: ew-resize;
+}
+
+.starter-range input::-webkit-slider-runnable-track {
+  height: var(--range-track-height, 0.28rem);
+  background: transparent;
+}
+
+.starter-range input::-webkit-slider-thumb {
+  width: var(--range-thumb-width, 1rem);
+  height: var(--range-thumb-height, 1.35rem);
+  margin-top: calc((var(--range-track-height, 0.28rem) - var(--range-thumb-height, 1.35rem)) / 2);
+  appearance: none;
+  border: 2px solid var(--signal-ink);
+  border-radius: var(--range-thumb-radius, 0);
+  background: var(--field);
+  box-shadow: inset 0 0 0 0.22rem var(--signal);
+  clip-path: var(--range-thumb-clip, none);
+  transition: scale 160ms ease;
+}
+
+.starter-range input:hover::-webkit-slider-thumb,
+.starter-range input:focus-visible::-webkit-slider-thumb {
+  scale: 1.14;
+}
+
+.starter-range input:focus-visible {
+  outline: 1px solid var(--signal-ink);
+  outline-offset: 3px;
+}
+
+/* Faction-owned signature controls: mechanics, not only skins */
+
+.signature-control {
+  position: relative;
+  display: grid;
+  grid-column: 1 / -1;
+  grid-template-columns: minmax(13rem, 0.8fr) minmax(16rem, 1.2fr);
+  gap: 0.8rem 1rem;
+  min-width: 0;
+  border-top: 1px solid var(--rule);
+  padding-top: 0.8rem;
+}
+
+[data-terra-depth="minimal"] .signature-control {
+  display: none;
+}
+
+.signature-header {
+  display: grid;
+  align-content: start;
+  gap: 0.35rem;
+  min-width: 0;
+}
+
+.signature-header div,
+.signature-header p,
+.signature-header h2,
+.signature-eyebrow {
+  margin: 0;
+}
+
+.signature-eyebrow {
+  color: var(--signal-ink);
+  font-size: 0.54rem;
+  font-weight: 850;
+  letter-spacing: 0.13em;
+}
+
+.signature-header h2 {
+  font-family: var(--font-display);
+  font-size: clamp(0.92rem, 1.8vw, 1.2rem);
+  line-height: 1.1;
+}
+
+.signature-header > p {
+  max-width: 30rem;
+  color: color-mix(in srgb, var(--ink) 72%, transparent);
+  font-size: 0.64rem;
+  line-height: 1.55;
+}
+
+.signature-options,
+.signature-stepper {
+  display: grid;
+  min-width: 0;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-self: center;
+  gap: 0.42rem;
+}
+
+.signature-option,
+.signature-stepper button,
+.signature-latch {
+  position: relative;
+  min-height: 2.8rem;
+  border: 1px solid var(--rule);
+  color: var(--ink);
+  background: color-mix(in srgb, var(--field) 82%, var(--surface));
+  cursor: pointer;
+  font: inherit;
+  transition:
+    translate 160ms ease,
+    scale 160ms ease,
+    border-color 180ms ease,
+    background-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.signature-option {
+  display: grid;
+  min-width: 0;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 0.42rem;
+  padding: 0.48rem;
+  text-align: left;
+}
+
+.signature-option > span {
+  color: var(--signal-ink);
+  font-size: 0.52rem;
+  font-variant-numeric: tabular-nums;
+  font-weight: 850;
+}
+
+.signature-option > b {
+  overflow: hidden;
+  font-size: 0.65rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.signature-option:hover,
+.signature-stepper button:hover,
+.signature-latch:hover {
+  border-color: var(--signal-ink);
+  background: color-mix(in srgb, var(--signal) 15%, var(--field));
+}
+
+.signature-option:focus-visible,
+.signature-stepper button:focus-visible,
+.signature-latch:focus-visible {
+  z-index: 3;
+  outline: 2px solid var(--signal);
+  outline-offset: 3px;
+}
+
+.signature-option:active,
+.signature-stepper button:active,
+.signature-latch:active {
+  translate: var(--signature-press-x, 0) var(--signature-press-y, 1px);
+  scale: 0.98;
+}
+
+.signature-option[aria-pressed="true"] {
+  border-color: var(--signal-ink);
+  background: var(--signature-selected, color-mix(in srgb, var(--signal) 24%, var(--field)));
+  box-shadow: var(--signature-boundary, inset 0 -3px 0 var(--signal));
+}
+
+.signature-stepper {
+  grid-template-columns: 2.8rem minmax(7rem, 1fr) 2.8rem;
+}
+
+.signature-stepper button {
+  display: grid;
+  place-items: center;
+  padding: 0;
+  color: var(--signal-ink);
+  font-size: 1.15rem;
+  font-weight: 850;
+}
+
+.signature-stepper button:disabled {
+  cursor: not-allowed;
+  opacity: 0.38;
+}
+
+.signature-stepper output {
+  display: grid;
+  min-height: 2.8rem;
+  place-items: center;
+  border-block: 1px solid var(--rule);
+  color: var(--signal-ink);
+  background: color-mix(in srgb, var(--surface) 62%, transparent);
+  font-size: 1rem;
+  font-variant-numeric: tabular-nums;
+  font-weight: 850;
+}
+
+.signature-latch {
+  display: grid;
+  min-width: min(100%, 18rem);
+  grid-template-columns: 3.4rem 1fr;
+  align-items: center;
+  justify-self: stretch;
+  gap: 0.75rem;
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+}
+
+.signature-latch-track {
+  position: relative;
+  display: block;
+  height: 1.35rem;
+  border: 1px solid var(--signal-ink);
+  background: var(--surface);
+}
+
+.signature-latch-track i {
+  position: absolute;
+  inset: 0.18rem auto 0.18rem 0.18rem;
+  width: 1rem;
+  background: var(--rule);
+  transition: translate 180ms ease, background-color 180ms ease;
+}
+
+.signature-latch[aria-pressed="true"] {
+  border-color: var(--signal-ink);
+  box-shadow: inset 0 -3px 0 var(--signal);
+}
+
+.signature-latch[aria-pressed="true"] .signature-latch-track i {
+  translate: 1.65rem 0;
+  background: var(--signal);
+}
+
+.signature-feedback {
+  grid-column: 2;
+  min-height: 1em;
+  margin: 0;
+  color: var(--signal-ink);
+  font-size: 0.56rem;
+  font-weight: 750;
+  letter-spacing: 0.04em;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .signature-control.is-reacting .signature-feedback {
+    animation: signature-feedback 320ms ease both;
+  }
+
+  @keyframes signature-feedback {
+    0% {
+      opacity: 0.2;
+      translate: -0.45rem 0;
+    }
+    100% {
+      opacity: 1;
+      translate: 0;
+    }
+  }
+}
+
+/* Rhine Lab: the stepper behaves like a measured caliper. */
+
+[data-terra-control="tolerance-caliper"] .signature-stepper {
+  position: relative;
+  padding-inline: 0.5rem;
+  background:
+    repeating-linear-gradient(90deg, transparent 0 0.68rem, var(--rule) 0.68rem 0.72rem)
+    0 0 / 100% 0.34rem no-repeat;
+}
+
+[data-terra-control="tolerance-caliper"] .signature-stepper::after {
+  position: absolute;
+  inset: auto 0.5rem -0.22rem;
+  height: 1px;
+  background: var(--signal-ink);
+  content: "";
+}
+
+[data-terra-control="tolerance-caliper"] .signature-stepper button {
+  border-radius: 2px;
+  box-shadow: inset 0.22rem 0 0 color-mix(in srgb, var(--signal) 72%, transparent);
+}
+
+/* Lungmen: clipped gates move along a civic route axis. */
+
+[data-terra-control="ward-gate-matrix"] .signature-options {
+  padding-bottom: 0.45rem;
+  background: linear-gradient(var(--cultural), var(--cultural)) 0 100% / 100% 0.22rem no-repeat;
+}
+
+[data-terra-control="ward-gate-matrix"] .signature-option {
+  clip-path: polygon(0 0, calc(100% - 0.65rem) 0, 100% 0.65rem, 100% 100%, 0 100%);
+}
+
+[data-terra-control="ward-gate-matrix"] .signature-option[aria-pressed="true"] {
+  --signature-selected: color-mix(in srgb, var(--cultural) 30%, var(--field));
+  --signature-boundary: inset 0.34rem 0 0 var(--cultural);
+  translate: 0.25rem 0;
+}
+
+/* Kazimierz: opposing broadcast wedges share a center line. */
+
+[data-terra-control="side-ownership-switch"] .signature-options {
+  gap: 0;
+}
+
+[data-terra-control="side-ownership-switch"] .signature-option {
+  clip-path: polygon(0 0, 100% 0, calc(100% - 0.75rem) 100%, 0.75rem 100%);
+  padding-inline: 0.8rem;
+}
+
+[data-terra-control="side-ownership-switch"] .signature-option[aria-pressed="true"] {
+  --signature-boundary: inset 0 -0.32rem 0 var(--signal);
+  z-index: 2;
+  translate: 0 -0.18rem;
+}
+
+/* Laterano: two witnessed declarations resolve inside double authority rings. */
+
+[data-terra-control="witness-pair-toggle"] .signature-options {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  justify-content: center;
+  padding-inline: 8%;
+  background: linear-gradient(var(--rule), var(--rule)) center / 20% 1px no-repeat;
+}
+
+[data-terra-control="witness-pair-toggle"] .signature-option {
+  min-height: 3.4rem;
+  grid-template-columns: auto;
+  justify-items: center;
+  border-radius: 999px;
+  text-align: center;
+}
+
+[data-terra-control="witness-pair-toggle"] .signature-option > span {
+  position: absolute;
+  inset: 0.3rem;
+  display: grid;
+  place-items: start center;
+  border: 1px solid transparent;
+  border-radius: inherit;
+}
+
+[data-terra-control="witness-pair-toggle"] .signature-option[aria-pressed="true"] {
+  --signature-boundary: 0 0 0 3px var(--field), 0 0 0 5px var(--signal);
+  scale: 0.96;
+}
+
+/* Siracusa: file leaves overlap and settle downward. */
+
+[data-terra-control="docket-leaf-tabs"] .signature-options {
+  grid-template-columns: repeat(4, minmax(4rem, 1fr));
+  gap: 0;
+  align-items: start;
+  padding-top: 0.35rem;
+}
+
+[data-terra-control="docket-leaf-tabs"] .signature-option {
+  margin-left: -1px;
+  clip-path: polygon(0 0, calc(100% - 0.58rem) 0, 100% 0.58rem, 100% 100%, 0 100%);
+}
+
+[data-terra-control="docket-leaf-tabs"] .signature-option[aria-pressed="true"] {
+  --signature-boundary: inset 0.26rem 0 0 var(--signal);
+  z-index: 2;
+  translate: 0 0.32rem;
+}
+
+/* Kjerag: verified weather thresholds tighten a stitched boundary. */
+
+[data-terra-control="stitched-weather-gates"] .signature-options {
+  background: linear-gradient(90deg, var(--rule), var(--rule)) center / calc(100% - 2rem) 1px no-repeat;
+}
+
+[data-terra-control="stitched-weather-gates"] .signature-option {
+  border-style: dashed;
+  border-radius: 0.72rem 0.1rem 0.72rem 0.1rem;
+}
+
+[data-terra-control="stitched-weather-gates"] .signature-option[aria-pressed="true"] {
+  --signature-boundary: inset 0 0 0 0.22rem color-mix(in srgb, var(--signal) 48%, transparent);
+  border-style: solid;
+  translate: 0 -0.18rem;
+}
+
+/* Iberia: the stepper becomes a bounded bearing instrument. */
+
+[data-terra-control="drift-trim-wheel"] .signature-stepper {
+  grid-template-columns: 3.2rem minmax(7rem, 1fr) 3.2rem;
+  padding-inline: 0.35rem;
+  background:
+    radial-gradient(circle at center, transparent 0 2.45rem, color-mix(in srgb, var(--signal) 46%, transparent) 2.5rem 2.56rem, transparent 2.62rem);
+}
+
+[data-terra-control="drift-trim-wheel"] .signature-stepper button {
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 0.22rem var(--surface);
+}
+
+[data-terra-control="drift-trim-wheel"] .signature-stepper output {
+  border: 1px solid var(--signal);
+  border-radius: 999px 999px 0.42rem 0.42rem;
+  box-shadow: inset 0 0 0 0.24rem var(--field);
+}
+
+/* Yan: commitment is a single downward seal press. */
+
+[data-terra-control="seal-press"] .signature-latch {
+  clip-path: polygon(0 0, calc(100% - 0.7rem) 0, 100% 0.7rem, 100% 100%, 0 100%);
+  background:
+    linear-gradient(90deg, transparent 0 72%, color-mix(in srgb, var(--signal) 18%, transparent) 72% 100%),
+    color-mix(in srgb, var(--field) 82%, var(--surface));
+}
+
+[data-terra-control="seal-press"] .signature-latch-track {
+  width: 2.3rem;
+  height: 2.3rem;
+  border-color: var(--signal-ink);
+}
+
+[data-terra-control="seal-press"] .signature-latch-track i {
+  inset: 0.35rem;
+  width: auto;
+  background: transparent;
+  box-shadow: inset 0 0 0 1px var(--signal-ink);
+}
+
+[data-terra-control="seal-press"] .signature-latch[aria-pressed="true"] {
+  --signature-press-y: 3px;
+  translate: 0 0.18rem;
+  box-shadow: inset 0 -0.28rem 0 var(--signal);
+}
+
+[data-terra-control="seal-press"] .signature-latch[aria-pressed="true"] .signature-latch-track i {
+  translate: 0;
+  background: var(--signal);
+}
+
+/* Leithanien: cue nodes form one measured cadence. */
+
+[data-terra-control="cadence-stepper"] .signature-options {
+  grid-template-columns: repeat(4, minmax(3.8rem, 1fr));
+  gap: 0;
+  background: linear-gradient(var(--signal), var(--signal)) center / calc(100% - 3rem) 1px no-repeat;
+}
+
+[data-terra-control="cadence-stepper"] .signature-option {
+  min-height: 3.2rem;
+  grid-template-columns: 1fr;
+  justify-items: center;
+  border-radius: 999px 0.25rem 999px 0.25rem;
+  text-align: center;
+}
+
+[data-terra-control="cadence-stepper"] .signature-option[aria-pressed="true"] {
+  --signature-boundary: inset 0.3rem 0 0 var(--signal), inset -0.3rem 0 0 var(--signal);
+  scale: 0.94 1;
+}
+
+/* Penguin Logistics: removable tickets snap along a handoff rail. */
+
+[data-terra-control="courier-relay-rail"] .signature-options {
+  gap: 0.28rem;
+  padding-bottom: 0.38rem;
+  background: repeating-linear-gradient(90deg, var(--ink) 0 0.5rem, transparent 0.5rem 0.76rem) 0 100% / 100% 1px no-repeat;
+}
+
+[data-terra-control="courier-relay-rail"] .signature-option {
+  clip-path: polygon(0.35rem 0, calc(100% - 0.35rem) 0, 100% 0.35rem, 100% calc(50% - 0.2rem), calc(100% - 0.18rem) 50%, 100% calc(50% + 0.2rem), 100% calc(100% - 0.35rem), calc(100% - 0.35rem) 100%, 0.35rem 100%, 0 calc(100% - 0.35rem), 0 calc(50% + 0.2rem), 0.18rem 50%, 0 calc(50% - 0.2rem), 0 0.35rem);
+  border: 0;
+}
+
+[data-terra-control="courier-relay-rail"] .signature-option[aria-pressed="true"] {
+  --signature-selected: var(--ink);
+  --signature-boundary: none;
+  color: var(--field);
+  translate: 0.36rem 0;
+}
+
+[data-terra-control="courier-relay-rail"] .signature-option[aria-pressed="true"] > span {
+  color: var(--field);
+}
+
+/* Blacksteel: each option is an equipment shutter with an interlock edge. */
+
+[data-terra-control="equipment-bay-shutters"] .signature-options {
+  gap: 0.5rem;
+  padding: 0.36rem;
+  border: 1px solid var(--rule);
+  background:
+    repeating-linear-gradient(135deg, color-mix(in srgb, var(--signal) 36%, transparent) 0 0.28rem, transparent 0.28rem 0.56rem)
+    0 100% / 100% 0.3rem no-repeat;
+}
+
+[data-terra-control="equipment-bay-shutters"] .signature-option {
+  clip-path: polygon(0.4rem 0, 100% 0, 100% calc(100% - 0.4rem), calc(100% - 0.4rem) 100%, 0 100%, 0 0.4rem);
+  box-shadow: inset 0.22rem 0 0 color-mix(in srgb, #7656b5 70%, transparent);
+}
+
+[data-terra-control="equipment-bay-shutters"] .signature-option[aria-pressed="true"] {
+  --signature-boundary: inset 0 -0.3rem 0 var(--signal), inset 0.22rem 0 0 #7656b5;
+  translate: 0 0.18rem;
+}
+
+/* Ursus Student Group: repaired responsibility strips stay modest and legible. */
+
+[data-terra-control="shared-supply-tabs"] .signature-options {
+  grid-template-columns: repeat(4, minmax(3.8rem, 1fr));
+  align-items: center;
+  gap: 0.34rem;
+  rotate: -0.25deg;
+}
+
+[data-terra-control="shared-supply-tabs"] .signature-option {
+  min-height: 3rem;
+  grid-template-columns: 1fr;
+  align-content: center;
+  border-radius: 0.15rem 0.5rem 0.2rem 0.08rem;
+  background:
+    linear-gradient(100deg, transparent 0 70%, color-mix(in srgb, var(--field) 42%, transparent) 70%),
+    color-mix(in srgb, var(--field) 78%, var(--surface));
+}
+
+[data-terra-control="shared-supply-tabs"] .signature-option:nth-child(even) {
+  translate: 0 0.18rem;
+  rotate: 0.6deg;
+}
+
+[data-terra-control="shared-supply-tabs"] .signature-option[aria-pressed="true"] {
+  --signature-boundary: inset 0 -0.22rem 0 var(--signal);
+  text-decoration: underline;
+  text-decoration-color: var(--signal);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.28rem;
+}
+
+.primary-action:hover {
+  translate: var(--control-hover-x, 0) var(--control-hover-y, 0);
+  scale: var(--control-hover-scale, 1);
+  rotate: var(--control-hover-rotate, 0deg);
+}
+
+/* Fixed faction control silhouettes */
+
+[data-terra-faction="rhine-lab"] {
+  --check-radius: 2px;
+  --range-thumb-width: 0.5rem;
+  --range-thumb-height: 1.6rem;
+  --range-track-height: 0.14rem;
+  --control-hover-scale: 0.992;
+}
+
+[data-terra-faction="lungmen-municipal"] {
+  --check-clip: polygon(0 0, calc(100% - 5px) 0, 100% 5px, 100% 100%, 0 100%);
+  --range-thumb-width: 1.45rem;
+  --range-thumb-height: 1rem;
+  --range-thumb-clip: polygon(0 0, calc(100% - 5px) 0, 100% 5px, 100% 100%, 0 100%);
+  --range-track-height: 0.42rem;
+  --control-hover-x: 4px;
+}
+
+[data-terra-faction="kazimierz-broadcast"] {
+  --check-clip: polygon(0 0, 100% 0, calc(100% - 6px) 100%, 0 100%);
+  --range-thumb-width: 2rem;
+  --range-thumb-height: 0.85rem;
+  --range-thumb-clip: polygon(0 0, 100% 0, calc(100% - 7px) 100%, 7px 100%);
+  --range-track-height: 0.5rem;
+  --control-hover-y: -2px;
+  --control-hover-rotate: -0.45deg;
+}
+
+[data-terra-faction="laterano-notarial"] {
+  --check-radius: 50%;
+  --check-mark-clip: circle(50%);
+  --range-thumb-width: 1.5rem;
+  --range-thumb-height: 1.5rem;
+  --range-thumb-radius: 50%;
+  --range-track-height: 0.14rem;
+  --control-hover-scale: 1.025;
+}
+
+[data-terra-faction="siracusa-dossier"] {
+  --check-clip: polygon(0 0, calc(100% - 6px) 0, 100% 6px, 100% 100%, 0 100%);
+  --range-thumb-width: 1.2rem;
+  --range-thumb-height: 1.55rem;
+  --range-thumb-clip: polygon(0 0, calc(100% - 7px) 0, 100% 7px, 100% 100%, 0 100%);
+  --range-track-height: 0.32rem;
+  --control-hover-y: -2px;
+}
+
+[data-terra-faction="kjerag-alpine"] {
+  --check-radius: 7px 1px 7px 1px;
+  --check-mark-clip: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+  --range-thumb-width: 1.2rem;
+  --range-thumb-height: 1.2rem;
+  --range-thumb-radius: 7px 1px 7px 1px;
+  --range-track-height: 0.32rem;
+  --control-hover-y: -3px;
+}
+
+[data-terra-faction="iberia-nautical"] {
+  --check-radius: 50%;
+  --check-mark-clip: circle(50%);
+  --range-thumb-width: 1.6rem;
+  --range-thumb-height: 1.6rem;
+  --range-thumb-radius: 50%;
+  --range-track-height: 0.18rem;
+  --control-hover-scale: 1.02;
+  --control-hover-rotate: 0.5deg;
+}
+
+[data-terra-faction="yan-archival"] {
+  --check-clip: polygon(0 0, calc(100% - 5px) 0, 100% 5px, 100% 100%, 0 100%);
+  --check-mark-clip: inset(0);
+  --range-thumb-width: 1.25rem;
+  --range-thumb-height: 1.25rem;
+  --range-thumb-clip: polygon(0 0, calc(100% - 6px) 0, 100% 6px, 100% 100%, 0 100%);
+  --range-track-height: 0.18rem;
+  --control-hover-y: 1px;
+}
+
+[data-terra-faction="leithanien-conservatory"] {
+  --check-radius: 50% 3px 50% 3px;
+  --check-mark-clip: ellipse(38% 50%);
+  --range-thumb-width: 0.9rem;
+  --range-thumb-height: 1.7rem;
+  --range-thumb-radius: 50% 3px 50% 3px;
+  --range-track-height: 0.14rem;
+  --control-hover-scale: 1.015;
+}
+
+[data-terra-faction="penguin-logistics-street"] {
+  --check-clip: polygon(5px 0, calc(100% - 5px) 0, 100% 5px, 100% calc(50% - 4px), calc(100% - 3px) 50%, 100% calc(50% + 4px), 100% calc(100% - 5px), calc(100% - 5px) 100%, 5px 100%, 0 calc(100% - 5px), 0 calc(50% + 4px), 3px 50%, 0 calc(50% - 4px), 0 5px);
+  --range-thumb-width: 1.75rem;
+  --range-thumb-height: 1.1rem;
+  --range-thumb-clip: var(--check-clip);
+  --range-track-height: 0.5rem;
+  --control-hover-x: 6px;
+  --control-hover-rotate: -0.5deg;
+}
+
+[data-terra-faction="blacksteel-contract"] {
+  --check-clip: polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px);
+  --range-thumb-width: 1.5rem;
+  --range-thumb-height: 1.25rem;
+  --range-thumb-clip: var(--check-clip);
+  --range-track-height: 0.55rem;
+  --control-hover-x: 1px;
+  --control-hover-y: -2px;
+}
+
+[data-terra-faction="ursus-student"] {
+  --check-radius: 2px 6px 2px 1px;
+  --check-mark-clip: polygon(0 18%, 78% 0, 100% 74%, 18% 100%);
+  --range-thumb-width: 1.4rem;
+  --range-thumb-height: 1.45rem;
+  --range-thumb-radius: 2px 7px 2px 1px;
+  --range-track-height: 0.38rem;
+  --control-hover-x: 1px;
+  --control-hover-y: -1px;
+  --control-hover-rotate: -0.3deg;
+}
+
+/* Fixed faction spatial profiles */
+
+[data-terra-layout="civic-gate-axis"] .stage,
+[data-terra-layout="elevation-ascent"] .stage,
+[data-terra-layout="scroll-annotation-margin"] .stage {
+  grid-template-columns: minmax(15rem, 0.7fr) minmax(0, 1.3fr);
+}
+
+[data-terra-layout="civic-gate-axis"] .stage-copy,
+[data-terra-layout="elevation-ascent"] .stage-copy,
+[data-terra-layout="scroll-annotation-margin"] .stage-copy {
+  grid-column: 2;
+}
+
+[data-terra-layout="civic-gate-axis"] .instrument,
+[data-terra-layout="elevation-ascent"] .instrument,
+[data-terra-layout="scroll-annotation-margin"] .instrument {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+[data-terra-layout="broadcast-zones"] .stage-copy,
+[data-terra-layout="diagonal-handoff-lane"] .stage-copy,
+[data-terra-layout="protected-equipment-rack"] .stage-copy {
+  z-index: 2;
+  grid-column: 1 / -1;
+  padding-right: 44%;
+}
+
+[data-terra-layout="broadcast-zones"] .instrument,
+[data-terra-layout="diagonal-handoff-lane"] .instrument,
+[data-terra-layout="protected-equipment-rack"] .instrument {
+  position: absolute;
+  z-index: 1;
+  right: 9%;
+}
+
+[data-terra-layout="symmetrical-reading-paper"] .stage {
+  grid-template-columns: minmax(0, 1fr);
+  text-align: center;
+}
+
+[data-terra-layout="symmetrical-reading-paper"] .stage-copy {
+  z-index: 2;
+  justify-self: center;
+}
+
+[data-terra-layout="symmetrical-reading-paper"] .instrument {
+  position: absolute;
+  right: 8%;
+  opacity: 0.46;
+}
+
+[data-terra-layout="layered-evidence-desk"] .workbench {
+  grid-template-columns: minmax(18rem, 0.58fr) minmax(0, 1.42fr);
+}
+
+[data-terra-layout="layered-evidence-desk"] .queue {
+  z-index: 2;
+  translate: 1.2rem -1.2rem;
+  box-shadow: 1.2rem 1.2rem 0 color-mix(in srgb, var(--surface) 56%, transparent);
+}
+
+[data-terra-layout="radial-chart-watch"] .stage-copy {
+  z-index: 2;
+  grid-column: 1 / -1;
+  padding-right: 48%;
+}
+
+[data-terra-layout="radial-chart-watch"] .instrument {
+  position: absolute;
+  right: 12%;
+  width: min(38vw, 28rem);
+}
+
+[data-terra-layout="measured-sequence-field"] .workbench,
+[data-terra-layout="repaired-shared-document"] .workbench {
+  grid-template-columns: minmax(0, 1.35fr) minmax(17rem, 0.65fr);
+}
+
+[data-terra-layout="measured-sequence-field"] .queue,
+[data-terra-layout="repaired-shared-document"] .queue {
+  order: 2;
+}
+
+[data-terra-layout="diagonal-handoff-lane"] .workbench,
+[data-terra-layout="protected-equipment-rack"] .workbench {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+[data-terra-layout="diagonal-handoff-lane"] .queue ol,
+[data-terra-layout="protected-equipment-rack"] .queue ol {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+@media (max-width: 860px) {
+  .starter-controls {
+    grid-template-columns: 1fr;
+  }
+
+  .signature-control {
+    grid-template-columns: 1fr;
+  }
+
+  .signature-feedback {
+    grid-column: 1;
+  }
+
+  [data-terra-layout] .stage {
+    grid-template-columns: 1fr;
+  }
+
+  [data-terra-layout] .stage-copy {
+    grid-column: 1;
+    padding-right: clamp(1rem, 5vw, 4.5rem);
+  }
+
+  [data-terra-layout] .instrument {
+    position: absolute;
+    right: -2rem;
+    grid-column: 1;
+    opacity: 0.25;
+  }
+
+  [data-terra-layout] .workbench {
+    grid-template-columns: 1fr;
+  }
+
+  [data-terra-layout="layered-evidence-desk"] .queue {
+    translate: 0;
+    box-shadow: 0.55rem 0.55rem 0 color-mix(in srgb, var(--surface) 56%, transparent);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .primary-action:hover,
+  .starter-check:hover,
+  .signature-option,
+  .signature-stepper button,
+  .signature-latch,
+  .signature-latch-track i {
+    translate: 0;
+    scale: 1;
+    rotate: 0deg;
+    transition-duration: 0.01ms;
+  }
+}

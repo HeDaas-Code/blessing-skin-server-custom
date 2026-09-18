@@ -26,7 +26,10 @@ const wrapper = css`
   transition-duration: 0.3s;
 `
 const shadow = css`
-  box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.1);
+  border: var(--terra-rule-width) solid var(--terra-rule);
+  border-radius: var(--terra-radius);
+  box-shadow: 0 2px 8px rgba(17, 23, 20, 0.18);
+  background-color: var(--terra-surface);
 `
 
 const Toast: React.FC<Props> = (props) => {

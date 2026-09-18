@@ -151,11 +151,74 @@ class Profile
         return $result;
     }
 
-    public static function createFromUuid($uuid)
+    /**
+     * 判断给定 UUID 是否来自微软账号绑定（`ygg_bindings.mojang_uuid`）。
+     * 匹配时忽略大小写与连字符。
+     */
+    public static function isBoundUuid($uuid)
     {
+        if (! Schema::hasTable('ygg_bindings')) {
+            return false;
+        }
+
+        $normalized = strtolower(str_replace('-', '', (string) $uuid));
+
+        if ($normalized === '') {
+            return false;
+        }
+
+        return DB::table('ygg_bindings')
+            ->whereRaw("lower(replace(mojang_uuid, '-', '')) = ?", [$normalized])
+            ->exists();
+    }
+
+    /**
+     * 解析 UUID 对应的 Player。
+     *
+     * 先按「忽略大小写与连字符」匹配 `ygg_bindings.mojang_uuid`——绑定微软账号的角色
+     * 用的是 Mojang UUID，不在离线 `uuid` 表里；匹配不到再回退到原来的 `uuid` 表查询。
+     */
+    public static function resolvePlayerFromUuid(string $uuid): ?Player
+    {
+        $normalized = strtolower(str_replace('-', '', $uuid));
+
+        if ($normalized !== '' && Schema::hasTable('ygg_bindings')) {
+            $binding = DB::table('ygg_bindings')
+                ->whereRaw("lower(replace(mojang_uuid, '-', '')) = ?", [$normalized])
+                ->first();
+
+            if ($binding) {
+                // 优先 uid + player_name 同时匹配，退化到该 uid 的任意角色
+                if ($binding->player_name) {
+                    $player = Player::where('uid', $binding->user_id)
+                        ->where('name', $binding->player_name)
+                        ->first();
+
+                    if ($player) {
+                        return $player;
+                    }
+                }
+
+                $player = Player::where('uid', $binding->user_id)->first();
+
+                if ($player) {
+                    return $player;
+                }
+            }
+        }
+
         $result = DB::table('uuid')->where('uuid', $uuid)->first();
 
         if ($result && ($player = Player::where('name', $result->name)->first())) {
+            return $player;
+        }
+
+        return null;
+    }
+
+    public static function createFromUuid($uuid)
+    {
+        if ($player = static::resolvePlayerFromUuid($uuid)) {
             return static::createFromPlayer($player);
         }
     }

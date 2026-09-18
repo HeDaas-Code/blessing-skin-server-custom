@@ -21,13 +21,13 @@ const FilterSelector: React.FC<Props> = (props) => {
   return (
     <>
       <button
-        className="btn btn-default dropdown-toggle"
+        className="btn btn-default dropdown-toggle terra-chamber-toggle"
         type="button"
         data-toggle="dropdown"
       >
         {humanizeType(filter)}
       </button>
-      <div className="dropdown-menu">
+      <div className="dropdown-menu terra-chamber-menu">
         <Button
           className="dropdown-item"
           active={filter === 'skin'}

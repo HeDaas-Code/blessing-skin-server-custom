@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ locale }}">
+<html lang="{{ locale }}" data-terra-faction="rhine-lab" data-terra-depth="moderate">
   <head>
     {{ include('shared.head') }}
     <title>{% block title %}{% endblock %} - {{ site_name }}</title>
@@ -9,7 +9,7 @@
     <div class="wrapper">
       {{ include('shared.header') }}
       {{ include('shared.sidebar', {scope: 'user'}) }}
-      <div class="content-wrapper">
+      <div class="content-wrapper terra-diagnostic-shell">
         <div class="content-header">
           <div class="container-fluid">
             <div class="d-flex justify-content-between flex-wrap">

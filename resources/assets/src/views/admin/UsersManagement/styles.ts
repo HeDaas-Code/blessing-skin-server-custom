@@ -20,10 +20,10 @@ export const Icon = styled.div<{ py?: boolean }>`
 export const InfoTable = styled.div`
   > div:not(:last-child) {
     ${breakpoints.lessThan(breakpoints.Breakpoint.sm)} {
-      border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+      border-bottom: 1px solid var(--terra-rule);
     }
     ${breakpoints.greaterThan(breakpoints.Breakpoint.sm)} {
-      border-right: 1px solid rgba(0, 0, 0, 0.125);
+      border-right: 1px solid var(--terra-rule);
     }
   }
 `

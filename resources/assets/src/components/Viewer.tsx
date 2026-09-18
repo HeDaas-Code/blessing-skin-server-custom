@@ -38,7 +38,7 @@ const ActionButton = styled.i`
   display: inline;
   padding: 0.5em 0.5em;
   &:hover {
-    color: #555;
+    color: var(--terra-ink-muted);
     cursor: pointer;
   }
 `
@@ -260,7 +260,7 @@ const Viewer: React.FC<Props> = (props) => {
           </div>
         </div>
       </div>
-      <div ref={containerWrapperRef} css={cssViewer} className="p-0">
+      <div ref={containerWrapperRef} css={cssViewer} className="p-0 terra-tray">
         <canvas ref={containerRef}></canvas>
       </div>
       <div className="card-footer">

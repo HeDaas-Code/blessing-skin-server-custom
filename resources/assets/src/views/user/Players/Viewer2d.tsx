@@ -24,7 +24,7 @@ const Viewer2d: React.FC<Props> = (props) => {
       <div className="card-header">
         <h3 className="card-title">{t('general.texturePreview')}</h3>
       </div>
-      <div className="card-body">
+      <div className="card-body terra-tray">
         <TexturePreview className="mb-5">
           <span>{t('general.skin')}</span>
           {props.skin ? (

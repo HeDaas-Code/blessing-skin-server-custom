@@ -1,0 +1,4 @@
+yarn run v1.22.22
+$ eslint --ext=ts -f=beauty .
+Done in 2.40s.
+EXIT_CODE=0

@@ -54,7 +54,7 @@ const ImageBox: React.FC<Props> = (props) => {
         <span className="mr-1">{report.texture_uploader?.nickname}</span>
         (UID: {report.uploader})
       </div>
-      <div className="card-body">
+      <div className="card-body terra-tray">
         <picture>
           <source srcSet={preview} type="image/webp" />
           <img

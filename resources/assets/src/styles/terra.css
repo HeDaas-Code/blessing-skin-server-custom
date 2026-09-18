@@ -1,0 +1,1925 @@
+/*
+ * terra.css — Rhine Lab · cool-light-laboratory (moderate depth)
+ * ---------------------------------------------------------------
+ * Original clean-room implementation; these are original seed tokens,
+ * not official faction tokens. Loaded AFTER AdminLTE in
+ * webpack.config.ts so equal-specificity rules here win the cascade.
+ *
+ * Root state is declared on every base template's <html> element:
+ *   <html data-terra-faction="rhine-lab" data-terra-depth="moderate">
+ *
+ * This file only restyles shared shell geometry and the shared component
+ * set. It changes no markup, no JS hooks, and no behavior.
+ */
+
+/* ==================================================================
+ * 1. Design tokens — cool mineral laboratory (light)
+ * ================================================================== */
+:root {
+  /* palette */
+  --terra-field: #edf2ef;          /* cool-leaning laboratory white */
+  --terra-surface: #ffffff;        /* frosted pane surface */
+  --terra-surface-muted: #f4f7f5;  /* secondary surface */
+  --terra-surface-deep: #d8e0db;   /* deep surface / specimen tray */
+  --terra-ink: #111714;            /* charcoal ink */
+  --terra-ink-muted: #4a5650;      /* secondary text */
+  --terra-rule: #95a29a;           /* mineral rule */
+  --terra-rule-strong: #6e7d75;    /* strong mineral rule */
+  --terra-signal: #b9d532;         /* chartreuse — active research */
+  --terra-signal-ink: #526214;     /* chartreuse text on light */
+  --terra-signal-deep: #5f7a17;    /* deeper chartreuse for focus/outline */
+  --terra-warn: #e0a53a;           /* amber — real heat/intervention only */
+  --terra-warn-ink: #7a5310;
+  --terra-critical: #a64035;       /* red — hazard only */
+  --terra-critical-ink: #7e2c24;
+
+  /* geometry */
+  --terra-radius: 2px;
+  --terra-rule-width: 2px;
+  --terra-inset: 3px;
+
+  /* typography */
+  --terra-font-label: 'Segoe UI', 'Microsoft Yahei', 'PingFang SC',
+    'Microsoft Jhenghei', sans-serif;
+  --terra-font-data: ui-monospace, 'SFMono-Regular', Menlo, Consolas,
+    'Liberation Mono', monospace;
+
+  /* solid charcoal plate + light text for primary/filled controls.
+     These stay constant across themes so light text never lands on a
+     light "ink" plate in dark mode (WCAG 1.4.3). */
+  --terra-ink-solid: #111714;
+  --terra-on-solid: #f4f7f5;
+  --terra-ink-solid-hover: #3f4a44;
+}
+
+/* ==================================================================
+ * 1b. Dark mode — cold mineral dark + chartreuse signal
+ *     (kept and refined by the motion/a11y pass; tokens switch here)
+ * ================================================================== */
+.dark-mode {
+  --terra-field: #0f1412;
+  --terra-surface: #1a221f;
+  --terra-surface-muted: #232c28;
+  --terra-surface-deep: #2c3731;
+  --terra-ink: #e7ede8;
+  --terra-ink-muted: #a9b5ae;
+  --terra-rule: #6e7d75;        /* >= 3:1 vs surface (WCAG 1.4.11) */
+  --terra-rule-strong: #7a8a80; /* >= 3:1 vs surface for focus/strong */
+  --terra-signal: #c3de3a;
+  --terra-signal-ink: #d9ee5b;
+  --terra-signal-deep: #a7c127;
+  --terra-warn: #e3b34c;
+  --terra-warn-ink: #f0ce8a;
+  --terra-critical: #c96b5f;
+  --terra-critical-ink: #e8a49b;
+  --terra-ink-solid: #111714;   /* review gate stays a charcoal plate */
+  --terra-on-solid: #f4f7f5;    /* light text on the charcoal plate */
+  --terra-ink-solid-hover: #2c3731; /* raised charcoal plate on hover */
+}
+
+/* ==================================================================
+ * 2. Base & typography
+ * ================================================================== */
+body {
+  color: var(--terra-ink);
+  background-color: var(--terra-field);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.nav-header,
+.card-title {
+  font-family: var(--terra-font-label);
+  letter-spacing: 0.02em;
+}
+
+/* Technical data (scores, dates, sample ids, timing) */
+.table,
+.terra-tnum,
+.stats {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'tnum';
+}
+
+/* Visible 2px keyboard focus, following the control form */
+:focus-visible {
+  outline: 2px solid var(--terra-signal-deep);
+  outline-offset: 2px;
+}
+
+/* ==================================================================
+ * 3. Reusable Rhine Lab geometry primitives
+ * ================================================================== */
+
+/* 诊断面板 — frosted diagnostic pane with a measured inset rail */
+.terra-pane,
+.card {
+  border: var(--terra-rule-width) solid var(--terra-rule);
+  border-radius: var(--terra-radius);
+  background-color: var(--terra-surface);
+  box-shadow: none;
+}
+
+.terra-pane {
+  position: relative;
+  padding: 1rem;
+}
+
+.terra-pane::before,
+.card::before {
+  content: '';
+  position: absolute;
+  top: var(--terra-inset);
+  bottom: var(--terra-inset);
+  left: var(--terra-inset);
+  width: 3px;
+  border-radius: 1px;
+  background: var(--terra-rule);
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+/* 样本带 — horizontal specimen band with a chartreuse sample marker */
+.terra-band {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 1px solid var(--terra-rule);
+  border-radius: var(--terra-radius);
+  background-color: var(--terra-surface-muted);
+  padding: 0.4rem 0.6rem;
+  font-family: var(--terra-font-label);
+  letter-spacing: 0.02em;
+  color: var(--terra-ink);
+}
+
+.terra-band::before {
+  content: '';
+  flex: 0 0 auto;
+  width: 8px;
+  height: 8px;
+  border-radius: 1px;
+  background: var(--terra-signal);
+  box-shadow: 0 0 0 2px var(--terra-surface);
+}
+
+/* 审阅闸门 — review gate (primary action silhouette) */
+.terra-gate {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  padding: 0.5rem 1.25rem;
+  border: var(--terra-rule-width) solid var(--terra-ink);
+  border-radius: var(--terra-radius);
+  background-color: var(--terra-ink-solid);
+  color: var(--terra-on-solid);
+  font-family: var(--terra-font-label);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  box-shadow: inset 3px 0 0 var(--terra-signal);
+}
+
+.terra-gate:hover {
+  background-color: var(--terra-ink-solid-hover);
+  border-color: var(--terra-ink-muted);
+  color: var(--terra-on-solid);
+}
+
+.terra-gate:active {
+  transform: translateY(1px);
+}
+
+/* 技术标签 — narrow technical micro-label */
+.terra-label {
+  font-family: var(--terra-font-label);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--terra-ink-muted);
+}
+
+/* ==================================================================
+ * 4. Shared component geometry
+ * ================================================================== */
+
+/* ---- Cards (see .card in section 3) ---- */
+.card {
+  position: relative;
+}
+
+.card .card-header,
+.card .card-footer {
+  background-color: var(--terra-surface-muted);
+  border-color: var(--terra-rule);
+}
+
+.card .card-header {
+  border-bottom: var(--terra-rule-width) solid var(--terra-rule);
+  border-radius: 0;
+}
+
+.card .card-footer {
+  border-top: var(--terra-rule-width) solid var(--terra-rule);
+  border-radius: 0;
+}
+
+/* ---- Buttons ---- */
+.btn {
+  border-radius: var(--terra-radius);
+  border-width: var(--terra-rule-width);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.btn:focus,
+.btn:focus-visible {
+  box-shadow: none;
+}
+
+/* Primary = review gate: charcoal plate with chartreuse sample edge */
+.btn-primary {
+  position: relative;
+  background-color: var(--terra-ink-solid);
+  border-color: var(--terra-ink);
+  color: var(--terra-on-solid);
+  box-shadow: none;
+}
+
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  top: var(--terra-inset);
+  bottom: var(--terra-inset);
+  left: var(--terra-inset);
+  width: 3px;
+  border-radius: 1px;
+  background: var(--terra-signal);
+  pointer-events: none;
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:not(:disabled):not(.disabled):active,
+.btn-primary:not(:disabled):not(.disabled).active {
+  background-color: var(--terra-ink-solid-hover);
+  border-color: var(--terra-ink-muted);
+  color: var(--terra-on-solid);
+}
+
+.btn-primary:not(:disabled):not(.disabled):active,
+.btn-primary:not(:disabled):not(.disabled).active {
+  transform: translateY(1px);
+}
+
+/* Secondary = specimen tag */
+.btn-secondary {
+  background-color: var(--terra-surface);
+  border-color: var(--terra-rule);
+  color: var(--terra-ink);
+}
+
+.btn-secondary:hover,
+.btn-secondary:focus,
+.btn-secondary:not(:disabled):not(.disabled):active {
+  background-color: var(--terra-surface-deep);
+  border-color: var(--terra-rule-strong);
+  color: var(--terra-ink);
+}
+
+/* Danger keeps its red semantics, faction geometry only */
+.btn-danger {
+  background-color: var(--terra-critical);
+  border-color: var(--terra-critical);
+  box-shadow: none;
+}
+
+.btn-danger:hover,
+.btn-danger:focus {
+  background-color: var(--terra-critical-ink);
+  border-color: var(--terra-critical-ink);
+}
+
+.btn-outline-secondary {
+  color: var(--terra-ink);
+  border-color: var(--terra-rule);
+}
+
+.btn-outline-secondary:hover {
+  background-color: var(--terra-surface-deep);
+  color: var(--terra-ink);
+  border-color: var(--terra-rule-strong);
+}
+
+/* ---- Form controls ---- */
+.form-control,
+textarea.form-control,
+select.form-control {
+  border: var(--terra-rule-width) solid var(--terra-rule);
+  border-radius: var(--terra-radius);
+  background-color: var(--terra-surface);
+  color: var(--terra-ink);
+  box-shadow: none;
+}
+
+.form-control:focus,
+textarea.form-control:focus,
+select.form-control:focus {
+  border-color: var(--terra-rule-strong);
+  background-color: var(--terra-surface);
+  color: var(--terra-ink);
+  box-shadow: 0 0 0 2px var(--terra-signal);
+}
+
+.form-control:disabled,
+.form-control[readonly] {
+  background-color: var(--terra-surface-muted);
+  color: var(--terra-ink-muted);
+}
+
+.input-group-text {
+  background-color: var(--terra-surface-muted);
+  border: var(--terra-rule-width) solid var(--terra-rule);
+  border-radius: var(--terra-radius);
+  color: var(--terra-ink);
+}
+
+/* ---- Tables ---- */
+.table {
+  color: var(--terra-ink);
+}
+
+.table thead th {
+  border-top: 0;
+  border-bottom: var(--terra-rule-width) solid var(--terra-rule-strong);
+  color: var(--terra-ink);
+  letter-spacing: 0.02em;
+}
+
+.table td,
+.table th {
+  border-top: 1px solid var(--terra-rule);
+}
+
+.table-hover tbody tr:hover {
+  color: var(--terra-ink);
+  background-color: var(--terra-surface-muted);
+}
+
+/* ---- Dropdowns ---- */
+.dropdown-menu {
+  border: var(--terra-rule-width) solid var(--terra-rule);
+  border-radius: var(--terra-radius);
+  background-color: var(--terra-surface);
+  box-shadow: none;
+}
+
+.dropdown-item {
+  color: var(--terra-ink);
+}
+
+.dropdown-item:hover,
+.dropdown-item:focus {
+  background-color: var(--terra-surface-deep);
+  color: var(--terra-ink);
+}
+
+.dropdown-item.active,
+.dropdown-item:active {
+  background-color: var(--terra-ink-solid);
+  color: var(--terra-on-solid);
+}
+
+.dropdown-item.dropdown-item-danger {
+  color: var(--terra-critical);
+}
+
+.dropdown-item.dropdown-item-danger:hover,
+.dropdown-item.dropdown-item-danger:focus {
+  background-color: var(--terra-critical);
+  color: #fff;
+}
+
+.dark-mode .dropdown-item.dropdown-item-danger:hover,
+.dark-mode .dropdown-item.dropdown-item-danger:focus {
+  color: var(--terra-ink-solid);
+}
+
+.dropdown-divider {
+  border-top: 1px solid var(--terra-rule);
+}
+
+/* ---- Pagination (calibration stepper) ---- */
+.pagination .page-link {
+  border: var(--terra-rule-width) solid var(--terra-rule);
+  border-radius: var(--terra-radius);
+  color: var(--terra-ink);
+  background-color: var(--terra-surface);
+  font-variant-numeric: tabular-nums;
+}
+
+.pagination .page-link:hover {
+  color: var(--terra-ink);
+  background-color: var(--terra-surface-deep);
+  border-color: var(--terra-rule-strong);
+}
+
+.pagination .page-item.active .page-link {
+  background-color: var(--terra-ink-solid);
+  border-color: var(--terra-ink);
+  color: var(--terra-on-solid);
+  box-shadow: inset 0 -3px 0 var(--terra-signal);
+}
+
+.pagination .page-item.disabled .page-link {
+  color: var(--terra-ink-muted);
+  background-color: var(--terra-surface-muted);
+  border-color: var(--terra-rule);
+}
+
+/* ---- Top bar (diagnostic top band foundation) ---- */
+.main-header {
+  border-bottom: var(--terra-rule-width) solid var(--terra-rule);
+}
+
+.main-header .nav-link {
+  letter-spacing: 0.02em;
+}
+
+/* ---- Sidebar (laboratory workbench rail foundation) ---- */
+.main-sidebar {
+  border-right: var(--terra-rule-width) solid var(--terra-rule);
+}
+
+.main-sidebar .nav-header {
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  opacity: 1;
+}
+
+/* Active item = measured sample rail (left inset, non-color boundary) */
+.nav-sidebar .nav-link.active {
+  box-shadow: inset 3px 0 0 var(--terra-signal);
+}
+
+.nav-sidebar .nav-link {
+  border-radius: var(--terra-radius);
+}
+
+.brand-link {
+  border-bottom: var(--terra-rule-width) solid var(--terra-rule);
+}
+
+/* ---- Content shell ---- */
+.content-wrapper {
+  background-color: var(--terra-field);
+}
+
+.content-header h1 {
+  font-weight: 600;
+}
+
+/* ---- Footer ---- */
+.main-footer {
+  background-color: var(--terra-surface);
+  border-top: var(--terra-rule-width) solid var(--terra-rule);
+  color: var(--terra-ink-muted);
+}
+
+
+
+/* ==================================================================
+ * 6. Global shell — Rhine Lab diagnostic workbench (moderate)
+ *    Named hooks added in t3 (S2 全局外壳).
+ * ================================================================== */
+
+/* ---- Upper diagnostic band (top nav) ---- */
+.terra-top-band {
+  background-color: var(--terra-surface);
+  border-bottom: var(--terra-rule-width) solid var(--terra-rule);
+}
+
+/* Restore brand color so the AdminLTE accent does not fight the ink tone */
+.terra-top-band .navbar-brand,
+.terra-top-band .brand-text {
+  color: var(--terra-ink);
+}
+
+.terra-top-band .nav-link {
+  color: var(--terra-ink);
+}
+
+.terra-top-band .nav-link:hover,
+.terra-top-band .nav-link:focus {
+  color: var(--terra-ink);
+}
+
+/* ---- Laboratory workbench rail (sidebar) ---- */
+.terra-rail {
+  background-color: var(--terra-surface);
+}
+
+/* nav-header — narrow technical label, kept non-interactive */
+.terra-rail .nav-header,
+.nav-header {
+  font-family: var(--terra-font-label);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--terra-ink-muted);
+  padding: 0.35rem 0.6rem;
+  background: transparent;
+}
+
+/* Active item — chartreuse bounded sample rail (non-color boundary) */
+.terra-rail .nav-sidebar .nav-link.active,
+.nav-sidebar .nav-link.active {
+  box-shadow: inset 3px 0 0 var(--terra-signal);
+  background-color: var(--terra-surface-deep);
+}
+
+/* ---- User panel → sample-source capsule ---- */
+.terra-source-capsule {
+  border: 1px solid var(--terra-rule);
+  border-radius: var(--terra-radius);
+  background-color: var(--terra-surface-muted);
+  padding: 0.75rem;
+}
+
+.terra-source-capsule .badge {
+  border-radius: var(--terra-radius);
+  letter-spacing: 0.02em;
+  font-weight: 500;
+}
+
+.terra-source-capsule .info a[data-mark='nickname'] {
+  color: var(--terra-ink);
+  font-family: var(--terra-font-label);
+  letter-spacing: 0.02em;
+}
+
+/* ---- Mineral-gray safety-paper footer ---- */
+.terra-footer {
+  background-color: var(--terra-surface-muted);
+  border-top: var(--terra-rule-width) solid var(--terra-rule);
+  color: var(--terra-ink-muted);
+}
+
+.terra-footer a,
+.main-footer a {
+  color: var(--terra-ink-muted);
+}
+
+/* ---- Diagnostic shell around the content stage ---- */
+.terra-diagnostic-shell {
+  background-color: var(--terra-field);
+}
+
+.terra-diagnostic-shell .content-header {
+  border-bottom: 1px solid var(--terra-rule);
+  margin-bottom: 1rem;
+}
+
+/* Keep the breadcrumb area quiet and technical */
+.terra-diagnostic-shell .breadcrumb {
+  font-family: var(--terra-font-label);
+  letter-spacing: 0.02em;
+  background: transparent;
+}
+
+/* ==================================================================
+ * 5. Motion — diagnostic aperture, calibration, selected-rail settle
+ *    Single-shot entrances (450–700ms), one restrained selected-rail
+ *    pass (1.8–2.4s, never loops), full reduced-motion parity. No
+ *    elastic/bounce easing and no infinite hover animations.
+ * ================================================================== */
+
+/* Diagnostic aperture opens the pane (single shot, 450–700ms) */
+@keyframes terra-aperture {
+  from {
+    opacity: 0;
+    transform: scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Measured calibration rail ticks in right after the aperture */
+@keyframes terra-calibrate {
+  from {
+    opacity: 0;
+  }
+}
+
+/* Selected sample rail — one restrained ~2s left-rail settle, then stop */
+@keyframes terra-signal-settle-x {
+  0% {
+    box-shadow: inset 0 0 0 0 var(--terra-signal);
+  }
+  70% {
+    box-shadow: inset 3px 0 0 var(--terra-signal);
+  }
+  100% {
+    box-shadow: inset 3px 0 0 var(--terra-signal);
+  }
+}
+
+/* Selected sample rail — bottom-rail settle (pagination/stepper) */
+@keyframes terra-signal-settle-y {
+  0% {
+    box-shadow: inset 0 0 0 0 var(--terra-signal);
+  }
+  70% {
+    box-shadow: inset 0 -3px 0 var(--terra-signal);
+  }
+  100% {
+    box-shadow: inset 0 -3px 0 var(--terra-signal);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* entrance: diagnostic aperture open + measured calibration rail */
+  .card,
+  .terra-pane,
+  .info-box,
+  .small-box,
+  .modal-content,
+  .toast,
+  .terra-panel .hero-body {
+    animation: terra-aperture 550ms cubic-bezier(0.2, 0, 0, 1) both;
+  }
+
+  .card::before,
+  .terra-pane::before,
+  .info-box::before,
+  .small-box::before,
+  .terra-panel .hero-body::before {
+    animation: terra-calibrate 650ms cubic-bezier(0.2, 0, 0, 1) both;
+  }
+
+  /* selected sample rail: one restrained ~2s settle, then stop */
+  .nav-sidebar .nav-link.active,
+  .terra-rail .nav-sidebar .nav-link.active {
+    animation: terra-signal-settle-x 2s cubic-bezier(0.2, 0, 0, 1) 1;
+  }
+
+  .pagination .page-item.active .page-link,
+  .terra-stepper .page-item.active .page-link {
+    animation: terra-signal-settle-y 2s cubic-bezier(0.2, 0, 0, 1) 1;
+  }
+
+  /* hover/focus parity — short, non-looping transitions only */
+  .btn,
+  .form-control,
+  .dropdown-item,
+  .pagination .page-link,
+  .nav-sidebar .nav-link,
+  .main-header .nav-link,
+  .terra-gate,
+  .terra-chamber-toggle {
+    transition: background-color 200ms ease-in-out, border-color 200ms ease-in-out,
+      color 200ms ease-in-out, box-shadow 200ms ease-in-out;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* present the final state immediately and stop all loops */
+  .card,
+  .terra-pane,
+  .info-box,
+  .small-box,
+  .modal-content,
+  .toast,
+  .terra-panel .hero-body,
+  .card::before,
+  .terra-pane::before,
+  .info-box::before,
+  .small-box::before,
+  .terra-panel .hero-body::before,
+  .nav-sidebar .nav-link.active,
+  .terra-rail .nav-sidebar .nav-link.active,
+  .pagination .page-item.active .page-link,
+  .terra-stepper .page-item.active .page-link {
+    animation: none !important;
+  }
+}
+/* ==================================================================
+ * 7. Public surfaces — auth / errors / setup / OAuth (moderate)
+ *    Rhine Lab diagnostic panels, specimen bands, and mineral rules.
+ * ================================================================== */
+
+/* ---- Authentication: cool field + diagnostic panel card ---- */
+.login-page {
+  background-color: var(--terra-field);
+  background-image: none;
+}
+
+.login-logo a {
+  color: var(--terra-ink);
+  letter-spacing: 0.02em;
+}
+
+.login-logo a:hover {
+  color: var(--terra-ink-muted);
+}
+
+.terra-auth-card {
+  border-color: var(--terra-rule);
+}
+
+.terra-auth-card .login-card-body {
+  background-color: var(--terra-surface);
+  color: var(--terra-ink);
+}
+
+/* Auth micro-copy = narrow technical label */
+.login-box-msg {
+  font-family: var(--terra-font-label);
+  letter-spacing: 0.02em;
+  color: var(--terra-ink-muted);
+}
+
+/* Auth alerts keep their semantic state, gaining a measured state rail */
+.login-box .alert {
+  border-radius: var(--terra-radius);
+  border: 1px solid var(--terra-rule);
+}
+
+.login-box .alert-danger {
+  border-left: var(--terra-inset) solid var(--terra-critical);
+  background-color: var(--terra-surface);
+  color: var(--terra-critical-ink);
+}
+
+.login-box .alert-warning {
+  border-left: var(--terra-inset) solid var(--terra-warn);
+  background-color: var(--terra-surface);
+  color: var(--terra-warn-ink);
+}
+
+/* ---- OAuth permission list: bounded specimen/approval band ---- */
+.terra-scopes {
+  border: var(--terra-rule-width) solid var(--terra-rule);
+  border-left-width: 3px;
+  border-radius: var(--terra-radius);
+  background-color: var(--terra-surface-muted);
+  padding: 0.8rem 0.9rem;
+  margin-bottom: 1.25rem;
+  font-family: var(--terra-font-label);
+  letter-spacing: 0.02em;
+}
+
+.terra-scopes ul {
+  padding-left: 1.15rem;
+  margin-bottom: 0;
+}
+
+/* ---- Errors & setup: unified Rhine panel + mineral rules ---- */
+body.bg-gray,
+body.bg-secondary {
+  background-color: var(--terra-field);
+  color: var(--terra-ink);
+}
+
+.terra-panel .hero-body {
+  width: 100%;
+  max-width: 40rem;
+  margin: 2rem auto;
+  padding: 2rem;
+  position: relative;
+  background-color: var(--terra-surface);
+  border: var(--terra-rule-width) solid var(--terra-rule);
+  border-radius: var(--terra-radius);
+}
+
+/* measured inset sample rail on the error/setup panel */
+.terra-panel .hero-body::before {
+  content: '';
+  position: absolute;
+  top: var(--terra-inset);
+  bottom: var(--terra-inset);
+  left: var(--terra-inset);
+  width: 3px;
+  border-radius: 1px;
+  background: var(--terra-rule);
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.terra-panel h1 a,
+.terra-panel h1 a:hover {
+  color: var(--terra-ink);
+}
+
+/* mineral rule line replaces the Spectre divider */
+.terra-panel .divider {
+  border-top: var(--terra-rule-width) solid var(--terra-rule);
+  height: var(--terra-rule-width);
+  opacity: 1;
+  margin: 1.25rem 0;
+}
+
+/* ---- Spectre controls used by the setup wizard ---- */
+.form-label {
+  font-family: var(--terra-font-label);
+  letter-spacing: 0.04em;
+  color: var(--terra-ink-muted);
+}
+
+.form-input {
+  border: var(--terra-rule-width) solid var(--terra-rule);
+  border-radius: var(--terra-radius);
+  background-color: var(--terra-surface);
+  color: var(--terra-ink);
+  box-shadow: none;
+}
+
+.form-input:focus {
+  border-color: var(--terra-rule-strong);
+  box-shadow: 0 0 0 2px var(--terra-signal);
+  background-color: var(--terra-surface);
+}
+
+/* Radio = calibration tick (native semantics preserved) */
+.form-radio .form-icon {
+  border: var(--terra-rule-width) solid var(--terra-rule);
+  border-radius: var(--terra-radius);
+  background: var(--terra-surface);
+}
+
+.form-radio input:checked + .form-icon {
+  background: var(--terra-ink-solid);
+  border-color: var(--terra-ink);
+}
+
+.form-radio input:checked + .form-icon::before {
+  background: var(--terra-on-solid);
+  border-radius: 1px;
+}
+
+.form-radio input:focus + .form-icon {
+  border-color: var(--terra-ink);
+  box-shadow: 0 0 0 2px var(--terra-signal);
+}
+
+/* Spectre toast (setup validation errors) = hazard panel */
+.toast.toast-error {
+  background-color: var(--terra-surface);
+  border: 1px solid var(--terra-rule);
+  border-left: var(--terra-inset) solid var(--terra-critical);
+  color: var(--terra-critical-ink);
+}
+
+.toast.toast-error a {
+  color: var(--terra-critical);
+}
+
+/* Spectre labels (language switch) = specimen capsule */
+.label {
+  border-radius: var(--terra-radius);
+  font-family: var(--terra-font-label);
+  letter-spacing: 0.02em;
+}
+
+.label.label-primary {
+  background-color: var(--terra-ink-solid);
+  color: var(--terra-on-solid);
+}
+
+.label.label-secondary {
+  background-color: var(--terra-surface-muted);
+  border: 1px solid var(--terra-rule);
+  color: var(--terra-ink-muted);
+}
+
+
+/* ==================================================================
+ * 8. React components — Rhine Lab instrument geometry (moderate)
+ *    t6 S5 React 组件主题：统一从 terra.css token 取色。
+ * ================================================================== */
+
+/* ---- Frosted diagnostic pane: modal (bootstrap .modal-*) ---- */
+.modal-content {
+  border: var(--terra-rule-width) solid var(--terra-rule);
+  border-radius: var(--terra-radius);
+  background-color: var(--terra-surface);
+  box-shadow: none;
+}
+
+.modal-header {
+  border-bottom: var(--terra-rule-width) solid var(--terra-rule);
+  border-top-left-radius: var(--terra-radius);
+  border-top-right-radius: var(--terra-radius);
+  background-color: var(--terra-surface-muted);
+}
+
+.modal-title {
+  font-family: var(--terra-font-label);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--terra-ink);
+}
+
+.modal-body {
+  color: var(--terra-ink);
+}
+
+.modal-footer {
+  border-top: var(--terra-rule-width) solid var(--terra-rule);
+  background-color: var(--terra-surface-muted);
+}
+
+.modal-header .close {
+  color: var(--terra-ink-muted);
+  opacity: 1;
+  text-shadow: none;
+}
+
+.modal-header .close:hover {
+  color: var(--terra-ink);
+}
+
+/* measured inset sample rail on the dialog body (review gate context) */
+.modal-content.bg-default {
+  position: relative;
+}
+
+/* ---- Toast → mineral safety slip with state rail ---- */
+.toast {
+  border: var(--terra-rule-width) solid var(--terra-rule);
+  border-radius: var(--terra-radius);
+  background-color: var(--terra-surface);
+  box-shadow: 0 2px 8px rgba(17, 23, 20, 0.18);
+}
+
+/* ---- InfoBox → diagnostic specimen pane ---- */
+.info-box {
+  border: var(--terra-rule-width) solid var(--terra-rule);
+  border-radius: var(--terra-radius);
+  background-color: var(--terra-surface);
+  box-shadow: none;
+  position: relative;
+}
+
+.info-box::before {
+  content: '';
+  position: absolute;
+  top: var(--terra-inset);
+  bottom: var(--terra-inset);
+  left: var(--terra-inset);
+  width: 3px;
+  border-radius: 1px;
+  background: var(--terra-rule);
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.info-box .info-box-icon {
+  border-radius: var(--terra-radius);
+  border: var(--terra-rule-width) solid var(--terra-rule);
+  background-color: var(--terra-surface-deep);
+  color: var(--terra-ink);
+}
+
+.info-box .info-box-text {
+  font-family: var(--terra-font-label);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--terra-ink-muted);
+}
+
+.info-box .info-box-number {
+  color: var(--terra-ink);
+  font-variant-numeric: tabular-nums;
+}
+
+.info-box .progress {
+  background-color: var(--terra-surface-deep);
+  border: 1px solid var(--terra-rule);
+  border-radius: var(--terra-radius);
+  height: 6px;
+}
+
+.info-box .progress .progress-bar {
+  background-color: var(--terra-signal-deep);
+}
+
+/* ==================================================================
+ * 8b. Signature controls — Rhine Lab calibrated instruments
+ * ================================================================== */
+
+/* ---- Sample chamber selector (skinlib FilterSelector) ---- */
+.terra-chamber-toggle {
+  background-color: var(--terra-surface);
+  border: var(--terra-rule-width) solid var(--terra-rule);
+  border-radius: var(--terra-radius);
+  color: var(--terra-ink);
+  font-family: var(--terra-font-label);
+  letter-spacing: 0.04em;
+  font-weight: 600;
+}
+
+.terra-chamber-toggle:hover,
+.terra-chamber-toggle:focus {
+  background-color: var(--terra-surface-deep);
+  border-color: var(--terra-rule-strong);
+  color: var(--terra-ink);
+}
+
+.terra-chamber-menu {
+  border: var(--terra-rule-width) solid var(--terra-rule);
+  border-radius: var(--terra-radius);
+  background-color: var(--terra-surface);
+  box-shadow: 0 2px 8px rgba(17, 23, 20, 0.18);
+  padding: 0.25rem 0;
+}
+
+.terra-chamber-menu .dropdown-item {
+  position: relative;
+  padding-left: 1.25rem;
+  color: var(--terra-ink);
+  font-family: var(--terra-font-label);
+  letter-spacing: 0.02em;
+}
+
+.terra-chamber-menu .dropdown-item.active {
+  background-color: var(--terra-surface-deep);
+  color: var(--terra-ink);
+}
+
+.terra-chamber-menu .dropdown-item.active::before {
+  content: '';
+  position: absolute;
+  top: var(--terra-inset);
+  bottom: var(--terra-inset);
+  left: var(--terra-inset);
+  width: 3px;
+  border-radius: 1px;
+  background: var(--terra-signal);
+}
+
+/* ---- Calibration stepper (Pagination) ---- */
+.terra-stepper {
+  display: inline-flex;
+  gap: 0.25rem;
+}
+
+.terra-stepper .page-item .page-link {
+  min-width: 40px;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-variant-numeric: tabular-nums;
+  font-family: var(--terra-font-label);
+  letter-spacing: 0.02em;
+}
+
+.terra-stepper .page-item.active .page-link {
+  background-color: var(--terra-ink-solid);
+  border-color: var(--terra-ink);
+  color: var(--terra-on-solid);
+  box-shadow: inset 0 -3px 0 var(--terra-signal);
+  transform: translateY(1px);
+}
+
+.terra-stepper .page-item.disabled .page-link {
+  color: var(--terra-ink-muted);
+  background-color: var(--terra-surface-muted);
+  border-color: var(--terra-rule);
+}
+
+/* ---- Specimen chamber (FileInput upload area) ---- */
+.terra-sample-chamber {
+  position: relative;
+}
+
+.terra-sample-chamber .custom-file-label {
+  border: var(--terra-rule-width) solid var(--terra-rule);
+  border-radius: var(--terra-radius);
+  background-color: var(--terra-surface-muted);
+  color: var(--terra-ink-muted);
+  font-family: var(--terra-font-label);
+  letter-spacing: 0.02em;
+}
+
+.terra-sample-chamber .custom-file-label::after {
+  border: 0;
+  border-left: var(--terra-rule-width) solid var(--terra-rule);
+  background-color: var(--terra-surface-deep);
+  color: var(--terra-ink);
+  border-radius: 0;
+  font-family: var(--terra-font-label);
+  letter-spacing: 0.04em;
+}
+
+.terra-sample-chamber .custom-file-input:focus ~ .custom-file-label {
+  border-color: var(--terra-rule-strong);
+  box-shadow: 0 0 0 2px var(--terra-signal);
+}
+
+/* ---- Review gate (primary commit action) — inherited from .btn-primary
+ *     plus an explicit hook for React submit buttons. ---- */
+.terra-gate {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  padding: 0.5rem 1.25rem;
+  border: var(--terra-rule-width) solid var(--terra-ink);
+  border-radius: var(--terra-radius);
+  background-color: var(--terra-ink-solid);
+  color: var(--terra-on-solid);
+  font-family: var(--terra-font-label);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  box-shadow: inset 3px 0 0 var(--terra-signal);
+}
+
+.terra-gate:hover,
+.terra-gate:focus {
+  background-color: var(--terra-ink-solid-hover);
+  border-color: var(--terra-ink-muted);
+  color: var(--terra-on-solid);
+}
+
+.terra-gate:active {
+  transform: translateY(1px);
+}
+
+.terra-gate:disabled {
+  background-color: var(--terra-surface-muted);
+  border-color: var(--terra-rule);
+  color: var(--terra-ink-muted);
+  box-shadow: none;
+}
+
+
+/* ==================================================================
+ * 9. Data surfaces & forms — Rhine Lab calibrated instruments (S4)
+ *    Frost diagnostic panes (AdminLTE colored cards neutralized),
+ *    review gate / specimen tag buttons, measured tick/latch binary
+ *    controls, sample-chamber swatches, and mineral tables/callouts.
+ * ================================================================== */
+
+/* ---- Frost diagnostic panes: neutralize AdminLTE colored card headers
+ *      to the mineral surface; keep exactly one red hazard band. ----
+ *      Prefixed with the root data attribute so these rules win over both
+ *      AdminLTE light and dark-mode color rules in the cascade. */
+html[data-terra-faction='rhine-lab'] .card-primary:not(.card-outline) > .card-header,
+html[data-terra-faction='rhine-lab'] .card-secondary:not(.card-outline) > .card-header,
+html[data-terra-faction='rhine-lab'] .card-success:not(.card-outline) > .card-header,
+html[data-terra-faction='rhine-lab'] .card-info:not(.card-outline) > .card-header,
+html[data-terra-faction='rhine-lab'] .card-warning:not(.card-outline) > .card-header,
+html[data-terra-faction='rhine-lab'] .card-green:not(.card-outline) > .card-header,
+html[data-terra-faction='rhine-lab'] .card-light:not(.card-outline) > .card-header,
+html[data-terra-faction='rhine-lab'] .card-dark:not(.card-outline) > .card-header,
+html[data-terra-faction='rhine-lab'] .box-primary > .card-header {
+  background-color: var(--terra-surface-muted);
+  border-bottom: var(--terra-rule-width) solid var(--terra-rule);
+  color: var(--terra-ink);
+}
+
+html[data-terra-faction='rhine-lab'] .card-primary:not(.card-outline) > .card-header a,
+html[data-terra-faction='rhine-lab'] .card-secondary:not(.card-outline) > .card-header a,
+html[data-terra-faction='rhine-lab'] .card-success:not(.card-outline) > .card-header a,
+html[data-terra-faction='rhine-lab'] .card-info:not(.card-outline) > .card-header a,
+html[data-terra-faction='rhine-lab'] .card-warning:not(.card-outline) > .card-header a,
+html[data-terra-faction='rhine-lab'] .card-green:not(.card-outline) > .card-header a,
+html[data-terra-faction='rhine-lab'] .card-light:not(.card-outline) > .card-header a,
+html[data-terra-faction='rhine-lab'] .card-dark:not(.card-outline) > .card-header a,
+html[data-terra-faction='rhine-lab'] .box-primary > .card-header a {
+  color: var(--terra-ink);
+}
+
+/* Colored "outline" cards collapse back to the measured 2px mineral rule */
+html[data-terra-faction='rhine-lab'] .card-primary.card-outline,
+html[data-terra-faction='rhine-lab'] .card-secondary.card-outline,
+html[data-terra-faction='rhine-lab'] .card-success.card-outline,
+html[data-terra-faction='rhine-lab'] .card-info.card-outline,
+html[data-terra-faction='rhine-lab'] .card-warning.card-outline,
+html[data-terra-faction='rhine-lab'] .card-green.card-outline,
+html[data-terra-faction='rhine-lab'] .card-danger.card-outline,
+html[data-terra-faction='rhine-lab'] .card-light.card-outline,
+html[data-terra-faction='rhine-lab'] .card-dark.card-outline {
+  border-top-width: var(--terra-rule-width);
+  border-top-color: var(--terra-rule);
+}
+
+/* Hazard card — the single red exception band (e.g. delete account) */
+html[data-terra-faction='rhine-lab'] .card-danger:not(.card-outline) > .card-header {
+  background-color: var(--terra-surface-muted);
+  border-bottom: var(--terra-rule-width) solid var(--terra-critical);
+  color: var(--terra-critical);
+}
+
+html[data-terra-faction='rhine-lab'] .card-danger:not(.card-outline) > .card-header a {
+  color: var(--terra-critical);
+}
+
+/* ---- Buttons: review gate (primary), specimen tag (default/secondary),
+ *      hazard stays red; shared neutrals lose the AdminLTE color. ---- */
+.btn-default {
+  background-color: var(--terra-surface);
+  border-color: var(--terra-rule);
+  color: var(--terra-ink);
+}
+
+.btn-default:hover,
+.btn-default:focus,
+.btn-default:not(:disabled):not(.disabled):active {
+  background-color: var(--terra-surface-deep);
+  border-color: var(--terra-rule-strong);
+  color: var(--terra-ink);
+}
+
+.btn-warning,
+.btn-info,
+.btn-success {
+  background-color: var(--terra-surface);
+  border-color: var(--terra-rule);
+  color: var(--terra-ink);
+}
+
+.btn-warning:hover,
+.btn-info:hover,
+.btn-success:hover,
+.btn-warning:focus,
+.btn-info:focus,
+.btn-success:focus,
+.btn-warning:not(:disabled):not(.disabled):active,
+.btn-info:not(:disabled):not(.disabled):active,
+.btn-success:not(:disabled):not(.disabled):active {
+  background-color: var(--terra-surface-deep);
+  border-color: var(--terra-rule-strong);
+  color: var(--terra-ink);
+}
+
+.btn-outline-info,
+.btn-outline-secondary,
+.btn-outline-warning,
+.btn-outline-success {
+  color: var(--terra-ink);
+  border-color: var(--terra-rule);
+}
+
+.btn-outline-info:hover,
+.btn-outline-secondary:hover,
+.btn-outline-warning:hover,
+.btn-outline-success:hover {
+  background-color: var(--terra-surface-deep);
+  border-color: var(--terra-rule-strong);
+  color: var(--terra-ink);
+}
+
+/* `.bg-primary` button (update / back actions) → review gate silhouette.
+ * `!important` only to match Bootstrap's `!important` utility. */
+.btn.bg-primary {
+  background-color: var(--terra-ink-solid) !important;
+  border-color: var(--terra-ink) !important;
+  color: var(--terra-on-solid) !important;
+  box-shadow: inset 3px 0 0 var(--terra-signal);
+}
+
+.btn.bg-primary:hover,
+.btn.bg-primary:focus,
+.btn.bg-primary:not(:disabled):not(.disabled):active {
+  background-color: var(--terra-ink-solid-hover) !important;
+  border-color: var(--terra-ink-muted) !important;
+  color: var(--terra-on-solid) !important;
+}
+
+/* ---- Select: self-drawn calibration chevron ---- */
+select.form-control {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding-right: 2rem;
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4 6.5L8 10.5L12 6.5' fill='none' stroke='%236e7d75' stroke-width='2' stroke-linecap='square' stroke-linejoin='miter'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.6rem center;
+  background-size: 0.85rem auto;
+}
+
+.dark-mode select.form-control {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4 6.5L8 10.5L12 6.5' fill='none' stroke='%23a9b5ae' stroke-width='2' stroke-linecap='square' stroke-linejoin='miter'/%3E%3C/svg%3E");
+}
+
+/* ---- Checkbox: calibration tick (square, crisp, non-color check) ---- */
+input[type='checkbox'].terra-check {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 16px;
+  height: 16px;
+  margin: 0 0.4rem 0 0;
+  border: var(--terra-rule-width) solid var(--terra-rule);
+  border-radius: var(--terra-radius);
+  background-color: var(--terra-surface);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 12px 12px;
+  vertical-align: -0.2em;
+  cursor: pointer;
+}
+
+input[type='checkbox'].terra-check:checked {
+  border-color: var(--terra-ink);
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3 8.5L7 12.5L13 4' fill='none' stroke='%23111714' stroke-width='2.2' stroke-linecap='square' stroke-linejoin='miter'/%3E%3C/svg%3E");
+}
+
+.dark-mode input[type='checkbox'].terra-check:checked {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3 8.5L7 12.5L13 4' fill='none' stroke='%23e7ede8' stroke-width='2.2' stroke-linecap='square' stroke-linejoin='miter'/%3E%3C/svg%3E");
+}
+
+input[type='checkbox'].terra-check:disabled {
+  background-color: var(--terra-surface-muted);
+  border-color: var(--terra-rule);
+  cursor: not-allowed;
+  opacity: 0.65;
+}
+
+input[type='checkbox'].terra-check:focus-visible {
+  outline: var(--terra-rule-width) solid var(--terra-signal-deep);
+  outline-offset: 2px;
+}
+
+/* ---- Radio: containment latch (round latch with non-color core) ---- */
+input[type='radio'].terra-latch {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 16px;
+  height: 16px;
+  margin: 0 0.4rem 0 0;
+  border: var(--terra-rule-width) solid var(--terra-rule);
+  border-radius: 50%;
+  background-color: var(--terra-surface);
+  vertical-align: -0.2em;
+  cursor: pointer;
+}
+
+input[type='radio'].terra-latch:checked {
+  border-color: var(--terra-ink);
+  background-image: radial-gradient(circle, var(--terra-ink) 0 4px, var(--terra-surface) 4px);
+}
+
+input[type='radio'].terra-latch:disabled {
+  background-color: var(--terra-surface-muted);
+  border-color: var(--terra-rule);
+  cursor: not-allowed;
+  opacity: 0.65;
+}
+
+input[type='radio'].terra-latch:focus-visible {
+  outline: var(--terra-rule-width) solid var(--terra-signal-deep);
+  outline-offset: 2px;
+}
+
+/* ---- Sample-chamber color swatches (admin/customize.twig) ---- */
+.terra-swatch {
+  width: 40px;
+  height: 24px;
+  border: var(--terra-rule-width) solid var(--terra-rule);
+  border-radius: var(--terra-radius);
+  box-shadow: none;
+  cursor: pointer;
+}
+
+.terra-swatch:hover {
+  border-color: var(--terra-rule-strong);
+}
+
+.terra-swatch-input:checked ~ .terra-swatch {
+  border-color: var(--terra-ink);
+  box-shadow: 0 0 0 2px var(--terra-surface), 0 0 0 4px var(--terra-signal);
+}
+
+/* ---- Dashboard small-box → frosted specimen pane with a signal rail ---- */
+.small-box {
+  background-color: var(--terra-surface) !important;
+  color: var(--terra-ink) !important;
+  border: var(--terra-rule-width) solid var(--terra-rule);
+  border-radius: var(--terra-radius);
+  box-shadow: none;
+  position: relative;
+}
+
+.small-box::before {
+  content: '';
+  position: absolute;
+  top: var(--terra-inset);
+  bottom: var(--terra-inset);
+  left: var(--terra-inset);
+  width: 3px;
+  border-radius: 1px;
+  background: var(--terra-signal);
+  pointer-events: none;
+}
+
+.small-box .inner p {
+  color: var(--terra-ink-muted) !important;
+}
+
+.small-box .icon {
+  color: var(--terra-rule-strong);
+  opacity: 0.45;
+}
+
+.small-box .small-box-footer {
+  background-color: var(--terra-surface-muted) !important;
+  color: var(--terra-ink-muted) !important;
+  border-top: 1px solid var(--terra-rule);
+}
+
+.small-box .small-box-footer:hover {
+  background-color: var(--terra-surface-deep) !important;
+  color: var(--terra-ink) !important;
+}
+
+/* ---- Mineral tables: measured row rules + muted striped surface ---- */
+.table-bordered,
+.table-bordered th,
+.table-bordered td {
+  border-color: var(--terra-rule);
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: var(--terra-surface-muted);
+}
+
+/* ---- Callouts & alerts: measured state bands, single hazard red ---- */
+.callout {
+  border: var(--terra-rule-width) solid var(--terra-rule);
+  border-left-width: 5px;
+  border-radius: var(--terra-radius);
+  background-color: var(--terra-surface);
+  box-shadow: none;
+  color: var(--terra-ink);
+}
+
+.callout a {
+  color: var(--terra-ink);
+}
+
+.callout-info {
+  border-left-color: var(--terra-signal-deep);
+}
+
+.callout-success {
+  border-left-color: var(--terra-signal);
+}
+
+.callout-warning {
+  border-left-color: var(--terra-warn);
+}
+
+.callout-danger {
+  border-left-color: var(--terra-critical);
+}
+
+.alert {
+  border-radius: var(--terra-radius);
+  border: 1px solid var(--terra-rule);
+}
+
+.alert-info {
+  background-color: var(--terra-surface-muted);
+  color: var(--terra-ink);
+  border-left: var(--terra-inset) solid var(--terra-signal-deep);
+}
+
+.alert-success {
+  background-color: var(--terra-surface-muted);
+  color: var(--terra-ink);
+  border-left: var(--terra-inset) solid var(--terra-signal);
+}
+
+.alert-warning {
+  background-color: var(--terra-surface-muted);
+  color: var(--terra-warn-ink);
+  border-left: var(--terra-inset) solid var(--terra-warn);
+}
+
+.alert-danger {
+  background-color: var(--terra-surface-muted);
+  color: var(--terra-critical-ink);
+  border-left: var(--terra-inset) solid var(--terra-critical);
+}
+
+
+/* ==================================================================
+ * 10. Accessibility & responsive — focus, targets, mobile shell
+ *     (motion/a11y pass, S6)
+ * ================================================================== */
+
+/* ---- 2px visible keyboard focus on interactive controls ----
+ * Bootstrap/AdminLTE zero out `outline` on `:focus`; re-assert a 2px
+ * chartreuse ring (>= 3:1 against every surface) on `:focus-visible`.
+ */
+a:focus-visible,
+button:focus-visible,
+[role='button']:focus-visible,
+.btn:focus-visible,
+.nav-link:focus-visible,
+.dropdown-item:focus-visible,
+.page-link:focus-visible,
+.terra-gate:focus-visible,
+.terra-chamber-toggle:focus-visible,
+.main-button:focus-visible,
+.close:focus-visible,
+.badge:focus-visible {
+  outline: 2px solid var(--terra-signal-deep) !important;
+  outline-offset: 2px;
+}
+
+/* ---- Pointer/touch targets >= 40x40px (WCAG 2.5.5) ---- */
+.btn,
+.terra-gate,
+.terra-chamber-toggle,
+.main-button,
+.nav-link,
+.dropdown-item,
+.pagination .page-link,
+.form-control,
+.form-input,
+.custom-file-label {
+  min-height: 40px;
+}
+
+.main-header .nav-link {
+  min-width: 40px;
+}
+
+/* ---- Mobile shell: top bar / bottom bar / drawer (<= 767.98px) ----
+ * AdminLTE already collapses the sidebar off-canvas and provides a
+ * fixed #sidebar-overlay; here we pin the diagnostic top band, make the
+ * rail a true viewport drawer, and preserve the selected sample rail
+ * with a 40px+ target. The footer remains the bottom bar.
+ */
+@media (max-width: 767.98px) {
+  /* top band stays reachable as a persistent top bar */
+  html[data-terra-faction='rhine-lab'] .main-header.terra-top-band {
+    position: sticky;
+    top: 0;
+    z-index: 1034;
+  }
+
+  /* laboratory rail becomes a full-height drawer above the overlay */
+  html[data-terra-faction='rhine-lab'] .main-sidebar.terra-rail {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    height: 100vh;
+    z-index: 1038;
+    box-shadow: 0 0 24px rgba(17, 23, 20, 0.35);
+  }
+
+  /* preserve selected sample rail + comfortable nav targets */
+  html[data-terra-faction='rhine-lab'] .main-sidebar.terra-rail .nav-sidebar .nav-link {
+    min-height: 44px;
+  }
+
+  html[data-terra-faction='rhine-lab'] .main-sidebar.terra-rail .nav-sidebar .nav-link.active {
+    background-color: var(--terra-surface-deep);
+    box-shadow: inset 3px 0 0 var(--terra-signal);
+  }
+}
+
+/* ==================================================================
+ * 11. Cascade hardening — beat AdminLTE/Bootstrap high-specificity
+ *     rules inside the authenticated shell (S7 QA pass).
+ *
+ *     The light-mode selectors in sections 5/6 lose to AdminLTE rules
+ *     such as `.dark-mode .navbar-cyan`, `.navbar-dark .nav-link`,
+ *     `.sidebar-dark-maroon .nav-item .nav-link.active`,
+ *     `.dark-mode .content-wrapper`, and `.dark-mode .btn-*` because
+ *     those carry more classes.  `html[data-terra-faction]` is present
+ *     on every base template, so these prefixed rules win without
+ *     touching markup, data-* hooks, or JS.
+ * ================================================================== */
+
+/* ---- Upper diagnostic band (top nav, light + dark) ---- */
+html[data-terra-faction='rhine-lab'] .terra-top-band {
+  background-color: var(--terra-surface);
+  border-bottom: var(--terra-rule-width) solid var(--terra-rule);
+}
+
+html[data-terra-faction='rhine-lab'] .terra-top-band .navbar-brand,
+html[data-terra-faction='rhine-lab'] .terra-top-band .brand-text,
+html[data-terra-faction='rhine-lab'] .terra-top-band .navbar-nav .nav-link {
+  color: var(--terra-ink);
+}
+
+html[data-terra-faction='rhine-lab'] .terra-top-band .navbar-nav .nav-link:hover,
+html[data-terra-faction='rhine-lab'] .terra-top-band .navbar-nav .nav-link:focus {
+  color: var(--terra-ink);
+}
+
+/* ---- Laboratory workbench rail (sidebar, light + dark) ---- */
+html[data-terra-faction='rhine-lab'] .terra-rail {
+  background-color: var(--terra-surface);
+}
+
+html[data-terra-faction='rhine-lab'] .terra-rail .nav-sidebar .nav-link {
+  color: var(--terra-ink-muted);
+}
+
+html[data-terra-faction='rhine-lab'] .terra-rail .nav-sidebar .nav-link:hover,
+html[data-terra-faction='rhine-lab'] .terra-rail .nav-sidebar .nav-link:focus {
+  color: var(--terra-ink);
+  background-color: var(--terra-surface-deep);
+}
+
+html[data-terra-faction='rhine-lab'] .terra-rail .nav-sidebar .nav-item .nav-link.active {
+  color: var(--terra-ink);
+  background-color: var(--terra-surface-deep);
+  box-shadow: inset 3px 0 0 var(--terra-signal);
+}
+
+/* ---- Diagnostic content shell (light + dark) ---- */
+html[data-terra-faction='rhine-lab'] .terra-diagnostic-shell {
+  background-color: var(--terra-field);
+}
+
+/* ---- Review gate = primary action (light + dark) ---- */
+html[data-terra-faction='rhine-lab'] .btn-primary {
+  background-color: var(--terra-ink-solid);
+  border-color: var(--terra-ink);
+  color: var(--terra-on-solid);
+}
+
+html[data-terra-faction='rhine-lab'] .btn-primary:hover,
+html[data-terra-faction='rhine-lab'] .btn-primary:focus,
+html[data-terra-faction='rhine-lab'] .btn-primary:not(:disabled):not(.disabled):active,
+html[data-terra-faction='rhine-lab'] .btn-primary:not(:disabled):not(.disabled).active {
+  background-color: var(--terra-ink-solid-hover);
+  border-color: var(--terra-ink-muted);
+  color: var(--terra-on-solid);
+}
+
+html[data-terra-faction='rhine-lab'] .btn-primary:disabled,
+html[data-terra-faction='rhine-lab'] .btn-primary.disabled {
+  background-color: var(--terra-surface-muted);
+  border-color: var(--terra-rule);
+  color: var(--terra-ink-muted);
+  box-shadow: none;
+}
+
+html[data-terra-faction='rhine-lab'] .btn-primary:disabled::before,
+html[data-terra-faction='rhine-lab'] .btn-primary.disabled::before {
+  background: transparent;
+}
+
+/* ---- Specimen tag = default / secondary (light + dark) ---- */
+html[data-terra-faction='rhine-lab'] .btn-secondary,
+html[data-terra-faction='rhine-lab'] .btn-default {
+  background-color: var(--terra-surface);
+  border-color: var(--terra-rule);
+  color: var(--terra-ink);
+}
+
+html[data-terra-faction='rhine-lab'] .btn-secondary:hover,
+html[data-terra-faction='rhine-lab'] .btn-secondary:focus,
+html[data-terra-faction='rhine-lab'] .btn-secondary:not(:disabled):not(.disabled):active,
+html[data-terra-faction='rhine-lab'] .btn-default:hover,
+html[data-terra-faction='rhine-lab'] .btn-default:focus,
+html[data-terra-faction='rhine-lab'] .btn-default:not(:disabled):not(.disabled):active {
+  background-color: var(--terra-surface-deep);
+  border-color: var(--terra-rule-strong);
+  color: var(--terra-ink);
+}
+
+/* ---- Neutralize AdminLTE colored buttons in both modes ---- */
+html[data-terra-faction='rhine-lab'] .btn-warning,
+html[data-terra-faction='rhine-lab'] .btn-info,
+html[data-terra-faction='rhine-lab'] .btn-success {
+  background-color: var(--terra-surface);
+  border-color: var(--terra-rule);
+  color: var(--terra-ink);
+}
+
+html[data-terra-faction='rhine-lab'] .btn-warning:hover,
+html[data-terra-faction='rhine-lab'] .btn-info:hover,
+html[data-terra-faction='rhine-lab'] .btn-success:hover,
+html[data-terra-faction='rhine-lab'] .btn-warning:focus,
+html[data-terra-faction='rhine-lab'] .btn-info:focus,
+html[data-terra-faction='rhine-lab'] .btn-success:focus,
+html[data-terra-faction='rhine-lab'] .btn-warning:not(:disabled):not(.disabled):active,
+html[data-terra-faction='rhine-lab'] .btn-info:not(:disabled):not(.disabled):active,
+html[data-terra-faction='rhine-lab'] .btn-success:not(:disabled):not(.disabled):active {
+  background-color: var(--terra-surface-deep);
+  border-color: var(--terra-rule-strong);
+  color: var(--terra-ink);
+}
+
+/* ---- Outline secondary stays a mineral specimen tag ---- */
+html[data-terra-faction='rhine-lab'] .btn-outline-secondary,
+html[data-terra-faction='rhine-lab'] .btn-outline-info,
+html[data-terra-faction='rhine-lab'] .btn-outline-warning,
+html[data-terra-faction='rhine-lab'] .btn-outline-success {
+  color: var(--terra-ink);
+  border-color: var(--terra-rule);
+}
+
+html[data-terra-faction='rhine-lab'] .btn-outline-secondary:hover,
+html[data-terra-faction='rhine-lab'] .btn-outline-info:hover,
+html[data-terra-faction='rhine-lab'] .btn-outline-warning:hover,
+html[data-terra-faction='rhine-lab'] .btn-outline-success:hover {
+  background-color: var(--terra-surface-deep);
+  border-color: var(--terra-rule-strong);
+  color: var(--terra-ink);
+}
+
+/* ---- Data surfaces: frost diagnostic panes, tables, forms (dark) ----
+ * The AdminLTE `.dark-mode .card`, `.dark-mode .form-control:not(...)`,
+ * `.dark-mode .dropdown-*`, and `.dark-mode .page-item ... .page-link`
+ * rules carry more classes than the light-mode selectors in section 9,
+ * so they re-assert Bootstrap/AdminLTE blue-gray surfaces in dark mode.
+ * These prefixed overrides restore the mineral surfaces without touching
+ * markup or JS hooks. */
+html[data-terra-faction='rhine-lab'] .card {
+  background-color: var(--terra-surface);
+  color: var(--terra-ink);
+}
+
+html[data-terra-faction='rhine-lab'] .form-control,
+html[data-terra-faction='rhine-lab'] textarea.form-control,
+html[data-terra-faction='rhine-lab'] select.form-control {
+  background-color: var(--terra-surface) !important;
+  color: var(--terra-ink) !important;
+}
+
+html[data-terra-faction='rhine-lab'] .form-control:disabled,
+html[data-terra-faction='rhine-lab'] .form-control[readonly] {
+  background-color: var(--terra-surface-muted) !important;
+  color: var(--terra-ink-muted) !important;
+}
+
+html[data-terra-faction='rhine-lab'] .input-group-text {
+  background-color: var(--terra-surface-muted);
+  border-color: var(--terra-rule);
+  color: var(--terra-ink);
+}
+
+html[data-terra-faction='rhine-lab'] .dropdown-menu {
+  background-color: var(--terra-surface);
+  color: var(--terra-ink);
+}
+
+html[data-terra-faction='rhine-lab'] .dropdown-item {
+  color: var(--terra-ink);
+}
+
+html[data-terra-faction='rhine-lab'] .pagination .page-item .page-link {
+  color: var(--terra-ink);
+  background-color: var(--terra-surface);
+  border-color: var(--terra-rule);
+}
+
+html[data-terra-faction='rhine-lab'] .pagination .page-item.active .page-link {
+  color: var(--terra-on-solid);
+  background-color: var(--terra-ink-solid);
+  border-color: var(--terra-ink);
+  box-shadow: inset 0 -3px 0 var(--terra-signal);
+}
+
+html[data-terra-faction='rhine-lab'] .pagination .page-item.disabled .page-link {
+  color: var(--terra-ink-muted) !important;
+  background-color: var(--terra-surface-muted) !important;
+  border-color: var(--terra-rule) !important;
+}
+
+html[data-terra-faction='rhine-lab'] .modal-content {
+  background-color: var(--terra-surface);
+  color: var(--terra-ink);
+}
+
+html[data-terra-faction='rhine-lab'] .table {
+  color: var(--terra-ink);
+}
+
+/* ==================================================================
+ * 12. Adaptive specimen tray — keep light (and dark) textures legible
+ *     in both modes.
+ *
+ *     Transparent preview PNGs and the transparent 3D viewer canvas
+ *     previously sat directly on the near-white card surface, so light
+ *     skins/capes blended into the background.  This bounded mineral
+ *     checkerboard (original CSS only) gives every texture a visible
+ *     stage.  No markup, no data-* hooks, no behaviour changes.
+ * ================================================================== */
+:root {
+  /* mid-mineral specimen tray: >= 3:1 against both a light (#f2f2f2)
+     and a dark (#2b2b2b) skin, so either skin keeps a visible stage */
+  --terra-tray-a: #7d8b84;
+  --terra-tray-b: #8b9992;
+}
+
+.dark-mode {
+  --terra-tray-a: #4d5c55;
+  --terra-tray-b: #586a62;
+}
+
+html[data-terra-faction='rhine-lab'] .terra-tray,
+html[data-terra-faction='rhine-lab'] img.card-img-top,
+html[data-terra-faction='rhine-lab'] img[src*='/preview/'] {
+  background-color: var(--terra-tray-a);
+  background-image: repeating-conic-gradient(
+    var(--terra-tray-a) 0% 25%,
+    var(--terra-tray-b) 0% 50%
+  );
+  background-size: 24px 24px;
+  border-radius: var(--terra-radius);
+  box-shadow: inset 0 0 0 1px var(--terra-rule);
+}
+
+/* White / black / gray viewer swatches need a visible edge in light mode */
+html[data-terra-faction='rhine-lab'] .btn-color:not(.terra-swatch) {
+  border: var(--terra-rule-width) solid var(--terra-rule);
+}
+
+/* setup/errors + skinlib share the diagnostic shell once themed */
+html[data-terra-faction='rhine-lab'] .login-page {
+  background-color: var(--terra-field);
+}
+
+
+/* ==================================================================
+ * 13. Legacy AdminLTE/Bootstrap utility colors → mineral palette.
+ *
+ *     Preset badges and labels (bg-teal / bg-indigo / bg-olive / …)
+ *     carried saturated 2.1–3.0:1 text contrast in light mode and
+ *     cyan/maroon chrome that fights the cool-light-laboratory lane.
+ *     These are pure token substitutions: same markup, same classes,
+ *     same behaviour, readable in both modes.
+ * ================================================================== */
+html[data-terra-faction='rhine-lab'] .badge {
+  border-radius: var(--terra-radius);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+html[data-terra-faction='rhine-lab'] .badge.bg-teal,
+html[data-terra-faction='rhine-lab'] .badge.bg-info,
+html[data-terra-faction='rhine-lab'] .badge.bg-olive,
+html[data-terra-faction='rhine-lab'] .badge.bg-indigo,
+html[data-terra-faction='rhine-lab'] .badge.bg-primary,
+html[data-terra-faction='rhine-lab'] .badge.bg-navy,
+html[data-terra-faction='rhine-lab'] .badge.bg-purple,
+html[data-terra-faction='rhine-lab'] .badge.bg-maroon,
+html[data-terra-faction='rhine-lab'] .badge.bg-light,
+html[data-terra-faction='rhine-lab'] .badge.bg-white {
+  background-color: var(--terra-ink) !important;
+  color: var(--terra-on-solid) !important;
+}
+
+html[data-terra-faction='rhine-lab'] .badge.bg-success,
+html[data-terra-faction='rhine-lab'] .badge.bg-green,
+html[data-terra-faction='rhine-lab'] .badge.bg-lime {
+  background-color: var(--terra-signal) !important;
+  color: var(--terra-signal-ink) !important;
+}
+
+html[data-terra-faction='rhine-lab'] .badge.bg-warning,
+html[data-terra-faction='rhine-lab'] .badge.bg-yellow,
+html[data-terra-faction='rhine-lab'] .badge.bg-orange {
+  background-color: var(--terra-warn) !important;
+  color: var(--terra-warn-ink) !important;
+}
+
+html[data-terra-faction='rhine-lab'] .badge.bg-danger,
+html[data-terra-faction='rhine-lab'] .badge.bg-red {
+  background-color: var(--terra-critical) !important;
+  color: #fff !important;
+}
+
+html[data-terra-faction='rhine-lab'] .badge.bg-secondary,
+html[data-terra-faction='rhine-lab'] .badge.bg-gray {
+  background-color: var(--terra-surface-deep) !important;
+  color: var(--terra-ink) !important;
+}
+
+html[data-terra-faction='rhine-lab'] .label.label-secondary {
+  background-color: var(--terra-surface-deep);
+  color: var(--terra-ink);
+}
+

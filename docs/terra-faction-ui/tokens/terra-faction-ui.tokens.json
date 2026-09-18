@@ -1,0 +1,306 @@
+{
+  "metadata": {
+    "name": "Terra Faction UI seed tokens",
+    "packageVersion": "1.0.0",
+    "status": "original clean-room implementation",
+    "official": false,
+    "note": "Semantic starting points with globally separated default tone lanes; not official faction tokens."
+  },
+  "depth": {
+    "minimal": {
+      "persistentLayers": 1,
+      "motion": "direct-only",
+      "shellCoverage": "critical"
+    },
+    "moderate": {
+      "persistentLayers": 2,
+      "motion": "reveal-and-direct",
+      "shellCoverage": "major"
+    },
+    "complex": {
+      "persistentLayers": 4,
+      "motion": "coordinated",
+      "shellCoverage": "system"
+    },
+    "maximal": {
+      "persistentLayers": 6,
+      "motion": "state-driven",
+      "shellCoverage": "bespoke"
+    }
+  },
+  "interactionProfiles": {
+    "rhine-lab": {
+      "topology": "diagnostic-plate",
+      "primaryRadius": "2px",
+      "press": "inward-calibration",
+      "selectedBoundary": "measured-sample-rail",
+      "signatureControls": ["sample-chamber-selector", "tolerance-caliper", "calibration-stepper", "containment-latch"]
+    },
+    "lungmen-municipal": {
+      "topology": "civic-gate-upper-right-chamfer",
+      "primaryRadius": "0",
+      "press": "route-axis-forward",
+      "selectedBoundary": "jade-owner-rail-and-vermilion-commit-edge",
+      "signatureControls": ["ward-gate-matrix", "route-priority-latch", "permit-punch", "queue-diverter"]
+    },
+    "kazimierz-broadcast": {
+      "topology": "broadcast-wedge",
+      "primaryRadius": "0",
+      "press": "horizontal-scoreboard-snap",
+      "selectedBoundary": "cobalt-side-rail",
+      "signatureControls": ["side-ownership-switch", "replay-shuttle", "bracket-lock", "lower-third-fader"]
+    },
+    "laterano-notarial": {
+      "topology": "authority-capsule",
+      "primaryRadius": "999px",
+      "press": "symmetric-contraction",
+      "selectedBoundary": "double-authority-ring",
+      "signatureControls": ["covenant-ring", "exception-aperture", "witness-pair-toggle", "radial-approval-stage"]
+    },
+    "siracusa-dossier": {
+      "topology": "docket-folded-corner",
+      "primaryRadius": "0 0 8px 0",
+      "press": "document-tab-settle",
+      "selectedBoundary": "burgundy-ruling-edge",
+      "signatureControls": ["docket-leaf-tabs", "provenance-hinge", "testimony-comparator", "ruling-pull-tab"]
+    },
+    "kjerag-alpine": {
+      "topology": "woven-route-gate",
+      "primaryRadius": "12px 2px 12px 2px",
+      "press": "vertical-route-settle",
+      "selectedBoundary": "stitched-threshold",
+      "signatureControls": ["stitched-weather-gates", "altitude-knot-slider", "route-rope-selector", "departure-window-fold"]
+    },
+    "iberia-nautical": {
+      "topology": "porthole-plaque",
+      "primaryRadius": "999px 999px 7px 7px",
+      "press": "radial-contraction",
+      "selectedBoundary": "brass-bearing-ring",
+      "signatureControls": ["bearing-dial", "watch-ring-selector", "drift-trim-wheel", "porthole-confirmation-shutter"]
+    },
+    "yan-archival": {
+      "topology": "folded-record-block",
+      "primaryRadius": "1px",
+      "press": "seal-press-down",
+      "selectedBoundary": "seal-red-record-edge",
+      "signatureControls": ["record-slip-rail", "seal-press", "folded-petition-selector", "annotation-margin-toggle"]
+    },
+    "leithanien-conservatory": {
+      "topology": "cadence-control",
+      "primaryRadius": "999px 4px 999px 4px",
+      "press": "symmetric-cadence-close",
+      "selectedBoundary": "brass-cue-edge",
+      "signatureControls": ["cadence-stepper", "cue-baton-scrubber", "rehearsal-bracket", "correspondence-closure"]
+    },
+    "penguin-logistics-street": {
+      "topology": "removable-waybill-ticket",
+      "primaryRadius": "0",
+      "press": "handoff-lane-forward",
+      "selectedBoundary": "paper-white-dispatch-band",
+      "signatureControls": ["removable-handoff-stub", "courier-relay-rail", "parcel-condition-tear-tag", "delivery-lane-shuttle"]
+    },
+    "blacksteel-contract": {
+      "topology": "opposed-industrial-chamfers",
+      "primaryRadius": "0",
+      "press": "inward-down-lock",
+      "selectedBoundary": "safety-yellow-readiness-rail-and-violet-owner-edge",
+      "signatureControls": ["equipment-bay-shutters", "readiness-lock-rail", "contract-scope-latch", "prerequisite-interlock"]
+    },
+    "ursus-student": {
+      "topology": "repaired-document-control",
+      "primaryRadius": "2px 8px 3px 1px",
+      "press": "modest-checklist-settle",
+      "selectedBoundary": "brick-red-repair-line",
+      "signatureControls": ["repaired-checklist-strip", "shared-supply-tabs", "alert-window-tape", "transfer-corridor-latch"]
+    }
+  },
+  "factions": {
+    "rhine-lab": {
+      "toneLane": "cool-light-laboratory",
+      "mode": "light",
+      "temperature": "cool",
+      "field": "#EDF2EF",
+      "ink": "#111714",
+      "surface": "#D8E0DB",
+      "rule": "#95A29A",
+      "signal": "#B9D532",
+      "signalInk": "#526214",
+      "signalText": "#111714",
+      "critical": "#A64035",
+      "signalRole": "active-research",
+      "material": "laboratory-glass"
+    },
+    "lungmen-municipal": {
+      "toneLane": "cool-mid-civic",
+      "mode": "mid-light",
+      "temperature": "cool",
+      "field": "#C9D0D4",
+      "ink": "#161A1E",
+      "surface": "#AEB7BD",
+      "rule": "#59636B",
+      "signal": "#C7443A",
+      "signalInk": "#7B201B",
+      "signalText": "#FFF8F0",
+      "critical": "#8F231E",
+      "signalRole": "civic-commitment",
+      "material": "civic-stone-and-jade-glass",
+      "secondary": "#2E625C",
+      "secondaryRole": "jade-transit-structure"
+    },
+    "kazimierz-broadcast": {
+      "toneLane": "neutral-light-broadcast",
+      "mode": "light",
+      "temperature": "neutral",
+      "field": "#F5F5F2",
+      "ink": "#0C1018",
+      "surface": "#D9DDE5",
+      "rule": "#667082",
+      "signal": "#2C62B4",
+      "signalInk": "#23477F",
+      "signalText": "#FFFFFF",
+      "critical": "#B52F36",
+      "signalRole": "broadcast-side",
+      "material": "broadcast-field"
+    },
+    "laterano-notarial": {
+      "toneLane": "warm-light-ceremonial",
+      "mode": "light",
+      "temperature": "warm",
+      "field": "#F7EED8",
+      "ink": "#241B12",
+      "surface": "#DED0B5",
+      "rule": "#947B5B",
+      "signal": "#B58A32",
+      "signalInk": "#6B4E17",
+      "signalText": "#241B12",
+      "critical": "#A13A2F",
+      "signalRole": "notarial-authority",
+      "material": "notarial-stone"
+    },
+    "siracusa-dossier": {
+      "toneLane": "warm-mid-dossier",
+      "mode": "mid-light",
+      "temperature": "warm",
+      "field": "#E9DCC7",
+      "ink": "#211412",
+      "surface": "#C7B29B",
+      "rule": "#806757",
+      "signal": "#742B38",
+      "signalInk": "#742B38",
+      "signalText": "#FFF6E7",
+      "critical": "#A53434",
+      "signalRole": "active-proceeding",
+      "material": "case-paper"
+    },
+    "kjerag-alpine": {
+      "toneLane": "cold-mid-alpine",
+      "mode": "mid-light",
+      "temperature": "cold",
+      "field": "#DCECF1",
+      "ink": "#11262B",
+      "surface": "#C2D9DF",
+      "rule": "#78939A",
+      "signal": "#168A8A",
+      "signalInk": "#0B5E60",
+      "signalText": "#051011",
+      "critical": "#A4433C",
+      "signalRole": "route-weather",
+      "material": "alpine-textile"
+    },
+    "iberia-nautical": {
+      "toneLane": "cold-dark-nautical",
+      "mode": "dark",
+      "temperature": "cold",
+      "field": "#0E2230",
+      "ink": "#F0E6D2",
+      "surface": "#243B48",
+      "rule": "#72848A",
+      "signal": "#C49A52",
+      "signalInk": "#E2C789",
+      "signalText": "#142532",
+      "critical": "#C85C4E",
+      "signalRole": "verified-heading",
+      "material": "weathered-chart"
+    },
+    "yan-archival": {
+      "toneLane": "neutral-light-ink-paper",
+      "mode": "light",
+      "temperature": "neutral",
+      "field": "#F6F2E8",
+      "ink": "#171817",
+      "surface": "#DDD7CA",
+      "rule": "#777A73",
+      "signal": "#B23B2F",
+      "signalInk": "#84261F",
+      "signalText": "#FFF9F0",
+      "critical": "#8C2825",
+      "signalRole": "seal-commitment",
+      "material": "ink-paper"
+    },
+    "leithanien-conservatory": {
+      "toneLane": "warm-dark-conservatory",
+      "mode": "dark",
+      "temperature": "warm",
+      "field": "#2B1018",
+      "ink": "#F1E3D3",
+      "surface": "#4A2130",
+      "rule": "#85616B",
+      "signal": "#C29A4B",
+      "signalInk": "#E2C77E",
+      "signalText": "#241015",
+      "critical": "#D35460",
+      "signalRole": "sequence-cue",
+      "material": "score-and-wood"
+    },
+    "penguin-logistics-street": {
+      "toneLane": "cool-dark-navy-white",
+      "mode": "dark",
+      "temperature": "cool",
+      "field": "#081A2F",
+      "ink": "#F4F7FA",
+      "surface": "#173453",
+      "rule": "#6F8297",
+      "signal": "#F4F7FA",
+      "signalInk": "#F4F7FA",
+      "signalText": "#081A2F",
+      "critical": "#D64F45",
+      "signalRole": "white-dispatch-lane",
+      "material": "navy-waybill-and-street-glass",
+      "evidenceConfidence": "medium"
+    },
+    "blacksteel-contract": {
+      "toneLane": "neutral-dark-industrial-hazard",
+      "mode": "dark",
+      "temperature": "neutral",
+      "field": "#141517",
+      "ink": "#F0F1EC",
+      "surface": "#292B2E",
+      "rule": "#686C70",
+      "signal": "#E6C900",
+      "signalInk": "#F3DE38",
+      "signalText": "#151618",
+      "critical": "#C54A43",
+      "secondary": "#7656B5",
+      "secondaryRole": "institutional-owner-edge",
+      "signalRole": "readiness-and-deployment",
+      "material": "contract-metal-and-protected-equipment",
+      "evidenceConfidence": "medium"
+    },
+    "ursus-student": {
+      "toneLane": "neutral-mid-wartime-documentary",
+      "mode": "mid-light",
+      "temperature": "smoke-neutral",
+      "field": "#B7B0A3",
+      "ink": "#191A18",
+      "surface": "#8E8A82",
+      "rule": "#595A56",
+      "signal": "#A33B2D",
+      "signalInk": "#6F221B",
+      "signalText": "#FFF8EC",
+      "critical": "#641E24",
+      "signalRole": "emergency-movement",
+      "material": "provisional-wartime-document",
+      "provisional": true
+    }
+  }
+}
