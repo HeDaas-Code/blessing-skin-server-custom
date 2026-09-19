@@ -51,7 +51,11 @@ openssl x509 -req -in "$OUT/server.csr" \
     -out "$OUT/server.crt" -days 825 -sha256 -extfile "$OUT/server.ext"
 
 rm -f "$OUT/server.csr" "$OUT/server.ext" "$OUT/ca.srl"
+
+# 私钥仅 root/属主可读；证书需要被容器内的 nginx/apache 读取，故目录可进入、证书世界可读
 chmod 600 "$OUT/ca.key" "$OUT/server.key" 2>/dev/null || true
+chmod 644 "$OUT/ca.crt" "$OUT/server.crt" 2>/dev/null || true
+chmod 755 "$OUT" 2>/dev/null || true
 
 echo
 echo "完成："

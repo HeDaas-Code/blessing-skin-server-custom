@@ -2,9 +2,16 @@
 #
 #   docker compose -f docker-compose.yml -f docker-compose.https.yml --env-file deploy.env up -d
 #
-# 证书由 ./docker/gen-certs.sh 生成到 ./certs，客户端需信任其中的 ca.crt。
+# 证书由 ./docker/gen-certs.sh 生成到 ./certs，客户端需信任其中的 ca.crt：
+#   - 浏览器/系统：下载 https://<host>:<BS_HTTPS_PORT>/ca.crt 并安装为受信任根证书
+#   - 游戏客户端(JVM)：把 ca.crt 导入启动器所用 JRE 的 cacerts，或加 JVM 参数
 # 默认监听 8443（服务器上 443 常被系统服务占用），可用 BS_HTTPS_PORT 调整。
 services:
+  app:
+    volumes:
+      # 通过 HTTP 端口 8080 分发根证书：http://<host>:8080/ca/ca.crt
+      - ./certs:/app/public/ca:ro
+
   web:
     image: nginx:alpine
     container_name: blessing-skin-web

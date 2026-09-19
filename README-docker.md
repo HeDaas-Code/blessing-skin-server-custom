@@ -174,6 +174,55 @@ server {
 同时把 `deploy.env` 中的 `BS_SITE_URL` 设为 `https://skin.example.com`。
 注意 `Host` 要带上端口（`$http_host`），否则应用在非 443 端口下生成的链接会丢端口。
 
+### 7.4 游戏启动器（authlib-injector）报 PKIX / 证书错误怎么办
+
+Minecraft 客户端的 authlib-injector 跑在 **JVM** 里，而 JVM 使用自己的信任库（`lib/security/cacerts`），
+**不会**自动读取浏览器的信任设置，所以自签证书会报：
+
+```
+javax.net.ssl.SSLHandshakeException: PKIX path building failed:
+sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target
+```
+
+三种解法，任选其一：
+
+**A. 让 JVM 信任本站 CA（推荐，HTTPS 全程可用）**
+
+先下载根证书（两个地址都可）：
+```
+https://<host>:<BS_HTTPS_PORT>/ca.crt          # 如 https://10.63.127.239:8443/ca.crt
+http://<host>:8080/ca/ca.crt                   # HTTP 端口也能下，无需先信任证书
+```
+
+然后二选一：
+
+- **导入启动器所用 JRE 的 cacerts**（最通用，Windows 示例）：
+  ```bat
+  :: 找到启动器的 java 目录后执行（默认口令 changeit）
+  "C:\Path\To\Launcher\jre\bin\keytool" -importcert -noprompt -trustcacerts ^
+      -alias blessing-skin -file blessing-skin-ca.crt ^
+      -keystore "C:\Path\To\Launcher\jre\lib\security\cacerts" -storepass changeit
+  ```
+  Linux/macOS 同理，把路径换成对应的 `$JAVA_HOME`。
+- **用 Windows 系统证书库**：先把 `ca.crt` 双击安装到"受信任的根证书颁发机构"，
+  再在启动器的「JVM 参数」里加：
+  ```
+  -Djavax.net.ssl.trustStoreType=WINDOWS-ROOT
+  ```
+
+**B. 该客户端改用 HTTP 地址（零配置，局域网内最省事）**
+
+启动器里把认证服务器地址填成：
+```
+http://<host>:8080/api/yggdrasil
+```
+（HTTP 端口一直保留可用；代价是账号密码在局域网内明文传输。）
+
+**C. 换成公网可信证书（玩家零配置，需要域名）**
+
+有域名且能被公网访问时，按 7.2 换成 Let's Encrypt 等公共 CA 签发的证书，
+客户端无需任何设置。私网 IP 无法申请公共 CA 证书。
+
 ---
 
 ## 八、常用运维
@@ -219,6 +268,8 @@ docker compose exec app tail -50 storage/logs/laravel.log         # 查看应用
 | 容器反复重启 | `docker compose logs app`；多为首次启动未填 `BS_ADMIN_EMAIL/BS_ADMIN_PASSWORD` |
 | 端口不是 8080 | 启动命令漏了 `--env-file deploy.env` |
 | 密码登录失败 | `deploy.env` 中的 `$` 需写成 `$$` 或用单引号包裹 |
+| 启动器报 PKIX / 证书错误 | JVM 有自己的信任库；见 7.4（导入 `ca.crt`，或客户端改用 HTTP 地址） |
+| 无法下载 `/ca.crt` | 检查 `certs/` 目录权限为 755、`ca.crt`/`server.crt` 为 644（`docker/gen-certs.sh` 已自动设置） |
 | 页面 500 | `docker compose exec app tail -50 storage/logs/laravel.log` |
 | 插件未启用 | `docker compose exec app php artisan plugin:enable <name>` 查看报错 |
 | 样式/脚本 404 | 确认镜像是完整构建版（`docker compose exec app ls public/app` 有 hash 文件名） |
