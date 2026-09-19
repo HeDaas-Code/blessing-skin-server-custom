@@ -223,6 +223,34 @@ http://<host>:8080/api/yggdrasil
 有域名且能被公网访问时，按 7.2 换成 Let's Encrypt 等公共 CA 签发的证书，
 客户端无需任何设置。私网 IP 无法申请公共 CA 证书。
 
+### 7.5 MSLX（MCServerLauncher）面板里的服务器
+
+如果你的 Minecraft 服务器由 **mslx-daemon** 容器管理（面板 + 服务器都在该容器内），
+服务端需要同时满足两点，`authlib-injector` 才会用本站 Yggdrasil API 完成正版校验：
+
+1. 实例配置里带上 javaagent（MSLX 里写在实例「参数」中）：
+   `-javaagent:authlib-injector-1.2.8.jar=https://<host>:8443/api/yggdrasil`
+   并把 `authlib-injector-1.2.8.jar` 放进该实例目录。
+2. 实例所用 JVM（MSLX 里 `MSLX://Java/<版本>` 对应容器内 `/app/DaemonData/Tools/Java/<版本>`）
+   信任本站 `ca.crt`。本项目提供一条命令完成导入：
+
+```bash
+# 在部署目录执行（自动导入 mslx-daemon 内 Java 17/21/25 的 cacerts）
+./docker/mslx-trust-ca.sh
+```
+
+之后到面板**重启服务器实例**即可生效。验证（容器内，应返回 STATUS=200）：
+
+```bash
+docker exec mslx-daemon /app/DaemonData/Tools/Java/25/bin/java \
+  /tmp/Fetch.java https://<host>:8443/api/yggdrasil
+```
+
+注意：
+- 该脚本把 `ca.crt` 导入的是**容器内的 JVM**；若 mslx-daemon 被删除重建，需要重新执行。
+- 若实例是 `online-mode=false`（离线模式），不需要配置 Yggdrasil，跳过本步骤。
+- 客户端（玩家启动器）仍然要按 7.4 处理证书信任。
+
 ---
 
 ## 八、常用运维
@@ -269,6 +297,7 @@ docker compose exec app tail -50 storage/logs/laravel.log         # 查看应用
 | 端口不是 8080 | 启动命令漏了 `--env-file deploy.env` |
 | 密码登录失败 | `deploy.env` 中的 `$` 需写成 `$$` 或用单引号包裹 |
 | 启动器报 PKIX / 证书错误 | JVM 有自己的信任库；见 7.4（导入 `ca.crt`，或客户端改用 HTTP 地址） |
+| MSLX 服务器实例报 PKIX | 执行 `./docker/mslx-trust-ca.sh` 导入 CA 到容器内 JVM 后重启实例（见 7.5） |
 | 无法下载 `/ca.crt` | 检查 `certs/` 目录权限为 755、`ca.crt`/`server.crt` 为 644（`docker/gen-certs.sh` 已自动设置） |
 | 页面 500 | `docker compose exec app tail -50 storage/logs/laravel.log` |
 | 插件未启用 | `docker compose exec app php artisan plugin:enable <name>` 查看报错 |
