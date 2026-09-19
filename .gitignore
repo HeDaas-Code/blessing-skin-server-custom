@@ -37,3 +37,4 @@ storage/app/
 storage/packages/
 deploy.env
 dist/
+certs/

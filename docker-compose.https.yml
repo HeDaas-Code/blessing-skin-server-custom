@@ -1,0 +1,18 @@
+# HTTPS 反向代理（自签 / 本地 CA 证书场景）
+#
+#   docker compose -f docker-compose.yml -f docker-compose.https.yml --env-file deploy.env up -d
+#
+# 证书由 ./docker/gen-certs.sh 生成到 ./certs，客户端需信任其中的 ca.crt。
+# 默认监听 8443（服务器上 443 常被系统服务占用），可用 BS_HTTPS_PORT 调整。
+services:
+  web:
+    image: nginx:alpine
+    container_name: blessing-skin-web
+    restart: unless-stopped
+    ports:
+      - "${BS_HTTPS_PORT:-8443}:443"
+    volumes:
+      - ./certs:/etc/nginx/certs:ro
+      - ./docker/nginx/https.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      - app

@@ -111,19 +111,58 @@ docker compose --env-file deploy.env up -d     # 入口脚本自动执行数据�
 
 ---
 
-## 七、反向代理（HTTPS）
+## 七、启用 HTTPS
+
+### 7.1 局域网/无公网域名：内置自签证书方案（开箱即用）
+
+适用于「用 IP 访问、没有域名」的场景；由项目自带脚本生成一个**本地 CA + 服务器证书**，
+客户端只要安装一次 `certs/ca.crt`（根证书），浏览器就不再告警。
+
+```bash
+# 1) 生成证书（IP/域名可写多个，全部进 SAN）
+./docker/gen-certs.sh 10.63.127.239 192.168.1.10 skin.lan
+
+# 2) 修改 deploy.env
+#    BS_SITE_URL=https://10.63.127.239:8443
+#    BS_HTTPS_PORT=8443            # 服务器上 443 常被系统服务占用，故默认 8443
+
+# 3) 启动（app + web 两个容器）
+docker compose -f docker-compose.yml -f docker-compose.https.yml --env-file deploy.env up -d
+```
+
+访问 `https://<服务器IP>:8443`。首次访问浏览器会提示证书不受信任，两种处理方式：
+
+- **推荐**：把服务器上的 `certs/ca.crt` 拷到客户端（Windows：双击 → 安装到"受信任的根证书颁发机构"；
+  macOS：钥匙串 → 系统 → 始终信任；Android/iOS：安装后在"证书信任设置"里开启），之后不再告警。
+- 临时：在浏览器中选择"继续访问"。
+
+证书有效期 825 天；续期只需重新执行 `./docker/gen-certs.sh`（复用已有 CA，客户端无需重新安装）。
+更换 IP/域名时同样重新执行，并把新地址作为参数传入。
+
+> `certs/` 已被 `.gitignore` 忽略，私钥不会进版本库。
+
+### 7.2 有域名和公网 IP：使用真实证书
+
+把证书放到 `certs/server.crt` 与 `certs/server.key`（或改写 `docker/nginx/https.conf` 中的路径），
+再按 7.1 的第 3 步启动；`BS_SITE_URL` 填 `https://你的域名`。
+免费证书可用 acme.sh / certbot 以 DNS 方式签发后拷贝进 `certs/`。
+
+### 7.3 已有外部反向代理（Nginx/Caddy/Traefik）
+
+此时不需要 `docker-compose.https.yml`，直接反代 8080 端口：
 
 ```nginx
 server {
     listen 443 ssl http2;
     server_name skin.example.com;
-    # ssl_certificate ...
+    ssl_certificate     /path/fullchain.pem;
+    ssl_certificate_key /path/privkey.pem;
 
     client_max_body_size 64m;
 
     location / {
         proxy_pass http://127.0.0.1:8080;
-        proxy_set_header Host              $host;
+        proxy_set_header Host              $http_host;
         proxy_set_header X-Real-IP         $remote_addr;
         proxy_set_header X-Forwarded-For   $proxy_add_x_forwarded_for;
         proxy_set_header X-Forwarded-Proto $scheme;
@@ -133,6 +172,7 @@ server {
 ```
 
 同时把 `deploy.env` 中的 `BS_SITE_URL` 设为 `https://skin.example.com`。
+注意 `Host` 要带上端口（`$http_host`），否则应用在非 443 端口下生成的链接会丢端口。
 
 ---
 
